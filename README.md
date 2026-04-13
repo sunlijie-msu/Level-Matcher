@@ -1,5 +1,5 @@
 # Level Matcher
-
+## Overview
 A physics-informed nuclear level matching system developed at the Nuclear Data Group at the Facility for Rare Isotope Beams (FRIB).
 
 This tool employs dual machine learning models (Extreme Gradient Boosting + Light Gradient Boosting Machine) along with physics-informed feature engineering to accurately match nuclear energy levels across different experimental datasets.
@@ -8,6 +8,15 @@ A prototype version of Level Matcher is available as an open-source repository a
 https://github.com/FRIBND/Level-Matcher
 
 To support the broader nuclear data community, a fully developed version of Level Matcher will be integrated into the Consistency Check and Evaluation Toolkit Java Codes as part of the NSDD ENSDF Analysis and Utility Programs.
+
+## Development Timeline
+
+- 2026-01-24: The repository was modularized and hardened through schema standardization, validation-split diagnostics, dedicated training-metrics visualizers, and consistency reporting modules for the public repository.
+
+- 2026-01-05: The project expanded into a physics-informed matching pipeline with JSON data ingestion, Dataset_Parser, graph-based clustering, Combined_Visualizer, the primary XGBoost matching engine, gamma-decay pattern features, and a dual-model XGBoost and LightGBM workflow.
+
+- 2025-10-20: The initial version of the Level Matcher began as a LightGBM ranking prototype at https://github.com/sunlijie-msu/Level-Matcher.
+
 
 ---
 
