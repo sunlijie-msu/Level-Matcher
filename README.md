@@ -11,11 +11,25 @@ To support the broader nuclear data community, a fully developed version of Leve
 
 ## Development Timeline
 
-- 2026-01-24: The repository was modularized and hardened through schema standardization, validation-split diagnostics, dedicated training-metrics visualizers, and consistency reporting modules for the public repository.
+- **2026-04-17**: Applied to the first real-world evaluation task for $^{34}$Cl.
+  - Pairwise inference across 27,615 candidate pairs from $^{32}$S(p,$\gamma$)$^{34}$Cl and $^{33}$S(p,p) resonance datasets
+  - Detached subprocess architecture adopted to isolate gradient boosting training from the IDE event loop, eliminating UI freeze events
 
-- 2026-01-05: The project expanded into a physics-informed matching pipeline with JSON data ingestion, Dataset_Parser, graph-based clustering, Combined_Visualizer, the primary XGBoost matching engine, gamma-decay pattern features, and a dual-model XGBoost and LightGBM workflow.
+- **2026-01-24**: Hardened for diagnostic rigor and modularized for public release.
+  - 80/20 stratified training-validation split with early stopping (patience = 50 rounds)
+  - Five-panel diagnostic visualization: RMSE, MAE, and LogLoss learning curves; Feature Importance (Gain); overfitting analysis (train-validation RMSE gap)
+  - Schema standardization across all ingested datasets
+  - Public-facing consistency reporting module integrated
 
-- 2025-10-20: The initial version of the Level Matcher began as a LightGBM ranking prototype at https://github.com/sunlijie-msu/Level-Matcher.
+- **2026-01-05**: Expanded into a full physics-informed matching pipeline.
+  - Regex-based ENSDF-to-JSON ingestion with schema validation
+  - Physics-informed feature engineering: five nuclear descriptors with hard-veto logic for quantum number violations
+  - Dual matching engine: XGBoost and LightGBM gradient-boosted ensembles for pairwise inference
+  - Graph-based clique-constrained clustering for mutually consistent level groupings
+  - High-resolution level scheme visualization for visual audit
+
+- **2025-10-20**: Initial prototype as a LightGBM ranking model.
+  - Repository: https://github.com/sunlijie-msu/Level-Matcher
 
 
 ---
@@ -47,9 +61,9 @@ The system operates as a recursive diagnostic pipeline that transforms raw exper
 
 ---
 
-## 1. Core Technology Stack: Machine Learning Hierarchy
+## 1. Core Technology Stack
 
-### Level 1: The Foundation - Decision Trees
+### Level 1: Decision Trees
 Decision trees are non-parametric supervised learning methods used for classification and regression. The primary objective is to create a model that predicts the target variable value by learning simple decision rules inferred from data features.
 
 #### 1.1 Core Components
@@ -64,8 +78,8 @@ Decision trees are non-parametric supervised learning methods used for classific
 - **Inherent Traits**: High variance and low bias. Deep trees are sensitive to minor data fluctuations and prone to overfitting.
 - **Project Role**: Functions as the base estimator for ensemble methods.
 
-### Level 2: The Strategy - Ensemble Learning
-Ensemble methods combine multiple models to create a single, more robust predictive model.
+### Level 2: Ensemble Learning
+Ensemble methods combine multiple models into a single, more robust predictive model.
 
 #### 2.1 Bagging (Bootstrap Aggregating)
 Bagging reduces variance by training multiple versions of the same model on different random subsets (with replacement) of the training data.
@@ -78,8 +92,7 @@ Boosting is a sequential method where each new model attempts to correct the err
 - **Mechanism**: Iterative improvement. Tree $m$ is trained to minimize the loss (errors) of the existing ensemble $F_{m-1}$.
 - **Physics Strength**: Mimics a logical "Veto" system. A subsequent tree can detect a specific violation (e.g., Parity mismatch) and output a large negative correction, effectively suppressing the match probability regardless of other indicators.
 
-### Level 3: The Algorithm
-Mathematical frameworks for implementing Sequential Boosting.
+### Level 3: Gradient Boosting Algorithm
 
 #### 3.1 Adaptive Boosting (AdaBoost)
 - **Mechanism**: Sample re-weighting. At each step, it increases the weights of misclassified observations.
@@ -89,7 +102,7 @@ Mathematical frameworks for implementing Sequential Boosting.
 - **Mechanism**: Functional Gradient Descent. A new tree is trained to predict the negative gradient (pseudo-residuals) of the loss function, fitting the error rather than the raw data.
 - **Verdict**: **Superior**. Optimizing differentiable loss functions (e.g., Logarithmic Loss) is more robust to outliers than the exponential loss used in AdaBoost. Reference: Friedman (2001).
 
-### Level 4: The Software Implementation
+### Level 4: Software Implementation
 
 | Package | NaN Handling | Growth Strategy | Best Data Scale | Weakness for Physics | Verdict |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -118,14 +131,14 @@ Nuclear experimental datasets are inherently sparse. XGBoost utilizes **Sparsity
 Nuclear level schemes typically contain fewer than 500 levels. Algorithms like LightGBM tend to "memorize" noise in small datasets. XGBoost’s level-wise growth, combined with native **$L_1$ (Lasso) and $L_2$ (Ridge) regularization**, prevents overfitting and captures general physical trends.
 
 ### 2.3 Statistical-Logical Integration
-*   **The Challenge:** Nuclear level matching is not merely a numerical optimization problem; it is constrained by strict physical laws. Standard models often treat logical constraints (e.g., selection rules) as "soft" statistical features, potentially allowing a precise energy match to override a fatal physics violation (e.g., matching $J^\pi = 3^+$ with $4^-$).
-*   **The XGBoost Solution:**
-    *   **Statistical Compliance (Monotonicity):** A larger energy deviation penalizes the match probability, reflecting the statistical nature of experimental uncertainties.
-    *   **Logical Compliance (Hard Vetoes):** As a sequential learner, XGBoost creates a hierarchy of decisions. It can learn that specific physical violations (like Parity Mismatch) act as absolute vetoes that nullify the probability, regardless of how perfect the energy agreement is.
+- **The Challenge:** Standard models treat selection rules as soft statistical features, allowing a precise energy match to override a fatal physics violation (e.g., $J^\pi = 3^+$ matched to $4^-$).
+- **The XGBoost Solution:**
+    - **Statistical Compliance (Monotonicity):** Larger energy deviations penalize match probability, reflecting the statistical nature of experimental uncertainties.
+    - **Logical Compliance (Hard Vetoes):** As a sequential learner, XGBoost learns that quantum number violations (e.g., parity mismatch) act as absolute vetoes, nullifying match probability regardless of energy agreement.
 
 ---
 
-## 3. Level 5: The Implementation Strategy
+## 3. Implementation Strategy
 
 ### 3.1 Data Partitioning Strategy
 
@@ -139,9 +152,9 @@ Nuclear level schemes typically contain fewer than 500 levels. Algorithms like L
 
 | Metric | Definition | Purpose | Target Range |
 | :--- | :--- | :--- | :--- |
-| **RMSE** | Root Mean Square Error | Measures average prediction error | $<0.05$ (Excel), $>0.3$ (Poor) |
-| **MAE** | Mean Absolute Error | Robust average absolute deviation | $<0.02$ (Excel), $>0.2$ (Poor) |
-| **LogLoss** | Binary Cross-Entropy | Calibrates match probabilities | $<0.3$ (Excel), $>1.0$ (Poor) |
+| **RMSE** | Root Mean Square Error | Measures average prediction error | $<0.05$ (Excellent), $>0.3$ (Poor) |
+| **MAE** | Mean Absolute Error | Robust average absolute deviation | $<0.02$ (Excellent), $>0.2$ (Poor) |
+| **LogLoss** | Binary Cross-Entropy | Calibrates match probabilities | $<0.3$ (Excellent), $>1.0$ (Poor) |
 | **Feature Gain** | Loss reduction per feature | Identifies physical drivers | Higher = More influential |
 | **Stop Round** | Early stopping iteration | Monitors model complexity | $<70\%$ of max estimators |
 
@@ -171,7 +184,7 @@ The model processes five primary features, transforming raw experimental data in
 ### 4.1 Physics Rescue Mechanism
 When quantum numbers or gamma patterns show exceptional agreement (Similarity $\ge 0.85$), the system activates a rescue protocol:
 - **Formula**: $\text{Effective Energy} = (\text{Energy Similarity})^{0.5}$
-- **Rational**: Prevents rejection of valid matches where energy calibration differs but internal structure is identical.
+- **Rationale**: Prevents rejection of valid matches where energy calibration differs but internal structure is identical.
 
 ---
 
@@ -236,5 +249,5 @@ After any code modification:
 
 ---
 **Maintained by**: FRIB Nuclear Data Group  
-**Status**: [STABLE]
-**Version**: 2.0 (Dual-Model Architecture)
+**Status**: [In Development]
+**Version**: 2.1 (Dual Gradient Boosting Architecture)
