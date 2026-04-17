@@ -6,27 +6,54 @@ Dataset Parser for Nuclear Level Matcher
 ======================================
 
 Workflow Diagram:
-[Start] -> [Raw Evaluated Nuclear Structure Data File Strings] -> [Parser Engine] -> [Structured Output]
-                                     |
-                                     v
-                             [Inference Rules]
-                            /        |        \
-      [Uncertainties (Precision)] [Spin-Parity Lists]  [Gamma Decays]
-                            \        |        /
-                             v       v       v
-                     [Standardized JSON Schema (Levels/Gammas)]
+
+  [data/raw/*.ens files]          [data/raw/XREF.txt]
+         |                               |
+         v                               v
+  [Identification Record]     [ENSDF Markup Normalization]
+  [DSID extraction]           [Letter -> Reaction Map]
+         |                               |
+         +---------------+---------------+
+                         |
+                         v
+              [DSID -> Letter Matching]
+                         |
+              +----------+----------+
+              |                     |
+              v                     v
+       [L Records]            [G Records]
+    [Energy Levels]        [Gamma Transitions]
+              |                     |
+              +----------+----------+
+                         |
+                         v
+          [Fixed-Width Column Slicing]
+          [Spin-Parity Parsing]
+          [Uncertainty Inference]
+                         |
+                         v
+          [Standardized JSON Schema]
+                         |
+                         v
+          [data/json/test_dataset_{X}.json]
 
 Technical Steps:
-1. Parse raw strings from Evaluated Nuclear Structure Data File (ENSDF) for energies, uncertainties, spins, and parities.
-2. Infer uncertainties from precision (significant figures) where explicit values are missing.
-3. Standardize data into a consistent JSON schema for the pipeline.
-4. Output structured files to `data/raw/` for ingestion by Feature Engineer.
+1. Read XREF.txt to build a letter-to-reaction mapping; strip ENSDF markup for normalized comparison.
+2. Scan all .ens files in data/raw/; extract each file's DSID from its identification record (cols 9-38).
+3. Match each DSID to its XREF letter using normalized string comparison.
+4. Parse L records (energy levels) and G records (gamma transitions) using fixed-width column slicing.
+5. Infer uncertainties from precision where explicit uncertainty values are absent.
+6. Output one test_dataset_{letter}.json per .ens file into data/json/.
 
 Architecture:
+- `normalize_ensdf_text`: Strips ENSDF markup ({+N}, |g, etc.) for DSID-to-XREF matching.
+- `parse_xref_file`: Reads XREF.txt into a normalized letter-to-description dictionary.
+- `match_dsid_to_letter`: Maps a .ens file's DSID to its XREF dataset letter.
 - `infer_uncertainty_from_precision`: Heuristic engine for precision-based uncertainty estimation.
 - `parse_spin_parity`: Normalizes ENSDF Spin-Parity strings into structured spin/parity hypothesis lists.
-- `parse_ensdf_line`: Slices individual ENSDF L records into structured level data dictionaries.
-- `convert_log_to_datasets`: Main driver that reads the evaluator log and writes per-dataset JSON files.
+- `parse_g_record`: Slices G records into structured gamma transition data dictionaries.
+- `parse_ensdf_line`: Slices L records into structured level data dictionaries.
+- `convert_ens_files_to_datasets`: Main driver that scans .ens files, matches labels, and writes JSON.
 """
 
 import json
@@ -284,50 +311,196 @@ def parse_ensdf_line(line):
 
     return "L", data
 
-def convert_log_to_datasets(log_path):
-    if not os.path.exists(log_path):
-        print(f"Error: {log_path} not found.")
+def normalize_ensdf_text(text):
+    """
+    Strips ENSDF markup from a text string and uppercases it for normalized comparison.
+    Used to match DSID fields in .ens identification records against XREF.txt descriptions.
+
+    Rules applied in order:
+    - '{+N}' or '{-N}' -> 'N'  (mass number superscripts: '{+33}S' -> '33S')
+    - '{...}'          -> ''   (remaining brace groups removed)
+    - '|x'            -> 'x'  (ENSDF pipe-prefix stripped: '|g' -> 'g')
+    - Result is uppercased and stripped.
+    """
+    # Replace mass-number superscript braces: {+33} -> 33, {+3} -> 3
+    text = re.sub(r'\{[+-]?(\d+)\}', r'\1', text)
+    # Remove any remaining brace groups (e.g., {++}, {-2})
+    text = re.sub(r'\{[^}]*\}', '', text)
+    # Strip ENSDF pipe-prefix: |g -> g, |a -> a, |b -> b, etc.
+    text = re.sub(r'\|(\S)', r'\1', text)
+    return text.upper().strip()
+
+
+def parse_xref_file(xref_path):
+    """
+    Reads an ENSDF-format XREF.txt file and returns a dictionary mapping each
+    dataset letter to its reaction description string.
+
+    XREF.txt uses the ENSDF X-record fixed-width format:
+    - col 7  (0-indexed): 'X'  (record type)
+    - col 8  (0-indexed): dataset letter (A-Z)
+    - col 9+ (0-indexed): reaction description, already uppercase and markup-free
+
+    Example line:  ' 34CL  XK33S(P,G)                  '
+    Example entry: {'K': '33S(P,G)'}
+
+    The descriptions are already in normalized uppercase form, matching
+    the DSID field extracted from .ens identification records directly.
+    """
+    xref_map = {}
+    if not os.path.exists(xref_path):
+        print(f"Warning: XREF file not found at '{xref_path}'. Dataset letters will be unknown.")
+        return xref_map
+    with open(xref_path, 'r', encoding='utf-8') as f:
+        for line in f:
+            if len(line) > 9 and line[7:8] == 'X':
+                letter = line[8:9]
+                description = line[9:].strip()
+                xref_map[letter] = description
+    print(f"XREF loaded: {len(xref_map)} dataset labels.")
+    return xref_map
+
+
+def match_dsid_to_letter(dsid, xref_map):
+    """
+    Matches the DSID string extracted from a .ens identification record to its
+    corresponding XREF dataset letter by direct string comparison.
+
+    Both the DSID (from the .ens identification record) and the XREF descriptions
+    (parsed from the ENSDF X-record format) are already uppercase, so no
+    additional normalization is required beyond whitespace stripping.
+
+    Returns the matched letter string, or None if no match is found.
+    """
+    normalized_dsid = dsid.strip().upper()
+    for letter, description in xref_map.items():
+        if normalized_dsid == description.upper():
+            return letter
+    return None
+
+
+def parse_g_record(line):
+    """
+    Parses a single ENSDF G record using fixed-width column slicing.
+    Returns a gamma decay data dictionary, or None if the line cannot be parsed.
+
+    Column layout (0-indexed, matching ENSDF 80-column standard):
+    -  9-18 : Gamma energy (keV)
+    - 19-20 : Energy uncertainty (DE)
+    - 22-28 : Relative photon intensity (RI)
+    - 29-30 : RI uncertainty (DRI); 'LT'/'GT' are limit markers, not numeric uncertainties
+    """
+    if len(line) < 23:
+        return None
+
+    energy_string = line[9:19].strip()
+    uncertainty_string = line[19:21].strip()
+    intensity_string = line[22:29].strip()
+    intensity_uncertainty_string = line[29:31].strip()
+
+    if not energy_string:
+        return None
+
+    try:
+        energy_value = float(energy_string)
+    except ValueError:
+        return None
+
+    if uncertainty_string:
+        energy_uncertainty = calculate_absolute_uncertainty(energy_string, uncertainty_string)
+    else:
+        energy_uncertainty = infer_uncertainty_from_precision(energy_string)
+
+    # Relative intensity: absent or non-numeric (LT/GT limit markers) -> store as 0.0
+    relative_intensity_value = 0.0
+    if intensity_string:
+        try:
+            relative_intensity_value = float(intensity_string)
+        except ValueError:
+            pass  # LT/GT or other non-numeric markers: leave as 0.0
+
+    # DRI: 'LT'/'GT' are limit qualifiers, not numeric uncertainties -> store as 0.0
+    intensity_uncertainty_value = 0.0
+    if intensity_uncertainty_string and intensity_uncertainty_string not in ('LT', 'GT'):
+        try:
+            intensity_uncertainty_value = float(intensity_uncertainty_string)
+        except ValueError:
+            pass
+
+    return {
+        "energy_value": energy_value,
+        "energy_uncertainty": energy_uncertainty,
+        "relative_intensity_value": relative_intensity_value,
+        "intensity_uncertainty_value": intensity_uncertainty_value,
+        "energy_input_string": format_evaluator_input(energy_string, uncertainty_string),
+        "intensity_input_string": format_evaluator_input(intensity_string, intensity_uncertainty_string) if intensity_string else "",
+    }
+
+
+def convert_ens_files_to_datasets(raw_dir, xref_path, output_dir):
+    """
+    Main driver: scans all .ens files in raw_dir, matches each file to its XREF dataset
+    letter via DSID comparison, parses L records (levels) and G records (gamma transitions),
+    and writes one test_dataset_{letter}.json per file to output_dir.
+    """
+    xref_map = parse_xref_file(xref_path)
+    os.makedirs(output_dir, exist_ok=True)
+
+    ens_files = sorted(filename for filename in os.listdir(raw_dir) if filename.endswith('.ens'))
+    if not ens_files:
+        print(f"No .ens files found in '{raw_dir}'.")
         return
 
-    with open(log_path, 'r', encoding='utf-8') as f:
-        lines = f.readlines()
+    for ens_filename in ens_files:
+        filepath = os.path.join(raw_dir, ens_filename)
 
-    datasets = {}
-    current_dataset_id = None
+        with open(filepath, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
 
-    for line in lines:
-        raw_line = line # Keep raw bytes for fixed-width slicing
-        line = line.strip()
-        if not line: continue
+        # 1. Extract DSID from the identification record (first line, cols 9-38, 0-indexed)
+        dsid = ""
+        if lines and len(lines[0]) > 9:
+            dsid = lines[0][9:39].strip()
 
-        if line.startswith("# Dataset"):
-            parts = line.split("Dataset")
-            if len(parts) > 1:
-                current_dataset_id = parts[1].split(":")[0].strip()
-                datasets[current_dataset_id] = []
-                print(f"Processing Dataset {current_dataset_id}...")
+        # 2. Match DSID to XREF letter
+        letter = match_dsid_to_letter(dsid, xref_map)
+        if letter is None:
+            print(f"Warning: DSID '{dsid}' in '{ens_filename}' did not match any XREF entry. Skipping.")
             continue
 
-        record_type, record_data = parse_ensdf_line(raw_line)
+        print(f"Processing '{ens_filename}' -> Dataset {letter} (DSID: {dsid})...")
 
-        if record_type == "L" and current_dataset_id is not None:
-            datasets[current_dataset_id].append(record_data)
+        # 3. Parse L records grouped with their immediately following G records
+        level_list = []
+        current_level = None
 
-    # Output JSON Files
-    for dataset_code, level_list in datasets.items():
+        for line in lines:
+            if len(line) < 8:
+                continue
+            if line[6:7] == ' ' and line[7:8] == 'L':
+                record_type, record_data = parse_ensdf_line(line)
+                if record_data is not None:
+                    current_level = record_data
+                    level_list.append(current_level)
+            elif line[6:7] == ' ' and line[7:8] == 'G' and current_level is not None:
+                gamma_data = parse_g_record(line)
+                if gamma_data is not None:
+                    current_level["gamma_decays"].append(gamma_data)
+
+        # 4. Build gammasTable and resolve initial/final level indices
         gammas_table_list = []
         gamma_counter = 0
-        
+
         for level_index, level_item in enumerate(level_list):
             if "gamma_decays" in level_item:
                 level_gamma_indices = []
                 initial_level_energy = level_item["energy"]["value"]
-                
+
                 for gamma_data in level_item["gamma_decays"]:
                     gamma_energy_value = gamma_data["energy_value"]
                     final_energy_target = initial_level_energy - gamma_energy_value
-                    
-                    # Match Final Level
+
+                    # Match final level by closest energy within 50 keV tolerance
                     best_match_index = 0
                     minimum_difference = 1e9
                     for candidate_index, candidate_level in enumerate(level_list):
@@ -335,19 +508,26 @@ def convert_log_to_datasets(log_path):
                         if difference < minimum_difference:
                             minimum_difference = difference
                             best_match_index = candidate_index
-                            
+
                     final_level_index = best_match_index if minimum_difference <= 50.0 else 0
-                    
-                    # Structuring Gamma Entry
+
                     gamma_entry = {
                         "energy": {
                             "unit": "keV",
                             "value": gamma_energy_value,
-                            "uncertainty": { "value": gamma_data["energy_uncertainty"], "type": "symmetric" } if gamma_data["energy_uncertainty"] > 0 else {"type": "unreported"}
+                            "uncertainty": (
+                                {"value": gamma_data["energy_uncertainty"], "type": "symmetric"}
+                                if gamma_data["energy_uncertainty"] > 0
+                                else {"type": "unreported"}
+                            )
                         },
                         "gammaIntensity": {
                             "value": gamma_data["relative_intensity_value"],
-                            "uncertainty": { "value": gamma_data["intensity_uncertainty_value"], "type": "symmetric" } if gamma_data["intensity_uncertainty_value"] > 0 else {"type": "unreported"}
+                            "uncertainty": (
+                                {"value": gamma_data["intensity_uncertainty_value"], "type": "symmetric"}
+                                if gamma_data["intensity_uncertainty_value"] > 0
+                                else {"type": "unreported"}
+                            )
                         },
                         "initialLevel": level_index,
                         "finalLevel": final_level_index
@@ -356,29 +536,40 @@ def convert_log_to_datasets(log_path):
                         gamma_entry["energy"]["evaluatorInput"] = gamma_data["energy_input_string"]
                     if gamma_data.get("intensity_input_string"):
                         gamma_entry["gammaIntensity"]["evaluatorInput"] = gamma_data["intensity_input_string"]
-                        
+
                     gammas_table_list.append(gamma_entry)
                     level_gamma_indices.append(gamma_counter)
                     gamma_counter += 1
-                
+
                 if level_gamma_indices:
                     level_item["gammas"] = level_gamma_indices
                 del level_item["gamma_decays"]
-        
-        output_data_structure = { "levelsTable": { "levels": level_list } }
+
+        output_data_structure = {"levelsTable": {"levels": level_list}}
         if gammas_table_list:
-            output_data_structure["gammasTable"] = { "gammas": gammas_table_list }
-            
-        # Robustly determine output directory
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        output_path = os.path.join(base_dir, 'data', 'raw', f"test_dataset_{dataset_code}.json")
-            
+            output_data_structure["gammasTable"] = {"gammas": gammas_table_list}
+
+        output_path = os.path.join(os.path.abspath(output_dir), f"test_dataset_{letter}.json")
         with open(output_path, 'w', encoding='utf-8') as f:
             json.dump(output_data_structure, f, indent=4)
-        print(f"Dataset {dataset_code} saved to {output_path}")
+        print(f"Dataset {letter} saved to {output_path}")
+
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("input_file", nargs='?', default="evaluatorInput_34Cl.log")
-    args = parser.parse_args()
-    convert_log_to_datasets(args.input_file)
+    argument_parser = argparse.ArgumentParser(
+        description="Parse ENSDF .ens files into structured JSON datasets."
+    )
+    argument_parser.add_argument(
+        "--raw_dir", default="data/raw",
+        help="Directory containing .ens input files (default: data/raw)"
+    )
+    argument_parser.add_argument(
+        "--xref", default="data/raw/XREF.txt",
+        help="Path to XREF.txt dataset label file (default: data/raw/XREF.txt)"
+    )
+    argument_parser.add_argument(
+        "--output_dir", default="data/json",
+        help="Directory for output JSON files (default: data/json)"
+    )
+    args = argument_parser.parse_args()
+    convert_ens_files_to_datasets(args.raw_dir, args.xref, args.output_dir)
