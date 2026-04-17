@@ -23,9 +23,10 @@ Technical Steps:
 4. Output structured files to `data/raw/` for ingestion by Feature Engineer.
 
 Architecture:
-- `infer_uncertainty_from_precision`: Heuristic engine for uncertainty estimation.
-- `standardize_spin_parity`: Normalizes Spin-Parity strings (e.g., "(3/2,5/2)+" -> distinct hypotheses).
-- `generate_datasets`: Main driver creating input files from embedded raw data (or file inputs).
+- `infer_uncertainty_from_precision`: Heuristic engine for precision-based uncertainty estimation.
+- `parse_spin_parity`: Normalizes ENSDF Spin-Parity strings into structured spin/parity hypothesis lists.
+- `parse_ensdf_line`: Slices individual ENSDF L records into structured level data dictionaries.
+- `convert_log_to_datasets`: Main driver that reads the evaluator log and writes per-dataset JSON files.
 """
 
 import json
@@ -93,61 +94,111 @@ def infer_uncertainty_from_precision(value_string):
 
 def parse_spin_parity(spin_parity_string):
     """
-    Parses Spin-Parity string into structured format.
-    Handles ranges "1:3", tentative "(1)-", and lists "1+,2+".
+    Parses ENSDF Spin-Parity string into a list of structured spin/parity hypotheses.
+
+    Handles the following ENSDF patterns:
+    - Simple assignments:   "2-", "3/2+"
+    - Tentative single:     "(2)-", "(3/2)+"
+    - Tentative lists:      "(2,3)-", "(1,2)+"   [parity outside parentheses]
+    - Tentative ranges:     "(1:3)-", "(0:2)+"   [parity outside parentheses]
+    - Bare ranges:          "1:3"                [no tentative markers, no parity]
+    - Mixed-parity lists:   "1+,2-"
     """
-    if not spin_parity_string or spin_parity_string.lower() in ['unknown', 'none']: 
+    if not spin_parity_string or spin_parity_string.lower() in ['unknown', 'none']:
         return []
 
     clean_string = spin_parity_string.strip().rstrip('.')
+    if not clean_string:
+        return []
 
-    # 1. Range support (e.g. 1:3)
-    if ':' in clean_string and all(c.isdigit() or c.isspace() or c == ':' for c in clean_string):
-        try:
-            start_spin, end_spin = map(int, clean_string.split(':'))
-            return [{
-                "twoTimesSpin": spin_index * 2,
-                "isTentativeSpin": False,
-                "parity": None,
-                "isTentativeParity": False
-            } for spin_index in range(start_spin, end_spin + 1)]
-        except ValueError: pass
+    # 1. Extract the global trailing parity sign.
+    #    In ENSDF, parity often follows the closing parenthesis: "(2,3)-", "(1:3)+".
+    global_parity = None
+    working_string = clean_string
+    if working_string[-1] in ('+', '-'):
+        global_parity = working_string[-1]
+        working_string = working_string[:-1].strip()
 
-    # 2. List parsing
-    # Handle global parentheses like (1,2)+
-    is_global_tentative = clean_string.startswith('(') and clean_string.endswith(')') and ',' in clean_string
-    if is_global_tentative: 
-        clean_string = clean_string[1:-1]
+    if not working_string:
+        return []
 
-    parts = [part.strip() for part in clean_string.split(',')]
+    # 2. Detect and strip global tentative parentheses enclosing the spin expression.
+    #    Examples: "(2,3)" after parity removal, "(1:3)" after parity removal.
+    is_globally_tentative = working_string.startswith('(') and working_string.endswith(')')
+    if is_globally_tentative:
+        working_string = working_string[1:-1]
+
+    if not working_string:
+        return []
+
+    # 3. Range support: "1:3" or "(1:3)-" (after stripping) -> "1:3".
+    #    Step by 2 in 2J space to correctly cover both integer (2,4,6) and
+    #    half-integer (1,3,5) spin sequences with a single rule.
+    if ':' in working_string and ',' not in working_string:
+        range_parts = working_string.split(':')
+        if len(range_parts) == 2:
+            try:
+                start_spin = float(eval(range_parts[0].strip()))
+                end_spin   = float(eval(range_parts[1].strip()))
+                start_two_j = int(round(start_spin * 2))
+                end_two_j   = int(round(end_spin   * 2))
+                is_tentative = is_globally_tentative or '(' in clean_string
+                # range stop is exclusive, so use end_two_j + 2 to include the endpoint
+                # Parity from outside the closing parenthesis is a firm assignment
+                # regardless of whether the spin range itself is tentative.
+                # Example: "(1:3)-" → spin tentative, parity '-' is firm.
+                return [{
+                    "twoTimesSpin": two_j,
+                    "isTentativeSpin": is_tentative,
+                    "parity": global_parity,
+                    "isTentativeParity": False
+                } for two_j in range(start_two_j, end_two_j + 2, 2)]
+            except (ValueError, SyntaxError):
+                pass
+
+    # 4. List parsing: "2,3", "1+,2-", or after stripping "2,3" from "(2,3)-".
     results = []
+    for part in [part.strip() for part in working_string.split(',')]:
+        if not part:
+            continue
 
-    for part in parts:
-        if not part: continue
-        
-        # Heuristic parsing for "3/2+" or "(5/2-)" or "1(+)"
-        # Extract parity
-        parity_value = '+' if '+' in part else '-' if '-' in part else None
-        
-        # Check tentativeness (local parentheses)
-        is_local_tentative = '(' in part or ')' in part
-        is_tentative = is_global_tentative or is_local_tentative
+        # Extract parity local to this part (e.g. "1+" in the list "1+,2-").
+        # Fall back to the global parity if no local parity sign is present.
+        part_parity = global_parity
+        if part[-1] in ('+', '-'):
+            part_parity = part[-1]
+            part = part[:-1].strip()
 
-        # Extract numeric spin: remove parentheses, parity signs
-        spin_raw = part.replace('+', '').replace('-', '').replace('(', '').replace(')', '').strip()
-        
+        # Detect local tentative parentheses on this individual spin token.
+        is_locally_tentative = '(' in part or ')' in part
+        is_tentative = is_globally_tentative or is_locally_tentative
+
+        spin_raw = part.replace('(', '').replace(')', '').strip()
+        if not spin_raw:
+            continue
+
         try:
             spin_value_parsed = float(eval(spin_raw))
             two_times_spin_value = int(round(spin_value_parsed * 2))
-            
+            # Parity written outside the closing parenthesis is a firm assignment.
+            # Parity found inside the tentative block (i.e. not from global_parity)
+            # is itself tentative alongside the spin.
+            # Example: "(1,2)-" → isTentativeParity = False (parity outside parens)
+            # Example: "(2+)"   → isTentativeParity = True  (parity inside parens)
+            parity_is_from_outside_parens = (
+                (part_parity is not None)
+                and (part_parity == global_parity)
+                and (global_parity is not None)
+            )
             results.append({
                 "twoTimesSpin": two_times_spin_value,
                 "isTentativeSpin": is_tentative,
-                "parity": parity_value,
-                "isTentativeParity": is_tentative if parity_value else False
+                "parity": part_parity,
+                "isTentativeParity": (not parity_is_from_outside_parens) and is_tentative and (part_parity is not None)
             })
-        except: continue
-        
+        except (ValueError, SyntaxError):
+            continue
+
     return results
 
 def calculate_absolute_uncertainty(value_string, uncertainty_string):
@@ -176,14 +227,18 @@ def format_evaluator_input(value_string, uncertainty_string):
 
 def parse_ensdf_line(line):
     """
-    Parses a single ENSDF line (L or G record) using fixed-width slicing.
-    Applies precision-based uncertainty inference when explicit uncertainty is missing.
+    Parses a single ENSDF L record using fixed-width column slicing.
+    Applies precision-based uncertainty inference when an explicit uncertainty is absent.
+    Skips all non-L record types (comment, gamma, header, and identification records).
     """
     if len(line) < 8:
         return None, None
-        
+
     record_type = line[7]
-    if record_type not in ['L', 'G']:
+    # Require both: record type 'L' at position 7 AND a blank at position 6.
+    # Comment records (cL) also carry 'L' at position 7 but have 'c' at position 6
+    # and must be excluded so their text content is never parsed as level data.
+    if record_type != 'L' or line[6] == 'c':
         return None, None
         
     energy_string = line[9:19].strip()
@@ -203,58 +258,31 @@ def parse_ensdf_line(line):
     else:
         uncertainty_value = infer_uncertainty_from_precision(energy_string)
     
-    if record_type == 'L':
-        spin_parity_raw = line[22:39].strip()
-        data = {
-            "energy": {
-                "unit": "keV",
-                "value": energy_value,
-                "uncertainty": { 
-                    "value": uncertainty_value, 
-                    "type": "symmetric" if uncertainty_string else "inferred"
-                }
-            },
-            "isStable": False,
-            "gamma_decays": []
-        }
-        if energy_string:
-            data["energy"]["evaluatorInput"] = format_evaluator_input(energy_string, uncertainty_string)
-            
-        spin_parity_values = parse_spin_parity(spin_parity_raw)
-        if spin_parity_values or spin_parity_raw:
-            data["spinParity"] = {}
-            if spin_parity_values:
-                data["spinParity"]["values"] = spin_parity_values
-            if spin_parity_raw:
-                data["spinParity"]["evaluatorInput"] = spin_parity_raw
-                
-        return "L", data
-    
-    elif record_type == 'G':
-        relative_intensity_string = line[22:29].strip()
-        delta_relative_intensity_string = line[29:31].strip()
-        
-        relative_intensity_value = float(relative_intensity_string) if relative_intensity_string else 0.0
-        
-        # Infer intensity uncertainty if not explicitly provided
-        if delta_relative_intensity_string:
-            intensity_uncertainty_value = calculate_absolute_uncertainty(relative_intensity_string, delta_relative_intensity_string)
-        elif relative_intensity_value > 0:
-            intensity_uncertainty_value = infer_uncertainty_from_precision(relative_intensity_string)
-        else:
-            intensity_uncertainty_value = 0.0
-        
-        data = {
-            "energy_value": energy_value,
-            "energy_uncertainty": uncertainty_value,
-            "energy_input_string": format_evaluator_input(energy_string, uncertainty_string) if energy_string else None,
-            "relative_intensity_value": relative_intensity_value,
-            "intensity_uncertainty_value": intensity_uncertainty_value,
-            "intensity_input_string": format_evaluator_input(relative_intensity_string, delta_relative_intensity_string) if relative_intensity_string else None
-        }
-        return "G", data
+    spin_parity_raw = line[22:39].strip()
+    data = {
+        "energy": {
+            "unit": "keV",
+            "value": energy_value,
+            "uncertainty": {
+                "value": uncertainty_value,
+                "type": "symmetric" if uncertainty_string else "inferred"
+            }
+        },
+        "isStable": False,
+        "gamma_decays": []
+    }
+    if energy_string:
+        data["energy"]["evaluatorInput"] = format_evaluator_input(energy_string, uncertainty_string)
 
-    return None, None
+    spin_parity_values = parse_spin_parity(spin_parity_raw)
+    if spin_parity_values or spin_parity_raw:
+        data["spinParity"] = {}
+        if spin_parity_values:
+            data["spinParity"]["values"] = spin_parity_values
+        if spin_parity_raw:
+            data["spinParity"]["evaluatorInput"] = spin_parity_raw
+
+    return "L", data
 
 def convert_log_to_datasets(log_path):
     if not os.path.exists(log_path):
@@ -266,29 +294,24 @@ def convert_log_to_datasets(log_path):
 
     datasets = {}
     current_dataset_id = None
-    last_level_data = None
-    
+
     for line in lines:
-        raw_line = line # Keep for slicing
+        raw_line = line # Keep raw bytes for fixed-width slicing
         line = line.strip()
         if not line: continue
-        
+
         if line.startswith("# Dataset"):
             parts = line.split("Dataset")
             if len(parts) > 1:
                 current_dataset_id = parts[1].split(":")[0].strip()
                 datasets[current_dataset_id] = []
-                last_level_data = None
                 print(f"Processing Dataset {current_dataset_id}...")
             continue
-            
+
         record_type, record_data = parse_ensdf_line(raw_line)
-        
+
         if record_type == "L" and current_dataset_id is not None:
             datasets[current_dataset_id].append(record_data)
-            last_level_data = record_data
-        elif record_type == "G" and last_level_data is not None:
-            last_level_data["gamma_decays"].append(record_data)
 
     # Output JSON Files
     for dataset_code, level_list in datasets.items():
@@ -356,6 +379,6 @@ def convert_log_to_datasets(log_path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("input_file", nargs='?', default="evaluatorInput.log")
+    parser.add_argument("input_file", nargs='?', default="evaluatorInput_34Cl.log")
     args = parser.parse_args()
     convert_log_to_datasets(args.input_file)
