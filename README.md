@@ -195,7 +195,8 @@ Level-Matcher/
 ├── Training_Metrics_Visualizer.py # Diagnostic suite (5-panel metrics plots)
 ├── Combined_Visualizer.py     # Visualization suite (High-res level scheme plots)
 ├── data/
-�?  └── raw/                   # Input JSON datasets (A, B, C)
+�?  ├── raw/                   # ENSDF source files, XREF labels, and legacy raw assets
+�?  └── json/                  # Standardized JSON datasets consumed by the pipeline
 ├── outputs/
 �?  ├── figures/               # PNG outputs (Diagnostics, Level Schemes)
 �?  ├── clustering/            # Final cluster memberships (Text reports)
@@ -211,12 +212,12 @@ Level-Matcher/
 
 ## 7. Workflow & Usage
 
-1.  **Ingestion**: `Dataset_Parser.py` normalizes ENSDF evaluator logs into `data/raw/` JSON files.
+1.  **Ingestion**: `Dataset_Parser.py` normalizes ENSDF datasets into `data/json/` JSON datasets.
 2.  **Synthesis**: `Level_Matcher.py` generates synthetic training data to seed the ensemble.
 3.  **Training**: The XGBoost + LightGBM ensembles are trained with early stopping.
 4.  **Inference**: Models perform cross-dataset comparisons outputting probabilities to `outputs/pairwise/`.
 5.  **Clustering**: The graph algorithm consolidates matches into physical level states.
-6.  **Verification**: `Combined_Visualizer.py` generates final plots for visual audit.
+6.  **Verification**: `Combined_Visualizer.py` reads the standardized JSON datasets and clustering logs to generate final plots for visual audit.
 
 ---
 

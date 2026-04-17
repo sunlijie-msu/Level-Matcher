@@ -1,8 +1,6 @@
 import pandas as pd
 import numpy as np
 from xgboost import XGBRegressor
-from lightgbm import LGBMRegressor
-from sklearn.cluster import KMeans
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 from Feature_Engineer import extract_features, generate_synthetic_training_data, parse_json_datasets
@@ -23,7 +21,7 @@ Workflow Diagram:
    v                                  v
 [Step 2: Model Training] <---- [Synthetic Labels]
    |
-   | (Models Ready: XGBoost & LightGBM & KMeans)
+   | (Model Ready: XGBoost)
    v
 [Step 3: Test Data Ingestion] --> [Data Standardization (A, B, C)]
    |
@@ -45,13 +43,11 @@ Step 1: Synthetic Training Data Generation
 
 Step 2: Model Training
   Input: Training features and labels from Step 1
-  Data Partitioning: 80% training (17,758 samples), 20% validation (4,440 samples)
-  Process: Train three independent models to capture different decision boundaries
-    - XGBoost: Gradient boosting with monotonic constraints (Physics Prior)
-    - LightGBM: Gradient boosting with heavier regularization
-    - KMeans: Unsupervised clustering baseline (k=2) for feature-space separation
+  Data Partitioning: 80% training, 20% validation
+  Process: Train XGBoost with monotonic constraints (Physics Prior)
+    - XGBoost: Gradient boosting with monotonic constraints enforcing physics priors
   Evaluation: RMSE, MAE, LogLoss, Feature Importance (Gain metric)
-  Output: Trained models (Regressors + Wrapper for KMeans) with diagnostic visualizations
+  Output: Trained XGBoost model with diagnostic visualizations
 
 Step 3: Test Data Ingestion
   Source: Test datasets (A, B, C) in data/raw/
@@ -61,11 +57,11 @@ Step 3: Test Data Ingestion
   Function: parse_json_datasets()
 
 Step 4: Pairwise Inference
-  Input: Standardized test data (Step 3) and trained models (Step 2)
-  Process: 
+  Input: Standardized test data (Step 3) and trained XGBoost model (Step 2)
+  Process:
     - Generate all cross-dataset pairs
     - Extract feature vectors (Feature_Engineer.extract_features)
-    - Apply both Machine Learning models to calculate matching probabilities
+    - Apply XGBoost to calculate matching probabilities
   Output: Ranked list of candidate matches
 
 Step 5: Constrained Clustering (Graph Partitioning)
@@ -87,7 +83,7 @@ if __name__ == "__main__":
     # ==========================================
     # Main Execution Pipeline:
     # 1. Synthetic Training Data Generation
-    # 2. Model Training (XGBoost, LightGBM, KMeans)
+    # 2. Model Training (XGBoost)
     # 3. Test Data Ingestion
     # 4. Pairwise Inference
     # 5. Graph-Based Clustering
@@ -112,17 +108,6 @@ if __name__ == "__main__":
         training_dataframe, training_labels, test_size=0.2, random_state=42, stratify=None
     )
     print(f"Training samples: {len(X_train)}, Validation samples: {len(X_validation)}")
-
-    # Wrapper class for KMeans to satisfy Level_Clusterer interface
-    class KMeansWrapper:
-        def __init__(self, kmeans_model, match_label):
-            self.kmeans = kmeans_model
-            self.match_label = match_label
-        
-        def predict(self, X):
-            # Returns [1.0] if match, [0.0] if not, for compatibility with model.predict()[0] access
-            labels = self.kmeans.predict(X)
-            return np.array([1.0 if label == self.match_label else 0.0 for label in labels])
 
     # Train XGBoost regressor with monotonic constraints enforcing physics rules
     # All five features designed as higher value → better match probability
@@ -197,75 +182,10 @@ if __name__ == "__main__":
     print(f"  Train MAE:  {train_mae:.4f} | Validation MAE:  {validation_mae:.4f}")
     print(f"  Train LogLoss: {train_logloss:.4f} | Validation LogLoss: {validation_logloss:.4f}")
 
-    # 2b: Train LightGBM (Secondary Model)
-    print("\nTraining LightGBM Model...")
-    # Note: 'objective="binary"' in LightGBM is equivalent to 'binary:logistic' in XGBoost (outputs probability 0-1).
-    # Heavy regularization prevents extreme confidence (100%/0%) and overfitting on small datasets.
-    # Configuration Logic:
-    # 1. reg_alpha=1.0 (L1 regularization), reg_lambda=10.0 (L2 regularization): Penalize extreme weights to ensure soft probability outputs (e.g. 99.5% instead of 100%).
-    # 2. num_leaves=7, max_depth=5: Constrain model complexity to prevent memorization of synthetic samples.
-    # 3. min_child_samples=20: Force generalization by requiring more data per leaf.
-    # Observation: This configuration causes LightGBM to weight perfect Gamma Patterns higher than XGBoost (e.g., A_2000<->B_2006 case).
-    model_lightgbm = LGBMRegressor(objective='binary',
-                                             monotone_constraints="1,1,1,1,1",  # Increasing constraints
-                                             n_estimators=500,
-                                             max_depth=5,
-                                             num_leaves=7,
-                                             min_child_samples=20,
-                                             learning_rate=0.02,
-                                             reg_alpha=1.0,       # L1 regularization to encourage sparse solutions
-                                             reg_lambda=10.0,     # L2 regularization to prevent extreme leaf weights (100% confidence)
-                                             verbose=-1,
-                                             random_state=42)
-    
-    # Train LightGBM model with validation monitoring
-    # LightGBM accepts multiple metrics directly in eval_metric parameter
-    model_lightgbm.fit(X_train, y_train,
-                      eval_set=[(X_train, y_train), (X_validation, y_validation)])
-    
-    # Compute diagnostic metrics
-    train_predictions_lgbm = model_lightgbm.predict(X_train)
-    validation_predictions_lgbm = model_lightgbm.predict(X_validation)
-    train_rmse_lgbm = np.sqrt(mean_squared_error(y_train, train_predictions_lgbm))
-    validation_rmse_lgbm = np.sqrt(mean_squared_error(y_validation, validation_predictions_lgbm))
-    train_mae_lgbm = mean_absolute_error(y_train, train_predictions_lgbm)
-    validation_mae_lgbm = mean_absolute_error(y_validation, validation_predictions_lgbm)
-    
-    # Manual binary cross-entropy computation (sklearn log_loss incompatible with continuous probabilities)
-    train_predictions_lgbm_clipped = np.clip(train_predictions_lgbm, 1e-15, 1 - 1e-15)
-    validation_predictions_lgbm_clipped = np.clip(validation_predictions_lgbm, 1e-15, 1 - 1e-15)
-    train_logloss_lgbm = -np.mean(y_train_np * np.log(train_predictions_lgbm_clipped) + (1 - y_train_np) * np.log(1 - train_predictions_lgbm_clipped))
-    validation_logloss_lgbm = -np.mean(y_validation_np * np.log(validation_predictions_lgbm_clipped) + (1 - y_validation_np) * np.log(1 - validation_predictions_lgbm_clipped))
-    
-    # Extract feature importance (Gain metric: total loss reduction per feature)
-    lightgbm_feature_importance = model_lightgbm.booster_.feature_importance(importance_type='gain')
-    
-    print(f"LightGBM Training Complete (best iteration: {model_lightgbm.best_iteration_})")
-    print(f"  Train RMSE: {train_rmse_lgbm:.4f} | Validation RMSE: {validation_rmse_lgbm:.4f}")
-    print(f"  Train MAE:  {train_mae_lgbm:.4f} | Validation MAE:  {validation_mae_lgbm:.4f}")
-    print(f"  Train LogLoss: {train_logloss_lgbm:.4f} | Validation LogLoss: {validation_logloss_lgbm:.4f}")
-
-    # 2c: Train KMeans (Unsupervised Clustering Baseline)
-    print("\nTraining KMeans Model...")
-    # K-Means clustering with K=2 (Match vs Non-Match)
-    # This serves as an unsupervised baseline to compare against supervised boosting.
-    model_kmeans = KMeans(n_clusters=2, random_state=42, n_init=10)
-    model_kmeans.fit(X_train)
-    
-    # Heuristic: Identify which cluster corresponds to 'Match'
-    # The 'Match' cluster should have a higher average 'Energy_Similarity' (feature 0) centroid value
-    # perfectly matched levels have Energy_Similarity close to 1.0.
-    cluster_centers = model_kmeans.cluster_centers_
-    match_cluster_label = np.argmax(cluster_centers[:, 0]) # Index of centroid with higher Energy_Sim
-    
-    # Create wrapper for inference
-    model_kmeans_wrapper = KMeansWrapper(model_kmeans, match_cluster_label)
-    print(f"KMeans Training Complete. Match Cluster Label: {match_cluster_label} (Centroid Energy_Sim: {cluster_centers[match_cluster_label][0]:.4f})")
-    
     # ==========================================
-    # Step 2c: Visualize Training Diagnostics
+    # Step 2b: Visualize Training Diagnostics
     # ==========================================
-    # Generate comprehensive diagnostic plots for both models
+    # Generate comprehensive diagnostic plots for XGBoost model
     print("\nGenerating Training Metrics Visualization...")
     xgboost_metrics_data = {
         'train_rmse': train_rmse,
@@ -278,18 +198,7 @@ if __name__ == "__main__":
         'best_iteration': model_xgboost.best_iteration,
         'maximum_iterations': 1000
     }
-    lightgbm_metrics_data = {
-        'train_rmse': train_rmse_lgbm,
-        'validation_rmse': validation_rmse_lgbm,
-        'train_mae': train_mae_lgbm,
-        'validation_mae': validation_mae_lgbm,
-        'train_logloss': train_logloss_lgbm,
-        'validation_logloss': validation_logloss_lgbm,
-        'feature_importance': lightgbm_feature_importance,
-        'best_iteration': model_lightgbm.best_iteration_,
-        'maximum_iterations': 500
-    }
-    visualize_training_metrics(xgboost_metrics_data, lightgbm_metrics_data)
+    visualize_training_metrics(xgboost_metrics_data)
 
     # ==========================================
     # Step 3: Test Data Ingestion
@@ -304,15 +213,13 @@ if __name__ == "__main__":
     # ==========================================
     # Step 4: Pairwise Inference
     # ==========================================
-    # Predict match probabilities for all cross-dataset level pairs using trained models
+    # Predict match probabilities for all cross-dataset level pairs using XGBoost
     matching_level_pairs_xgboost = []
-    matching_level_pairs_lightgbm = []
-    matching_level_pairs_kmeans = []
     all_pairwise_results_for_display = []
 
     level_dataframe_rows_list = list(dataframe.iterrows())
     
-    print("\nRunning Pairwise Inference (XGBoost & LightGBM & KMeans)...")
+    print("\nRunning Pairwise Inference (XGBoost)...")
     for i in range(len(level_dataframe_rows_list)):
         for j in range(i + 1, len(level_dataframe_rows_list)):
             _, level_1 = level_dataframe_rows_list[i]
@@ -325,27 +232,20 @@ if __name__ == "__main__":
             # Extract the input features for each level pair
             feature_vector = extract_features(level_1, level_2)
             
-            # Prediction: Use the trained models to predict match probability for this input feature vector
+            # Prediction: Use XGBoost to predict match probability for this input feature vector
             # Convert to DataFrame with explicit feature names
             feature_dataframe = pd.DataFrame([feature_vector], columns=feature_names)
             xgboost_probability = model_xgboost.predict(feature_dataframe)[0]
-            lightgbm_probability = model_lightgbm.predict(feature_dataframe)[0]
-            kmeans_output = model_kmeans_wrapper.predict(feature_dataframe)[0] # Returns 1.0 or 0.0
-            
-            # Separate logic: Each model is independent.
-            
-            # Record level pairs above output threshold (Dual Report)
-            if xgboost_probability > pairwise_output_threshold or lightgbm_probability > pairwise_output_threshold:
-                 all_pairwise_results_for_display.append({
+
+            # Record level pairs above output threshold
+            if xgboost_probability > pairwise_output_threshold:
+                all_pairwise_results_for_display.append({
                     'level_1_id': level_1['level_id'], 'level_2_id': level_2['level_id'],
                     'dataset_code_1': level_1['dataset_code'], 'dataset_code_2': level_2['dataset_code'],
-                    'xgboost_probability': xgboost_probability, 'lightgbm_probability': lightgbm_probability,
-                    'kmeans_label': int(kmeans_output),
+                    'xgboost_probability': xgboost_probability,
                     'features': feature_vector
                 })
-
-            # Prepare separate lists for clustering
-            if xgboost_probability > pairwise_output_threshold:
+                # Prepare list for clustering
                 matching_level_pairs_xgboost.append({
                     'level_1_id': level_1['level_id'],
                     'level_2_id': level_2['level_id'],
@@ -354,47 +254,23 @@ if __name__ == "__main__":
                     'probability': xgboost_probability,
                     'features': feature_vector
                 })
-            
-            if lightgbm_probability > pairwise_output_threshold:
-                matching_level_pairs_lightgbm.append({
-                    'level_1_id': level_1['level_id'],
-                    'level_2_id': level_2['level_id'],
-                    'dataset_code_1': level_1['dataset_code'],
-                    'dataset_code_2': level_2['dataset_code'],
-                    'probability': lightgbm_probability,
-                    'features': feature_vector
-                })
-            
-            if kmeans_output > pairwise_output_threshold:
-                matching_level_pairs_kmeans.append({
-                    'level_1_id': level_1['level_id'],
-                    'level_2_id': level_2['level_id'],
-                    'dataset_code_1': level_1['dataset_code'],
-                    'dataset_code_2': level_2['dataset_code'],
-                    'probability': kmeans_output, # 1.0
-                    'features': feature_vector
-                })
 
-    # Sort by probability descending (using max of both for the combined list)
-    all_pairwise_results_for_display.sort(key=lambda x: max(x['xgboost_probability'], x['lightgbm_probability']), reverse=True)
+    # Sort by XGBoost probability descending
+    all_pairwise_results_for_display.sort(key=lambda x: x['xgboost_probability'], reverse=True)
     matching_level_pairs_xgboost.sort(key=lambda x: x['probability'], reverse=True)
-    matching_level_pairs_lightgbm.sort(key=lambda x: x['probability'], reverse=True)
-    matching_level_pairs_kmeans.sort(key=lambda x: x['probability'], reverse=True)
 
     # Write pairwise inference results to file (Side-by-Side Comparison)
     threshold_percent = pairwise_output_threshold * 100
     with open('outputs/pairwise/Output_Level_Pairwise_Inference.txt', 'w', encoding='utf-8') as output_file:
         output_file.write(f"=== PAIRWISE INFERENCE RESULTS (>{threshold_percent:.1f}%) ===\n")
-        output_file.write(f"Model Comparison: XGBoost vs LightGBM vs KMeans\n")
+        output_file.write(f"Model: XGBoost\n")
         output_file.write(f"Total Level Pairs Found: {len(all_pairwise_results_for_display)}\n\n")
         
         for item in all_pairwise_results_for_display:
             energy_similarity, spin_similarity, parity_similarity, specificity, gamma_decay_pattern_similarity = item['features']
-            # Default to N/A if missing (though they should be present based on loop)
-            kmeans_val = 'Match' if item.get('kmeans_label', 0) == 1 else 'No-Match'
             output_file.write(
                 f"{item['level_1_id']} <-> {item['level_2_id']} | "
-                f"XGBoost: {item['xgboost_probability']:.1%} | LightGBM: {item['lightgbm_probability']:.1%} | KMeans: {kmeans_val}\n"
+                f"XGBoost: {item['xgboost_probability']:.1%}\n"
                 f"  Features: Energy_Similarity={energy_similarity:.2f}, Spin_Similarity={spin_similarity:.2f}, "
                 f"Parity_Similarity={parity_similarity:.2f}, Specificity={specificity:.2f}, Gamma_Pattern_Similarity={gamma_decay_pattern_similarity:.2f}\n\n"
             )
@@ -405,7 +281,5 @@ if __name__ == "__main__":
     # Step 5: Graph-Based Clustering
     # ==========================================
     
-    # Execute clustering independently for each model (XGBoost primary, LightGBM secondary, KMeans baseline)
+    # Execute clustering with XGBoost results
     perform_clustering_and_output(matching_level_pairs_xgboost, model_xgboost, "outputs/clustering/Output_Clustering_Results_XGBoost.txt", "XGBoost", dataframe)
-    perform_clustering_and_output(matching_level_pairs_lightgbm, model_lightgbm, "outputs/clustering/Output_Clustering_Results_LightGBM.txt", "LightGBM", dataframe)
-    perform_clustering_and_output(matching_level_pairs_kmeans, model_kmeans_wrapper, "outputs/clustering/Output_Clustering_Results_KMeans.txt", "KMeans", dataframe)

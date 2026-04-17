@@ -470,7 +470,7 @@
                     "unit": "keV",
                     "value": 3631.7,
                     "uncertainty": {
-                        "value": 0.30000000000000004,
+                        "value": 0.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3631.7 3"
@@ -519,7 +519,7 @@
                     "unit": "keV",
                     "value": 3660.0,
                     "uncertainty": {
-                        "value": 0.30000000000000004,
+                        "value": 0.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3660.0 3"
@@ -540,7 +540,7 @@
                     "unit": "keV",
                     "value": 3773.72,
                     "uncertainty": {
-                        "value": 0.41000000000000003,
+                        "value": 0.41,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3773.72 41"
@@ -584,7 +584,7 @@
                     "unit": "keV",
                     "value": 3940.1,
                     "uncertainty": {
-                        "value": 0.30000000000000004,
+                        "value": 0.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3940.1 3"
@@ -602,7 +602,7 @@
                     "unit": "keV",
                     "value": 3964.1,
                     "uncertainty": {
-                        "value": 0.30000000000000004,
+                        "value": 0.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3964.1 3"
@@ -619,7 +619,7 @@
                     "unit": "keV",
                     "value": 3983.0,
                     "uncertainty": {
-                        "value": 0.30000000000000004,
+                        "value": 0.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3983.0 3"
@@ -834,7 +834,7 @@
                     "unit": "keV",
                     "value": 4461.4,
                     "uncertainty": {
-                        "value": 0.30000000000000004,
+                        "value": 0.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4461.4 3"
@@ -957,7 +957,7 @@
                     "unit": "keV",
                     "value": 4717.4,
                     "uncertainty": {
-                        "value": 0.6000000000000001,
+                        "value": 0.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4717.4 6"
@@ -1038,7 +1038,7 @@
                     "unit": "keV",
                     "value": 4995.6,
                     "uncertainty": {
-                        "value": 0.30000000000000004,
+                        "value": 0.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4995.6 3"
@@ -1068,7 +1068,7 @@
                     "unit": "keV",
                     "value": 5171.6,
                     "uncertainty": {
-                        "value": 0.30000000000000004,
+                        "value": 0.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "5171.6 3"
@@ -1813,7 +1813,7 @@
                     "unit": "keV",
                     "value": 6219.3,
                     "uncertainty": {
-                        "value": 1.2000000000000002,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6219.3 12"
@@ -2054,7 +2054,7 @@
                     "unit": "keV",
                     "value": 6382.4,
                     "uncertainty": {
-                        "value": 1.4000000000000001,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6382.4 14"
@@ -2080,7 +2080,7 @@
                     "unit": "keV",
                     "value": 6399.8,
                     "uncertainty": {
-                        "value": 1.4000000000000001,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6399.8 14"
@@ -2100,7 +2100,7 @@
                     "unit": "keV",
                     "value": 6441.2,
                     "uncertainty": {
-                        "value": 1.4000000000000001,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6441.2 14"
@@ -2167,7 +2167,7 @@
                     "unit": "keV",
                     "value": 6477.5,
                     "uncertainty": {
-                        "value": 1.4000000000000001,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6477.5 14"
@@ -2186,7 +2186,7 @@
                     "unit": "keV",
                     "value": 6486.9,
                     "uncertainty": {
-                        "value": 1.4000000000000001,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6486.9 14"
@@ -2602,7 +2602,7 @@
                     "unit": "keV",
                     "value": 6828.6,
                     "uncertainty": {
-                        "value": 1.4000000000000001,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6828.6 14"
@@ -2624,7 +2624,7 @@
                     "unit": "keV",
                     "value": 6842.8,
                     "uncertainty": {
-                        "value": 1.4000000000000001,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6842.8 14"
@@ -2659,7 +2659,7 @@
                     "unit": "keV",
                     "value": 6853.0,
                     "uncertainty": {
-                        "value": 1.4000000000000001,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6853.0 14"
@@ -2780,7 +2780,7 @@
                     "unit": "keV",
                     "value": 6918.0,
                     "uncertainty": {
-                        "value": 1.7000000000000002,
+                        "value": 1.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6918.0 17"
@@ -2823,7 +2823,7 @@
                     "unit": "keV",
                     "value": 6931.5,
                     "uncertainty": {
-                        "value": 1.7000000000000002,
+                        "value": 1.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6931.5 17"
@@ -2855,7 +2855,7 @@
                     "unit": "keV",
                     "value": 6977.4,
                     "uncertainty": {
-                        "value": 1.7000000000000002,
+                        "value": 1.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6977.4 17"
@@ -4127,7 +4127,8 @@
                     "value": 0.0,
                     "uncertainty": {
                         "type": "unreported"
-                    }
+                    },
+                    "evaluatorInput": ""
                 },
                 "initialLevel": 1,
                 "finalLevel": 0
@@ -8493,7 +8494,8 @@
                     "value": 0.0,
                     "uncertainty": {
                         "type": "unreported"
-                    }
+                    },
+                    "evaluatorInput": ""
                 },
                 "initialLevel": 47,
                 "finalLevel": 15
@@ -21970,7 +21972,8 @@
                     "value": 0.0,
                     "uncertainty": {
                         "type": "unreported"
-                    }
+                    },
+                    "evaluatorInput": ""
                 },
                 "initialLevel": 157,
                 "finalLevel": 6
@@ -21989,7 +21992,8 @@
                     "value": 0.0,
                     "uncertainty": {
                         "type": "unreported"
-                    }
+                    },
+                    "evaluatorInput": ""
                 },
                 "initialLevel": 157,
                 "finalLevel": 1

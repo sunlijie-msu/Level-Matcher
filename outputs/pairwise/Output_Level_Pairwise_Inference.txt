@@ -1,472 +1,385 @@
 === PAIRWISE INFERENCE RESULTS (>0.1%) ===
-Model Comparison: XGBoost vs LightGBM vs KMeans
-Total Level Pairs Found: 156
+Model: XGBoost
+Total Level Pairs Found: 127
 
-A_0 <-> B_0 | XGBoost: 94.2% | LightGBM: 99.4% | KMeans: Match
+A_0 <-> B_0 | XGBoost: 94.2%
   Features: Energy_Similarity=1.00, Spin_Similarity=1.00, Parity_Similarity=1.00, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_0 <-> C_0 | XGBoost: 94.2% | LightGBM: 99.4% | KMeans: Match
+A_0 <-> C_0 | XGBoost: 94.2%
   Features: Energy_Similarity=1.00, Spin_Similarity=1.00, Parity_Similarity=1.00, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_600 <-> B_603 | XGBoost: 67.7% | LightGBM: 99.4% | KMeans: Match
-  Features: Energy_Similarity=0.91, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+B_0 <-> C_0 | XGBoost: 94.2%
+  Features: Energy_Similarity=1.00, Spin_Similarity=1.00, Parity_Similarity=1.00, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_600 <-> C_601 | XGBoost: 73.8% | LightGBM: 99.4% | KMeans: Match
+A_3005 <-> C_3005 | XGBoost: 73.8%
+  Features: Energy_Similarity=1.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+A_600 <-> C_601 | XGBoost: 73.8%
   Features: Energy_Similarity=0.99, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2000 <-> B_2006 | XGBoost: 19.9% | LightGBM: 99.4% | KMeans: Match
-  Features: Energy_Similarity=0.17, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=1.00
-
-A_2000 <-> C_2000 | XGBoost: 0.1% | LightGBM: 99.4% | KMeans: Match
-  Features: Energy_Similarity=1.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.29
-
-A_2005 <-> B_2006 | XGBoost: 0.1% | LightGBM: 99.4% | KMeans: Match
-  Features: Energy_Similarity=0.95, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.25
-
-A_2005 <-> C_2000 | XGBoost: 36.3% | LightGBM: 99.4% | KMeans: Match
-  Features: Energy_Similarity=0.29, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=1.00
-
-A_3000 <-> C_3005 | XGBoost: 73.8% | LightGBM: 99.4% | KMeans: Match
+A_3000 <-> C_3005 | XGBoost: 73.8%
   Features: Energy_Similarity=1.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_3005 <-> B_3000 | XGBoost: 71.5% | LightGBM: 99.4% | KMeans: Match
-  Features: Energy_Similarity=0.61, Spin_Similarity=1.00, Parity_Similarity=1.00, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-A_3005 <-> C_3005 | XGBoost: 73.8% | LightGBM: 99.4% | KMeans: Match
+B_3000 <-> C_3005 | XGBoost: 73.8%
   Features: Energy_Similarity=1.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_4000 <-> B_4000 | XGBoost: 8.3% | LightGBM: 99.4% | KMeans: No-Match
-  Features: Energy_Similarity=1.00, Spin_Similarity=0.20, Parity_Similarity=0.05, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-A_4000 <-> C_4003 | XGBoost: 40.0% | LightGBM: 99.4% | KMeans: Match
-  Features: Energy_Similarity=1.00, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_4005 <-> B_4000 | XGBoost: 42.5% | LightGBM: 99.4% | KMeans: Match
-  Features: Energy_Similarity=0.61, Spin_Similarity=0.80, Parity_Similarity=0.80, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-A_4005 <-> C_4003 | XGBoost: 40.0% | LightGBM: 99.4% | KMeans: Match
-  Features: Energy_Similarity=1.00, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_5000 <-> B_5000 | XGBoost: 6.1% | LightGBM: 99.4% | KMeans: No-Match
-  Features: Energy_Similarity=1.00, Spin_Similarity=0.20, Parity_Similarity=0.05, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_5000 <-> C_5003 | XGBoost: 28.4% | LightGBM: 99.4% | KMeans: Match
-  Features: Energy_Similarity=1.00, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.33, Gamma_Pattern_Similarity=0.50
-
-A_5005 <-> B_5000 | XGBoost: 23.7% | LightGBM: 99.4% | KMeans: Match
-  Features: Energy_Similarity=0.61, Spin_Similarity=0.80, Parity_Similarity=0.80, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_5005 <-> C_5003 | XGBoost: 28.4% | LightGBM: 99.4% | KMeans: Match
-  Features: Energy_Similarity=1.00, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.33, Gamma_Pattern_Similarity=0.50
-
-B_0 <-> C_0 | XGBoost: 94.2% | LightGBM: 99.4% | KMeans: Match
-  Features: Energy_Similarity=1.00, Spin_Similarity=1.00, Parity_Similarity=1.00, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_603 <-> C_601 | XGBoost: 72.2% | LightGBM: 99.4% | KMeans: Match
+B_603 <-> C_601 | XGBoost: 72.2%
   Features: Energy_Similarity=0.98, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-B_2006 <-> C_2000 | XGBoost: 0.1% | LightGBM: 99.4% | KMeans: Match
-  Features: Energy_Similarity=0.17, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.24
+A_3005 <-> B_3000 | XGBoost: 71.5%
+  Features: Energy_Similarity=0.61, Spin_Similarity=1.00, Parity_Similarity=1.00, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-B_3000 <-> C_3005 | XGBoost: 73.8% | LightGBM: 99.4% | KMeans: Match
-  Features: Energy_Similarity=1.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+A_600 <-> B_603 | XGBoost: 67.7%
+  Features: Energy_Similarity=0.91, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-B_4000 <-> C_4003 | XGBoost: 40.0% | LightGBM: 99.4% | KMeans: Match
+A_4005 <-> B_4000 | XGBoost: 42.5%
+  Features: Energy_Similarity=0.61, Spin_Similarity=0.80, Parity_Similarity=0.80, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+A_4000 <-> C_4003 | XGBoost: 40.0%
   Features: Energy_Similarity=1.00, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-B_5000 <-> C_5003 | XGBoost: 40.0% | LightGBM: 99.4% | KMeans: Match
+A_4005 <-> C_4003 | XGBoost: 40.0%
   Features: Energy_Similarity=1.00, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_0 <-> B_603 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+B_4000 <-> C_4003 | XGBoost: 40.0%
+  Features: Energy_Similarity=1.00, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
+
+B_5000 <-> C_5003 | XGBoost: 40.0%
+  Features: Energy_Similarity=1.00, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
+
+A_2005 <-> C_2000 | XGBoost: 36.3%
+  Features: Energy_Similarity=0.29, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=1.00
+
+A_5000 <-> C_5003 | XGBoost: 28.4%
+  Features: Energy_Similarity=1.00, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.33, Gamma_Pattern_Similarity=0.50
+
+A_5005 <-> C_5003 | XGBoost: 28.4%
+  Features: Energy_Similarity=1.00, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.33, Gamma_Pattern_Similarity=0.50
+
+A_5005 <-> B_5000 | XGBoost: 23.7%
+  Features: Energy_Similarity=0.61, Spin_Similarity=0.80, Parity_Similarity=0.80, Specificity=0.58, Gamma_Pattern_Similarity=0.50
+
+A_2000 <-> B_2006 | XGBoost: 19.9%
+  Features: Energy_Similarity=0.17, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=1.00
+
+A_4000 <-> B_4000 | XGBoost: 8.3%
+  Features: Energy_Similarity=1.00, Spin_Similarity=0.20, Parity_Similarity=0.05, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+A_5000 <-> B_5000 | XGBoost: 6.1%
+  Features: Energy_Similarity=1.00, Spin_Similarity=0.20, Parity_Similarity=0.05, Specificity=0.58, Gamma_Pattern_Similarity=0.50
+
+A_3000 <-> C_4003 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=1.00, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
+
+A_3000 <-> C_5003 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=1.00, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
+
+A_3005 <-> C_4003 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=1.00, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
+
+B_3000 <-> C_4003 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=1.00, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
+
+A_0 <-> B_603 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_0 <-> B_2006 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_0 <-> B_2006 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_0 <-> C_601 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_0 <-> C_601 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_0 <-> C_2000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_0 <-> C_2000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_0 <-> C_3005 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_0 <-> C_3005 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_600 <-> B_0 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_600 <-> B_0 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_600 <-> B_2006 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_600 <-> B_2006 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_600 <-> B_3000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_600 <-> B_3000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_600 <-> B_4000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_600 <-> B_4000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_600 <-> B_5000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_600 <-> B_5000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_600 <-> C_0 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_600 <-> C_0 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_600 <-> C_2000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_600 <-> C_2000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_600 <-> C_3005 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_600 <-> C_3005 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_600 <-> C_4003 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_600 <-> C_5003 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_2000 <-> B_0 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_2000 <-> B_0 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2000 <-> B_603 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_2000 <-> B_603 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2000 <-> B_3000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_2000 <-> B_3000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2000 <-> B_4000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_2000 <-> B_4000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2000 <-> B_5000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_2000 <-> B_5000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2000 <-> C_0 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_2000 <-> C_0 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2000 <-> C_601 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_2000 <-> C_601 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2000 <-> C_3005 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_2000 <-> C_3005 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2000 <-> C_4003 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_2000 <-> C_5003 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_2005 <-> B_0 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_2005 <-> B_0 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2005 <-> B_603 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_2005 <-> B_603 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2005 <-> B_3000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_2005 <-> B_3000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2005 <-> B_4000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_2005 <-> B_4000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2005 <-> B_5000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_2005 <-> B_5000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2005 <-> C_0 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_2005 <-> C_0 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2005 <-> C_601 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_2005 <-> C_601 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2005 <-> C_3005 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_2005 <-> C_3005 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_2005 <-> C_4003 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_2005 <-> C_5003 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_3000 <-> B_603 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_3000 <-> B_603 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_3000 <-> B_2006 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_3000 <-> B_2006 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_3000 <-> B_4000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_3000 <-> B_4000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.80, Parity_Similarity=0.80, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_3000 <-> C_601 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_3000 <-> C_601 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_3000 <-> C_2000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_3000 <-> C_2000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_3000 <-> C_4003 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=1.00, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_3000 <-> C_5003 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=1.00, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_3005 <-> B_603 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_3005 <-> B_603 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_3005 <-> B_2006 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_3005 <-> B_2006 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_3005 <-> B_4000 | XGBoost: 0.1% | LightGBM: 21.6% | KMeans: No-Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.05, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-A_3005 <-> C_601 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_3005 <-> C_601 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_3005 <-> C_2000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_3005 <-> C_2000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_3005 <-> C_4003 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=1.00, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_4000 <-> B_0 | XGBoost: 0.1% | LightGBM: 21.6% | KMeans: No-Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.05, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-A_4000 <-> B_603 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_4000 <-> B_603 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_4000 <-> B_2006 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_4000 <-> B_2006 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_4000 <-> B_3000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_4000 <-> B_3000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.80, Parity_Similarity=0.80, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_4000 <-> C_0 | XGBoost: 0.1% | LightGBM: 21.6% | KMeans: No-Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.05, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-A_4000 <-> C_601 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_4000 <-> C_601 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_4000 <-> C_2000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_4000 <-> C_2000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_4000 <-> C_3005 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_4000 <-> C_3005 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_4000 <-> C_5003 | XGBoost: 0.3% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_4005 <-> B_603 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_4005 <-> B_603 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_4005 <-> B_2006 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_4005 <-> B_2006 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_4005 <-> B_3000 | XGBoost: 0.1% | LightGBM: 21.6% | KMeans: No-Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.05, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-A_4005 <-> C_601 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_4005 <-> C_601 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_4005 <-> C_2000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_4005 <-> C_2000 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_4005 <-> C_3005 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
+A_4005 <-> C_3005 | XGBoost: 0.5%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_4005 <-> C_5003 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+B_0 <-> C_601 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+B_0 <-> C_2000 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+B_0 <-> C_3005 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+B_603 <-> C_0 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+B_603 <-> C_2000 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+B_603 <-> C_3005 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+B_2006 <-> C_0 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+B_2006 <-> C_601 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+B_2006 <-> C_3005 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+B_3000 <-> C_601 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+B_3000 <-> C_2000 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+B_4000 <-> C_601 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+B_4000 <-> C_2000 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+B_4000 <-> C_3005 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+B_5000 <-> C_601 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+B_5000 <-> C_2000 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+B_5000 <-> C_3005 | XGBoost: 0.5%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+A_600 <-> C_4003 | XGBoost: 0.4%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
+
+A_600 <-> C_5003 | XGBoost: 0.4%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
+
+A_2000 <-> C_4003 | XGBoost: 0.4%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
+
+A_2000 <-> C_5003 | XGBoost: 0.4%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
+
+A_2005 <-> C_4003 | XGBoost: 0.4%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
+
+A_2005 <-> C_5003 | XGBoost: 0.4%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
+
+A_4005 <-> C_5003 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_5000 <-> B_0 | XGBoost: 0.3% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.80, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_5000 <-> B_603 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+A_5000 <-> B_603 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_5000 <-> B_2006 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+A_5000 <-> B_2006 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_5000 <-> B_3000 | XGBoost: 0.2% | LightGBM: 21.6% | KMeans: No-Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.80, Parity_Similarity=0.05, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_5000 <-> B_4000 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+A_5000 <-> B_4000 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.80, Parity_Similarity=0.80, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_5000 <-> C_0 | XGBoost: 0.3% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.80, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_5000 <-> C_601 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+A_5000 <-> C_601 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_5000 <-> C_2000 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+A_5000 <-> C_2000 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_5000 <-> C_3005 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+A_5000 <-> C_3005 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_5000 <-> C_4003 | XGBoost: 0.3% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.33, Gamma_Pattern_Similarity=0.50
-
-A_5005 <-> B_603 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+A_5005 <-> B_603 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_5005 <-> B_2006 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+A_5005 <-> B_2006 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_5005 <-> B_4000 | XGBoost: 0.1% | LightGBM: 21.6% | KMeans: No-Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.05, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_5005 <-> C_601 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+A_5005 <-> C_601 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_5005 <-> C_2000 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+A_5005 <-> C_2000 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_5005 <-> C_3005 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+A_5005 <-> C_3005 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_5005 <-> C_4003 | XGBoost: 0.3% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.33, Gamma_Pattern_Similarity=0.50
-
-B_0 <-> C_601 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_0 <-> C_2000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_0 <-> C_3005 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_603 <-> C_0 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_603 <-> C_2000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_603 <-> C_3005 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_603 <-> C_4003 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+B_603 <-> C_4003 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-B_603 <-> C_5003 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+B_603 <-> C_5003 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-B_2006 <-> C_0 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_2006 <-> C_601 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_2006 <-> C_3005 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_2006 <-> C_4003 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+B_2006 <-> C_4003 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-B_2006 <-> C_5003 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+B_2006 <-> C_5003 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-B_3000 <-> C_601 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_3000 <-> C_2000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_3000 <-> C_4003 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=1.00, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-B_4000 <-> C_601 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_4000 <-> C_2000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_4000 <-> C_3005 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_4000 <-> C_5003 | XGBoost: 0.4% | LightGBM: 21.6% | KMeans: Match
+B_4000 <-> C_5003 | XGBoost: 0.4%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-B_5000 <-> C_601 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+A_5000 <-> C_4003 | XGBoost: 0.3%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.33, Gamma_Pattern_Similarity=0.50
 
-B_5000 <-> C_2000 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+A_5005 <-> C_4003 | XGBoost: 0.3%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.33, Gamma_Pattern_Similarity=0.50
 
-B_5000 <-> C_3005 | XGBoost: 0.5% | LightGBM: 21.6% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_5000 <-> C_4003 | XGBoost: 0.3% | LightGBM: 21.6% | KMeans: Match
+A_4000 <-> C_5003 | XGBoost: 0.3%
   Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_0 <-> B_4000 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=0.80, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+A_5000 <-> B_0 | XGBoost: 0.3%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.80, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_0 <-> B_5000 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: No-Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=0.05, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+A_5000 <-> C_0 | XGBoost: 0.3%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.80, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_0 <-> C_4003 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.05, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
+B_5000 <-> C_4003 | XGBoost: 0.3%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_0 <-> C_5003 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
+A_5000 <-> B_3000 | XGBoost: 0.2%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.80, Parity_Similarity=0.05, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 
-A_3000 <-> B_0 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=1.00, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+A_3005 <-> B_4000 | XGBoost: 0.1%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.05, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_3000 <-> B_5000 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: No-Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=0.05, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+A_4000 <-> B_0 | XGBoost: 0.1%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.05, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_3000 <-> C_0 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=1.00, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+A_4000 <-> C_0 | XGBoost: 0.1%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.05, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_3005 <-> B_5000 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=0.80, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+A_4005 <-> B_3000 | XGBoost: 0.1%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.05, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-A_3005 <-> C_5003 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.05, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_4000 <-> B_5000 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=0.80, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-A_4005 <-> B_0 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=0.80, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-A_4005 <-> B_5000 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: No-Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=0.05, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-A_4005 <-> C_0 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=0.80, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-A_5005 <-> B_0 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: No-Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=0.05, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_5005 <-> B_3000 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=0.80, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-A_5005 <-> C_0 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: No-Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=0.05, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-B_0 <-> C_4003 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.05, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-B_0 <-> C_5003 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-B_3000 <-> C_5003 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.05, Parity_Similarity=0.50, Specificity=0.58, Gamma_Pattern_Similarity=0.50
-
-B_4000 <-> C_0 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=0.80, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_5000 <-> C_0 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: No-Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.00, Parity_Similarity=0.05, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-A_3000 <-> B_3000 | XGBoost: 0.0% | LightGBM: 0.5% | KMeans: No-Match
-  Features: Energy_Similarity=1.00, Spin_Similarity=0.05, Parity_Similarity=0.00, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-A_0 <-> B_3000 | XGBoost: 0.0% | LightGBM: 0.3% | KMeans: No-Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.05, Parity_Similarity=0.00, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-A_3005 <-> B_0 | XGBoost: 0.0% | LightGBM: 0.3% | KMeans: No-Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.05, Parity_Similarity=0.00, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-A_3005 <-> C_0 | XGBoost: 0.0% | LightGBM: 0.3% | KMeans: No-Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.05, Parity_Similarity=0.00, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-B_3000 <-> C_0 | XGBoost: 0.0% | LightGBM: 0.3% | KMeans: No-Match
-  Features: Energy_Similarity=0.00, Spin_Similarity=0.05, Parity_Similarity=0.00, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+A_5005 <-> B_4000 | XGBoost: 0.1%
+  Features: Energy_Similarity=0.00, Spin_Similarity=0.20, Parity_Similarity=0.05, Specificity=0.58, Gamma_Pattern_Similarity=0.50
 

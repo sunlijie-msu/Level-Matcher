@@ -60,6 +60,7 @@ import json
 import re
 import os
 import argparse
+from decimal import Decimal, InvalidOperation
 
 def infer_uncertainty_from_precision(value_string):
     """
@@ -74,7 +75,9 @@ def infer_uncertainty_from_precision(value_string):
     - "1234.5" → ±0.5 keV (1 decimal place)
     - "567.89" → ±0.05 keV (2 decimal places)
     
-    Returns: Inferred uncertainty as float, or 5.0 (conservative default) if cannot parse
+    Returns: Inferred uncertainty as float, or 5.0 (conservative default) if cannot parse.
+    Uses exact base-10 Decimal arithmetic so JSON output remains numerically clean
+    (for example, 1.7 instead of 1.7000000000000002).
     """
     if not value_string:
         return 5.0
@@ -99,13 +102,13 @@ def infer_uncertainty_from_precision(value_string):
         if '.' in mantissa:
             decimal_part = mantissa.split('.')[1]
             decimal_places = len(decimal_part)
-            
+
             # Uncertainty: 5 × 10^(-decimal_places) × 10^exponent
-            mantissa_uncertainty = 5.0 * (10 ** (-decimal_places))
-            return mantissa_uncertainty * (10 ** exponent)
+            mantissa_uncertainty = Decimal('5').scaleb(-decimal_places)
+            return float(mantissa_uncertainty.scaleb(exponent))
         else:
             # Integer mantissa: "2E3" → ±5×10^3 = ±5000
-            return 5.0 * (10 ** exponent)
+            return float(Decimal('5').scaleb(exponent))
     
     # Handle regular decimal notation
     if '.' in value_string:
@@ -114,7 +117,7 @@ def infer_uncertainty_from_precision(value_string):
         # Example: "1234.56" has 2 decimal places → precision to 0.01 keV → ±0.05 keV
         decimal_part = value_string.split('.')[1]
         decimal_places = len(decimal_part)
-        return 5.0 * (10 ** (-decimal_places))
+        return float(Decimal('5').scaleb(-decimal_places))
     else:
         # Integer: precision to nearest 10
         return 5.0
@@ -245,7 +248,10 @@ def calculate_absolute_uncertainty(value_string, uncertainty_string):
     else:
         decimals = 0
         
-    return float(uncertainty_string) * (10 ** -decimals)
+    try:
+        return float(Decimal(uncertainty_string).scaleb(-decimals))
+    except InvalidOperation:
+        return 0.0
 
 def format_evaluator_input(value_string, uncertainty_string):
     if not uncertainty_string:
@@ -534,8 +540,7 @@ def convert_ens_files_to_datasets(raw_dir, xref_path, output_dir):
                     }
                     if gamma_data.get("energy_input_string"):
                         gamma_entry["energy"]["evaluatorInput"] = gamma_data["energy_input_string"]
-                    if gamma_data.get("intensity_input_string"):
-                        gamma_entry["gammaIntensity"]["evaluatorInput"] = gamma_data["intensity_input_string"]
+                    gamma_entry["gammaIntensity"]["evaluatorInput"] = gamma_data["intensity_input_string"]
 
                     gammas_table_list.append(gamma_entry)
                     level_gamma_indices.append(gamma_counter)

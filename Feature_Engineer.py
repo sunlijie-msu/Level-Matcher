@@ -141,13 +141,18 @@ def parse_json_datasets(dataset_codes):
     """
     levels = []
     
-    # Robustly determine data directory relative to this script
+    # Robustly determine data directory relative to this script.
+    # Primary location is data/json/ because Dataset_Parser now writes standardized
+    # datasets there. Fall back to data/raw/ to preserve compatibility with older
+    # example repositories and pre-existing test fixtures.
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    data_dir = os.path.join(base_dir, 'data', 'raw')
+    preferred_data_dir = os.path.join(base_dir, 'data', 'json')
+    fallback_data_dir = os.path.join(base_dir, 'data', 'raw')
     
     for dataset_code in dataset_codes:
-        # Strictly use the test_dataset_{code}.json files with the new schema in data/raw/
-        filename = os.path.join(data_dir, f"test_dataset_{dataset_code}.json")
+        filename = os.path.join(preferred_data_dir, f"test_dataset_{dataset_code}.json")
+        if not os.path.exists(filename):
+            filename = os.path.join(fallback_data_dir, f"test_dataset_{dataset_code}.json")
 
         if os.path.exists(filename):
             with open(filename, 'r', encoding='utf-8') as f:

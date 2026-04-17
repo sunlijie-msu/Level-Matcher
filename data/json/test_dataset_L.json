@@ -1591,7 +1591,7 @@
                     "unit": "keV",
                     "value": 7859.2,
                     "uncertainty": {
-                        "value": 2.9000000000000004,
+                        "value": 2.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "7859.2 29"
@@ -1603,7 +1603,7 @@
                     "unit": "keV",
                     "value": 7883.4,
                     "uncertainty": {
-                        "value": 2.9000000000000004,
+                        "value": 2.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "7883.4 29"
@@ -1615,7 +1615,7 @@
                     "unit": "keV",
                     "value": 7897.0,
                     "uncertainty": {
-                        "value": 2.9000000000000004,
+                        "value": 2.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "7897.0 29"
@@ -1749,7 +1749,7 @@
                     "unit": "keV",
                     "value": 7953.3,
                     "uncertainty": {
-                        "value": 2.9000000000000004,
+                        "value": 2.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "7953.3 29"

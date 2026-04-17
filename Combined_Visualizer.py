@@ -111,7 +111,9 @@ def spread_text_positions(energies, minimum_distance=250):
 
 def load_dataset(dataset_code):
     """Load level data and gamma table from JSON file for a given dataset code."""
-    filename = f"data/raw/test_dataset_{dataset_code}.json"
+    filename = f"data/json/test_dataset_{dataset_code}.json"
+    if not os.path.exists(filename):
+        filename = f"data/raw/test_dataset_{dataset_code}.json"
     if not os.path.exists(filename):
         return [], []
     
@@ -527,25 +529,11 @@ if __name__ == "__main__":
     # Generate level schemes
     plot_level_schemes()
     
-    # Generate Clustering Results (XGBoost) - Baseline
+    # Generate Clustering Results (XGBoost)
     plot_clustering_results(
         input_path='outputs/clustering/Output_Clustering_Results_XGBoost.txt', 
         output_path='outputs/figures/Output_Cluster_Scheme_XGBoost.png', 
         title_suffix='(XGBoost / Energy-Dominant)'
-    )
-    
-    # Generate Clustering Results (LightGBM) - Foil
-    plot_clustering_results(
-        input_path='outputs/clustering/Output_Clustering_Results_LightGBM.txt', 
-        output_path='outputs/figures/Output_Cluster_Scheme_LightGBM.png', 
-        title_suffix='(LightGBM / Gamma-Pattern-Aware)'
-    )
-
-    # Generate Clustering Results (KMeans) - Geometric Baseline
-    plot_clustering_results(
-        input_path='outputs/clustering/Output_Clustering_Results_KMeans.txt', 
-        output_path='outputs/figures/Output_Cluster_Scheme_KMeans.png', 
-        title_suffix='(KMeans / Geometric-Baseline)'
     )
     
     print("=" * 60)
