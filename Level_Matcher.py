@@ -50,8 +50,8 @@ Step 2: Model Training
   Output: Trained XGBoost model with diagnostic visualizations
 
 Step 3: Test Data Ingestion
-  Source: Test datasets (A, B, C) in data/raw/
-  Input: Local JSON files (test_dataset_A.json, etc.) containing levels and gamma transitions
+  Source: Real-world datasets (K, L) in data/json/
+  Input: Local JSON files (test_dataset_K.json, test_dataset_L.json) containing levels and gamma transitions
   Process: Standardizes energy, uncertainty, Spin-Parity strings, and gamma decay records into a unified DataFrame
   Constraint: Strictly for inference; these levels are never seen during the training phase.
   Function: parse_json_datasets()
@@ -205,8 +205,10 @@ if __name__ == "__main__":
     # ==========================================
     # Load level and gamma test data from JSON files for matching.
     # Logic: These datasets (A, B, C) are used solely for inference and were not seen during training.
+    # Logic: These datasets (K, L) are the real-world inference targets; never seen during the synthetic training phase.
+
     print("Ingesting Test Data...")
-    levels = parse_json_datasets(['A', 'B', 'C'])
+    levels = parse_json_datasets(['K', 'L'])
     dataframe = pd.DataFrame(levels)
     dataframe['level_id'] = dataframe.apply(lambda row: f"{row['dataset_code']}_{int(row['energy_value'])}", axis=1)
 

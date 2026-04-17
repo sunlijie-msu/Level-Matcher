@@ -129,11 +129,11 @@ def load_dataset(dataset_code):
 
 def plot_level_schemes():
     """Generate visualization of input level schemes from all datasets with gamma transitions."""
-    datasets = ['A', 'B', 'C']
-    figure, axis = plt.subplots(figsize=(14, 10))
+    datasets = ['K', 'L']
+    figure, axis = plt.subplots(figsize=(10, 10))
     
     # X-axis positions for each dataset column
-    x_positions = {'A': 0, 'B': 3.0, 'C': 6.0}
+    x_positions = {'K': 0, 'L': 3.0}
     line_width = 0.8
     maximum_energy = 0
     
@@ -311,10 +311,10 @@ def plot_level_schemes():
                          bbox=dict(boxstyle='square,pad=0.1', facecolor='white', edgecolor='none', alpha=1.0))
 
     # Styling
-    axis.set_xlim(-1.5, 8.0)
+    axis.set_xlim(-1.5, 4.5)
     axis.set_ylim(-200, maximum_energy * 1.15)
-    axis.set_xticks([0, 3.0, 6.0])
-    axis.set_xticklabels(['Dataset A', 'Dataset B', 'Dataset C'], 
+    axis.set_xticks([0, 3.0])
+    axis.set_xticklabels(['Dataset K', 'Dataset L'], 
                          fontsize=Font_Config['axis_labels'], fontweight='bold', family='Times New Roman')
     
     axis.spines['top'].set_visible(False)
