@@ -445,7 +445,7 @@ Cluster 88:
   Members:
     [K] K_6605: E=6605.0±2.0 keV, Spin-Parity=None (Anchor)
 
-Cluster 89:
+Cluster 89: human evaluator prefers to split
   Anchor: K_6624 | E=6624.7±1.5 keV | Spin-Parity=None
   Members:
     [K] K_6624: E=6624.7±1.5 keV, Spin-Parity=None (Anchor)
@@ -472,7 +472,7 @@ Cluster 93:
     [K] K_6720: E=6720.2±1.6 keV, Spin-Parity=None (Match Probability: 73.8%)
     [L] L_6719: E=6719.5±1.5 keV, Spin-Parity=3- (Anchor)
 
-Cluster 94:
+Cluster 94: human evaluator prefers not to match
   Anchor: L_6719 | E=6719.5±1.5 keV | Spin-Parity=3-
   Members:
     [K] K_6723: E=6723.7±1.6 keV, Spin-Parity=None (Match Probability: 52.5%)
@@ -563,7 +563,7 @@ Cluster 110:
   Members:
     [K] K_6977: E=6977.4±1.7 keV, Spin-Parity=None (Anchor)
 
-Cluster 111:
+Cluster 111: human evaluator prefers Cluster 112 over Cluster 111
   Anchor: L_6986 | E=6986.9±0.3 keV | Spin-Parity=1-
   Members:
     [K] K_6984: E=6984.9±1.0 keV, Spin-Parity=None (Match Probability: 52.5%)
@@ -575,7 +575,7 @@ Cluster 112:
     [K] K_6986: E=6986.9±2.0 keV, Spin-Parity=None (Match Probability: 73.8%)
     [L] L_6986: E=6986.9±0.3 keV, Spin-Parity=1- (Anchor)
 
-Cluster 113:
+Cluster 113: human evaluator prefers Cluster 114 over Cluster 113
   Anchor: L_6991 | E=6991.3±0.3 keV | Spin-Parity=1+
   Members:
     [K] K_6986: E=6986.9±2.0 keV, Spin-Parity=None (Match Probability: 42.5%)
@@ -597,7 +597,7 @@ Cluster 116:
   Members:
     [L] L_7037: E=7037.8±0.3 keV, Spin-Parity=2- (Anchor)
 
-Cluster 117:
+Cluster 117: human evaluator prefers not to match
   Anchor: K_7051 | E=7051.6±1.8 keV | Spin-Parity=None
   Members:
     [K] K_7051: E=7051.6±1.8 keV, Spin-Parity=None (Anchor)
@@ -609,7 +609,7 @@ Cluster 118:
     [K] K_7059: E=7059.0±0.3 keV, Spin-Parity=1,2 (Anchor)
     [L] L_7057: E=7057.7±2.0 keV, Spin-Parity=None (Match Probability: 50.4%)
 
-Cluster 119:
+Cluster 119: human evaluator prefers not to match
   Anchor: K_7061 | E=7061.6±1.0 keV | Spin-Parity=None
   Members:
     [K] K_7061: E=7061.6±1.0 keV, Spin-Parity=None (Anchor)
