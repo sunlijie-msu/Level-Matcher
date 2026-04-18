@@ -778,19 +778,19 @@ Cluster 149:
     [K] K_7449: E=7449.7±1.0 keV, Spin-Parity=None (Anchor)
     [L] L_7451: E=7451.6±2.0 keV, Spin-Parity=None (Match Probability: 69.9%)
 
-Cluster 150:
+Cluster 150: human evaluator slightly prefers to split into two clusters
   Anchor: K_7462 | E=7462.3±1.0 keV | Spin-Parity=None
   Members:
     [K] K_7462: E=7462.3±1.0 keV, Spin-Parity=None (Anchor)
     [L] L_7457: E=7457.6±1.5 keV, Spin-Parity=1- (Match Probability: 35.9%)
 
-Cluster 151:
+Cluster 151: human evaluator slightly prefers to split into two clusters
   Anchor: K_7470 | E=7470.1±1.0 keV | Spin-Parity=None
   Members:
     [K] K_7470: E=7470.1±1.0 keV, Spin-Parity=None (Anchor)
     [L] L_7475: E=7475.3±1.5 keV, Spin-Parity=2+ (Match Probability: 26.6%)
 
-Cluster 152:
+Cluster 152: uman evaluator slightly prefers to split into two clusters
   Anchor: K_7486 | E=7486.6±1.0 keV | Spin-Parity=None
   Members:
     [K] K_7486: E=7486.6±1.0 keV, Spin-Parity=None (Anchor)

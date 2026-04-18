@@ -8,7 +8,7 @@ Developed and refined through daily evaluation tasks at the Nuclear Data Group a
 This tool employs dual machine learning models (Extreme Gradient Boosting + Light Gradient Boosting Machine) along with physics-informed feature engineering to accurately match nuclear energy levels across different experimental datasets.
 
 A prototype version of Level Matcher is available as an open-source repository at
-https://github.com/FRIBND/Level-Matcher
+[github.com/FRIBND/Level-Matcher](https://github.com/FRIBND/Level-Matcher).
 
 To support the broader nuclear data community, a fully developed version of Level Matcher will be integrated into the Consistency Check and Evaluation Toolkit Java Codes as part of the NSDD ENSDF Analysis and Utility Programs.
 
