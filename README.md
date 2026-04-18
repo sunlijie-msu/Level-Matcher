@@ -1,6 +1,9 @@
-# Level Matcher
+**Level Matcher:** Part of the AI/ML Technical Innovation at the FRIB Nuclear Data Group (nucleardata@frib.msu.edu).
+
 ## Overview
-A physics-informed nuclear level matching system developed at the Nuclear Data Group at the Facility for Rare Isotope Beams (FRIB).
+
+A physics-informed nuclear level matching system designed for Evaluated Nuclear Structure Data File (ENSDF) workflows.
+Developed and refined through daily evaluation tasks at the Nuclear Data Group at the Facility for Rare Isotope Beams (FRIB).
 
 This tool employs dual machine learning models (Extreme Gradient Boosting + Light Gradient Boosting Machine) along with physics-informed feature engineering to accurately match nuclear energy levels across different experimental datasets.
 
