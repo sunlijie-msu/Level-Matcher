@@ -11,9 +11,9 @@ To support the broader nuclear data community, a fully developed version of Leve
 
 ## Development Timeline
 
-- **2026-04-17**: Applied to the first real-world evaluation task for $^{34}$Cl.
+- **2026-04-17**: Applied to the first real-world evaluation task for $^{34}\text{Cl}$.
   - Pairwise inference across 27,615 candidate pairs from $^{32}\text{S}(p,\gamma)^{34}\text{Cl}$ and $^{33}\text{S}(p,p)$ resonance datasets
-  - Detached subprocess architecture adopted to isolate gradient boosting training from the IDE event loop, eliminating UI freeze events
+  - Detached subprocess architecture adopted to isolate gradient boosting training from the IDE event loop, eliminating VS Code UI freeze events
 
 - **2026-01-24**: Hardened for diagnostic rigor and modularized for public release.
   - 80/20 stratified training-validation split with early stopping (patience = 50 rounds)
