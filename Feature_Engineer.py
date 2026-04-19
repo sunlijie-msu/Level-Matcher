@@ -805,7 +805,7 @@ def generate_synthetic_training_data():
     correlation_threshold = Scoring_Config['Feature_Correlation']['Threshold']
     rescue_exponent = Scoring_Config['Feature_Correlation']['Rescue_Exponent']
     
-    # 3. Define Physics Logic for Labeling (with Feature Correlation)
+    # 3. Define Physics Logic for Labeling (with Feature Correlation) calculate_label = veto physics mismatches → remap unknowns → boost energy when physics agrees → multiply energy × physics quality × ambiguity penalty.
     def calculate_label(energy_similarity, spin_similarity, parity_similarity, specificity, gamma_similarity):
         # HARD VETO: If physics explicitly mismatches (score <= near-zero), reject.
         # Allow small tolerance if config uses 0.05 for mismatched.
@@ -834,21 +834,21 @@ def generate_synthetic_training_data():
         # NOTE: Rescue != Firm Match. It prevents a 0% veto (Survival), allowing the candidate
         # to remain in consideration. It typically raises probability from <1% to ~15-25%
         # for poor energy matches, which may pass the pairwise filter but not yet cluster.
-        effective_energy = energy_similarity
+        effective_energy_similarity = energy_similarity
         if correlation_enabled:
             is_quantum_match = (spin_similarity >= correlation_threshold and parity_similarity >= correlation_threshold)
             is_gamma_match = (gamma_similarity >= correlation_threshold)
 
             if is_quantum_match or is_gamma_match:
-                 # Apply rescue: energy → energy^exponent (e.g., sqrt transforms 0.04→0.2, 0.4→0.63)
-                 effective_energy = energy_similarity ** rescue_exponent
+                 # Apply rescue: energy → energy^exponent (e.g., sqrt transforms 0.04→0.2, 0.25→0.50, 0.64→0.80)
+                 effective_energy_similarity = energy_similarity ** rescue_exponent
 
         # PROBABILITY FORMULA:
         # Base confidence from Energy * Physics Quality * Specificity
         # Use geometric mean of physics factors to balance them.
         physics_confidence = np.sqrt(spin_factor * parity_factor * gamma_factor)
         
-        probability = effective_energy * physics_confidence * specificity
+        probability = effective_energy_similarity * physics_confidence * specificity
         return min(max(probability, 0.0), 0.99)
 
     # 4. Systematic Grid Generation (Cover the feature space)
