@@ -1,6 +1,6 @@
 === PAIRWISE INFERENCE RESULTS (>1.0%) ===
 Model: XGBoost
-Total Level Pairs Found: 100
+Total Level Pairs Found: 121
 
 K_6842 <-> L_6842 | XGBoost: 73.8%
   Features: Energy_Similarity=1.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
@@ -10,6 +10,9 @@ K_7321 <-> L_7321 | XGBoost: 73.8%
 
 K_7909 <-> L_7909 | XGBoost: 73.8%
   Features: Energy_Similarity=1.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_6737 <-> L_6737 | XGBoost: 73.8%
+  Features: Energy_Similarity=0.99, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
 K_6807 <-> L_6807 | XGBoost: 73.8%
   Features: Energy_Similarity=1.00, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
@@ -29,276 +32,336 @@ K_7909 <-> L_7909 | XGBoost: 73.8%
 K_8048 <-> L_8048 | XGBoost: 73.8%
   Features: Energy_Similarity=0.99, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_6737 <-> L_6737 | XGBoost: 72.6%
+K_6720 <-> L_6719 | XGBoost: 72.6%
   Features: Energy_Similarity=0.98, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_6720 <-> L_6719 | XGBoost: 72.2%
+K_7934 <-> L_7934 | XGBoost: 72.2%
   Features: Energy_Similarity=0.97, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7934 <-> L_7934 | XGBoost: 71.2%
+K_7979 <-> L_7980 | XGBoost: 71.9%
   Features: Energy_Similarity=0.96, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7979 <-> L_7980 | XGBoost: 70.1%
+K_7966 <-> L_7967 | XGBoost: 71.2%
+  Features: Energy_Similarity=0.95, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_6370 <-> L_6369 | XGBoost: 71.0%
+  Features: Energy_Similarity=0.88, Spin_Similarity=1.00, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7649 <-> L_7648 | XGBoost: 70.1%
   Features: Energy_Similarity=0.94, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7966 <-> L_7967 | XGBoost: 69.9%
+K_6853 <-> L_6851 | XGBoost: 69.9%
   Features: Energy_Similarity=0.93, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7649 <-> L_7648 | XGBoost: 67.7%
-  Features: Energy_Similarity=0.91, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7720 <-> L_7719 | XGBoost: 69.9%
+  Features: Energy_Similarity=0.93, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_6370 <-> L_6369 | XGBoost: 67.1%
-  Features: Energy_Similarity=0.83, Spin_Similarity=1.00, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_8214 <-> L_8214 | XGBoost: 69.9%
+  Features: Energy_Similarity=0.93, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_6853 <-> L_6851 | XGBoost: 66.7%
-  Features: Energy_Similarity=0.90, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_6546 <-> L_6545 | XGBoost: 69.4%
+  Features: Energy_Similarity=0.92, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_8214 <-> L_8214 | XGBoost: 66.7%
-  Features: Energy_Similarity=0.90, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7899 <-> L_7897 | XGBoost: 69.4%
+  Features: Energy_Similarity=0.92, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7720 <-> L_7719 | XGBoost: 65.7%
+K_8235 <-> L_8236 | XGBoost: 69.4%
+  Features: Energy_Similarity=0.93, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_8154 <-> L_8155 | XGBoost: 65.7%
   Features: Energy_Similarity=0.89, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_8235 <-> L_8236 | XGBoost: 65.7%
-  Features: Energy_Similarity=0.89, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7449 <-> L_7451 | XGBoost: 64.5%
+  Features: Energy_Similarity=0.87, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_6546 <-> L_6545 | XGBoost: 64.8%
-  Features: Energy_Similarity=0.88, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7122 <-> L_7124 | XGBoost: 62.7%
+  Features: Energy_Similarity=0.85, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7899 <-> L_7897 | XGBoost: 64.8%
-  Features: Energy_Similarity=0.88, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7511 <-> L_7510 | XGBoost: 62.7%
+  Features: Energy_Similarity=0.85, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_8154 <-> L_8155 | XGBoost: 61.7%
+K_7406 <-> L_7408 | XGBoost: 62.4%
+  Features: Energy_Similarity=0.85, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7886 <-> L_7883 | XGBoost: 61.0%
   Features: Energy_Similarity=0.83, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7449 <-> L_7451 | XGBoost: 60.0%
-  Features: Energy_Similarity=0.81, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_6992 <-> L_6991 | XGBoost: 60.0%
+  Features: Energy_Similarity=0.80, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7122 <-> L_7124 | XGBoost: 55.5%
-  Features: Energy_Similarity=0.79, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_6322 <-> L_6321 | XGBoost: 55.8%
+  Features: Energy_Similarity=0.97, Spin_Similarity=1.00, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
 
-K_7406 <-> L_7408 | XGBoost: 55.5%
-  Features: Energy_Similarity=0.79, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7979 <-> L_7977 | XGBoost: 55.5%
+  Features: Energy_Similarity=0.78, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7511 <-> L_7510 | XGBoost: 55.5%
-  Features: Energy_Similarity=0.79, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_8259 <-> L_8260 | XGBoost: 55.5%
+  Features: Energy_Similarity=0.76, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7886 <-> L_7883 | XGBoost: 55.5%
-  Features: Energy_Similarity=0.75, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-K_6322 <-> L_6321 | XGBoost: 55.1%
-  Features: Energy_Similarity=0.95, Spin_Similarity=1.00, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
-
-K_6992 <-> L_6991 | XGBoost: 52.5%
+K_7126 <-> L_7124 | XGBoost: 52.5%
   Features: Energy_Similarity=0.72, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7979 <-> L_7977 | XGBoost: 52.5%
-  Features: Energy_Similarity=0.69, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7496 <-> L_7493 | XGBoost: 52.5%
+  Features: Energy_Similarity=0.70, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_8259 <-> L_8260 | XGBoost: 47.6%
-  Features: Energy_Similarity=0.66, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7543 <-> L_7546 | XGBoost: 52.5%
+  Features: Energy_Similarity=0.72, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7848 <-> L_7849 | XGBoost: 46.0%
-  Features: Energy_Similarity=0.89, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
+K_7848 <-> L_7849 | XGBoost: 49.2%
+  Features: Energy_Similarity=0.93, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
 
-K_7059 <-> L_7057 | XGBoost: 45.5%
-  Features: Energy_Similarity=0.88, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
+K_7059 <-> L_7057 | XGBoost: 48.9%
+  Features: Energy_Similarity=0.92, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
 
-K_7126 <-> L_7124 | XGBoost: 42.5%
+K_7588 <-> L_7585 | XGBoost: 47.6%
+  Features: Energy_Similarity=0.64, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7649 <-> L_7652 | XGBoost: 47.6%
+  Features: Energy_Similarity=0.68, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7527 <-> L_7525 | XGBoost: 44.1%
+  Features: Energy_Similarity=0.85, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
+
+K_7878 <-> L_7883 | XGBoost: 42.5%
   Features: Energy_Similarity=0.61, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7496 <-> L_7493 | XGBoost: 42.5%
-  Features: Energy_Similarity=0.59, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_8191 <-> L_8192 | XGBoost: 42.5%
+  Features: Energy_Similarity=0.63, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7543 <-> L_7546 | XGBoost: 42.5%
-  Features: Energy_Similarity=0.61, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7675 <-> L_7677 | XGBoost: 41.9%
+  Features: Energy_Similarity=0.76, Spin_Similarity=1.00, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
 
-K_7527 <-> L_7525 | XGBoost: 38.0%
-  Features: Energy_Similarity=0.79, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
+K_7078 <-> L_7080 | XGBoost: 41.6%
+  Features: Energy_Similarity=0.82, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
 
-K_7649 <-> L_7652 | XGBoost: 37.6%
-  Features: Energy_Similarity=0.56, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7061 <-> L_7057 | XGBoost: 37.6%
+  Features: Energy_Similarity=0.54, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7588 <-> L_7585 | XGBoost: 35.9%
-  Features: Energy_Similarity=0.51, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7238 <-> L_7241 | XGBoost: 37.6%
+  Features: Energy_Similarity=0.57, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7878 <-> L_7883 | XGBoost: 35.9%
+K_7582 <-> L_7585 | XGBoost: 37.6%
+  Features: Energy_Similarity=0.53, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_6723 <-> L_6719 | XGBoost: 35.9%
   Features: Energy_Similarity=0.48, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_8191 <-> L_8192 | XGBoost: 35.9%
+K_6984 <-> L_6986 | XGBoost: 35.9%
   Features: Energy_Similarity=0.50, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7675 <-> L_7677 | XGBoost: 35.4%
-  Features: Energy_Similarity=0.67, Spin_Similarity=1.00, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
+K_7853 <-> L_7859 | XGBoost: 35.9%
+  Features: Energy_Similarity=0.49, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7078 <-> L_7080 | XGBoost: 35.3%
-  Features: Energy_Similarity=0.74, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
+K_8030 <-> L_8027 | XGBoost: 35.9%
+  Features: Energy_Similarity=0.51, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_8319 <-> L_8317 | XGBoost: 27.0%
-  Features: Energy_Similarity=0.53, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
+K_6931 <-> L_6934 | XGBoost: 32.5%
+  Features: Energy_Similarity=0.47, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_8070 <-> L_8069 | XGBoost: 26.7%
-  Features: Energy_Similarity=0.94, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.45, Gamma_Pattern_Similarity=0.50
+K_7539 <-> L_7536 | XGBoost: 32.5%
+  Features: Energy_Similarity=0.47, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7238 <-> L_7241 | XGBoost: 26.6%
-  Features: Energy_Similarity=0.44, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_8319 <-> L_8317 | XGBoost: 31.7%
+  Features: Energy_Similarity=0.65, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
 
-K_7942 <-> L_7944 | XGBoost: 26.2%
-  Features: Energy_Similarity=0.79, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.50, Gamma_Pattern_Similarity=0.50
+K_7942 <-> L_7944 | XGBoost: 30.0%
+  Features: Energy_Similarity=0.85, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.50, Gamma_Pattern_Similarity=0.50
 
-K_7061 <-> L_7057 | XGBoost: 22.8%
-  Features: Energy_Similarity=0.40, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_8070 <-> L_8069 | XGBoost: 27.4%
+  Features: Energy_Similarity=0.96, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.45, Gamma_Pattern_Similarity=0.50
 
-K_7582 <-> L_7585 | XGBoost: 22.8%
+K_7784 <-> L_7787 | XGBoost: 27.0%
+  Features: Energy_Similarity=0.55, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
+
+K_7831 <-> L_7827 | XGBoost: 26.6%
+  Features: Energy_Similarity=0.43, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7675 <-> L_7674 | XGBoost: 24.7%
+  Features: Energy_Similarity=0.87, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.35, Gamma_Pattern_Similarity=0.50
+
+K_8390 <-> L_8386 | XGBoost: 24.0%
+  Features: Energy_Similarity=0.47, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
+
+K_6986 <-> L_6991 | XGBoost: 22.8%
   Features: Energy_Similarity=0.39, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_8030 <-> L_8027 | XGBoost: 22.8%
-  Features: Energy_Similarity=0.37, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7051 <-> L_7057 | XGBoost: 22.8%
+  Features: Energy_Similarity=0.36, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7675 <-> L_7674 | XGBoost: 22.8%
-  Features: Energy_Similarity=0.81, Spin_Similarity=0.80, Parity_Similarity=0.50, Specificity=0.35, Gamma_Pattern_Similarity=0.50
+K_7126 <-> L_7130 | XGBoost: 22.8%
+  Features: Energy_Similarity=0.39, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7784 <-> L_7787 | XGBoost: 19.7%
+K_7382 <-> L_7386 | XGBoost: 22.8%
+  Features: Energy_Similarity=0.39, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7527 <-> L_7531 | XGBoost: 22.8%
+  Features: Energy_Similarity=0.39, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7609 <-> L_7613 | XGBoost: 22.8%
+  Features: Energy_Similarity=0.39, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7853 <-> L_7849 | XGBoost: 19.7%
   Features: Energy_Similarity=0.41, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
 
-K_6723 <-> L_6719 | XGBoost: 19.0%
-  Features: Energy_Similarity=0.33, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-K_6931 <-> L_6934 | XGBoost: 19.0%
-  Features: Energy_Similarity=0.33, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-K_6984 <-> L_6986 | XGBoost: 19.0%
-  Features: Energy_Similarity=0.35, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-K_7539 <-> L_7536 | XGBoost: 19.0%
+K_7115 <-> L_7111 | XGBoost: 19.0%
   Features: Energy_Similarity=0.32, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7853 <-> L_7859 | XGBoost: 19.0%
+K_7506 <-> L_7510 | XGBoost: 19.0%
   Features: Energy_Similarity=0.34, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7831 <-> L_7827 | XGBoost: 17.2%
-  Features: Energy_Similarity=0.28, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7979 <-> L_7975 | XGBoost: 19.0%
+  Features: Energy_Similarity=0.30, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_6986 <-> L_6991 | XGBoost: 15.6%
+K_8048 <-> L_8052 | XGBoost: 19.0%
+  Features: Energy_Similarity=0.36, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_8319 <-> L_8316 | XGBoost: 19.0%
+  Features: Energy_Similarity=0.32, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7321 <-> L_7317 | XGBoost: 17.2%
+  Features: Energy_Similarity=0.29, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7904 <-> L_7897 | XGBoost: 17.2%
+  Features: Energy_Similarity=0.27, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7803 <-> L_7799 | XGBoost: 17.1%
+  Features: Energy_Similarity=0.37, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
+
+K_7462 <-> L_7457 | XGBoost: 15.6%
+  Features: Energy_Similarity=0.26, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7486 <-> L_7491 | XGBoost: 15.6%
+  Features: Energy_Similarity=0.26, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7643 <-> L_7648 | XGBoost: 15.6%
   Features: Energy_Similarity=0.24, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7126 <-> L_7130 | XGBoost: 15.6%
-  Features: Energy_Similarity=0.25, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7904 <-> L_7909 | XGBoost: 15.6%
+  Features: Energy_Similarity=0.26, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7382 <-> L_7386 | XGBoost: 15.6%
-  Features: Energy_Similarity=0.25, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7904 <-> L_7909 | XGBoost: 15.6%
+  Features: Energy_Similarity=0.24, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7527 <-> L_7531 | XGBoost: 15.6%
-  Features: Energy_Similarity=0.25, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_8154 <-> L_8159 | XGBoost: 15.6%
+  Features: Energy_Similarity=0.24, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7609 <-> L_7613 | XGBoost: 15.6%
-  Features: Energy_Similarity=0.25, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-K_8390 <-> L_8386 | XGBoost: 15.2%
-  Features: Energy_Similarity=0.32, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
-
-K_7051 <-> L_7057 | XGBoost: 13.8%
-  Features: Energy_Similarity=0.21, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-K_8048 <-> L_8052 | XGBoost: 13.8%
-  Features: Energy_Similarity=0.21, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-K_7853 <-> L_7849 | XGBoost: 12.7%
-  Features: Energy_Similarity=0.26, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
-
-K_7115 <-> L_7111 | XGBoost: 12.4%
-  Features: Energy_Similarity=0.18, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-K_7506 <-> L_7510 | XGBoost: 12.4%
+K_7218 <-> L_7213 | XGBoost: 13.8%
   Features: Energy_Similarity=0.20, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7979 <-> L_7975 | XGBoost: 12.4%
+K_7496 <-> L_7491 | XGBoost: 13.8%
+  Features: Energy_Similarity=0.21, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7990 <-> L_7985 | XGBoost: 13.8%
+  Features: Energy_Similarity=0.23, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_8154 <-> L_8149 | XGBoost: 13.8%
+  Features: Energy_Similarity=0.21, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7470 <-> L_7475 | XGBoost: 12.4%
+  Features: Energy_Similarity=0.19, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_8048 <-> L_8043 | XGBoost: 12.4%
+  Features: Energy_Similarity=0.19, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_8248 <-> L_8251 | XGBoost: 12.4%
   Features: Energy_Similarity=0.17, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_8319 <-> L_8316 | XGBoost: 12.4%
-  Features: Energy_Similarity=0.18, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-K_7803 <-> L_7799 | XGBoost: 11.4%
-  Features: Energy_Similarity=0.23, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
-
-K_7321 <-> L_7317 | XGBoost: 10.4%
-  Features: Energy_Similarity=0.15, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-K_7904 <-> L_7897 | XGBoost: 10.4%
+K_7831 <-> L_7825 | XGBoost: 10.4%
   Features: Energy_Similarity=0.14, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7462 <-> L_7457 | XGBoost: 8.9%
+K_8132 <-> L_8127 | XGBoost: 10.4%
+  Features: Energy_Similarity=0.17, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_8195 <-> L_8192 | XGBoost: 10.4%
   Features: Energy_Similarity=0.13, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7486 <-> L_7491 | XGBoost: 8.9%
+K_7708 <-> L_7704 | XGBoost: 10.0%
+  Features: Energy_Similarity=0.34, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.45, Gamma_Pattern_Similarity=0.50
+
+K_6624 <-> L_6632 | XGBoost: 8.9%
   Features: Energy_Similarity=0.13, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7643 <-> L_7648 | XGBoost: 8.9%
-  Features: Energy_Similarity=0.12, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
-
-K_7904 <-> L_7909 | XGBoost: 8.9%
+K_7934 <-> L_7929 | XGBoost: 8.9%
   Features: Energy_Similarity=0.13, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7904 <-> L_7909 | XGBoost: 8.9%
+K_7979 <-> L_7985 | XGBoost: 8.9%
+  Features: Energy_Similarity=0.13, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_8361 <-> L_8358 | XGBoost: 8.9%
   Features: Energy_Similarity=0.12, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7990 <-> L_7985 | XGBoost: 8.9%
-  Features: Energy_Similarity=0.11, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7690 <-> L_7684 | XGBoost: 8.4%
+  Features: Energy_Similarity=0.15, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
 
-K_8154 <-> L_8159 | XGBoost: 8.9%
-  Features: Energy_Similarity=0.12, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7997 <-> L_8002 | XGBoost: 8.4%
+  Features: Energy_Similarity=0.15, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
 
-K_7218 <-> L_7213 | XGBoost: 8.3%
+K_7539 <-> L_7546 | XGBoost: 8.3%
   Features: Energy_Similarity=0.09, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7470 <-> L_7475 | XGBoost: 8.3%
+K_7624 <-> L_7618 | XGBoost: 8.3%
+  Features: Energy_Similarity=0.09, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7848 <-> L_7859 | XGBoost: 8.3%
+  Features: Energy_Similarity=0.09, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7886 <-> L_7897 | XGBoost: 8.3%
+  Features: Energy_Similarity=0.09, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7942 <-> L_7953 | XGBoost: 8.3%
+  Features: Energy_Similarity=0.09, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_8235 <-> L_8231 | XGBoost: 8.3%
   Features: Energy_Similarity=0.08, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7496 <-> L_7491 | XGBoost: 8.3%
+K_8280 <-> L_8276 | XGBoost: 8.3%
   Features: Energy_Similarity=0.10, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_8048 <-> L_8043 | XGBoost: 8.3%
+K_8372 <-> L_8376 | XGBoost: 8.3%
   Features: Energy_Similarity=0.08, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_8154 <-> L_8149 | XGBoost: 8.3%
-  Features: Energy_Similarity=0.10, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7406 <-> L_7412 | XGBoost: 7.2%
+  Features: Energy_Similarity=0.11, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
 
-K_8132 <-> L_8127 | XGBoost: 6.9%
+K_7690 <-> L_7696 | XGBoost: 6.9%
   Features: Energy_Similarity=0.07, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_8248 <-> L_8251 | XGBoost: 6.9%
+K_8214 <-> L_8210 | XGBoost: 6.9%
   Features: Energy_Similarity=0.07, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7708 <-> L_7704 | XGBoost: 6.6%
-  Features: Energy_Similarity=0.20, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.45, Gamma_Pattern_Similarity=0.50
+K_7539 <-> L_7533 | XGBoost: 4.8%
+  Features: Energy_Similarity=0.11, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.45, Gamma_Pattern_Similarity=0.50
 
-K_6624 <-> L_6632 | XGBoost: 4.6%
+K_6361 <-> L_6369 | XGBoost: 4.6%
   Features: Energy_Similarity=0.05, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7831 <-> L_7825 | XGBoost: 4.6%
+K_6640 <-> L_6632 | XGBoost: 4.6%
+  Features: Energy_Similarity=0.03, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7203 <-> L_7196 | XGBoost: 4.6%
   Features: Energy_Similarity=0.05, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7934 <-> L_7929 | XGBoost: 4.6%
+K_7486 <-> L_7493 | XGBoost: 4.6%
   Features: Energy_Similarity=0.04, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7979 <-> L_7985 | XGBoost: 4.6%
-  Features: Energy_Similarity=0.04, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7517 <-> L_7510 | XGBoost: 4.6%
+  Features: Energy_Similarity=0.03, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_8195 <-> L_8192 | XGBoost: 4.6%
+K_7543 <-> L_7536 | XGBoost: 4.6%
+  Features: Energy_Similarity=0.03, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+
+K_7588 <-> L_7595 | XGBoost: 4.6%
   Features: Energy_Similarity=0.05, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_8361 <-> L_8358 | XGBoost: 4.6%
-  Features: Energy_Similarity=0.04, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
+K_7909 <-> L_7897 | XGBoost: 4.6%
+  Features: Energy_Similarity=0.03, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7406 <-> L_7412 | XGBoost: 3.8%
-  Features: Energy_Similarity=0.04, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
+K_8035 <-> L_8043 | XGBoost: 4.6%
+  Features: Energy_Similarity=0.03, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=1.00, Gamma_Pattern_Similarity=0.50
 
-K_7690 <-> L_7684 | XGBoost: 3.8%
-  Features: Energy_Similarity=0.06, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
+K_7527 <-> L_7533 | XGBoost: 3.8%
+  Features: Energy_Similarity=0.07, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.45, Gamma_Pattern_Similarity=0.50
 
-K_7997 <-> L_8002 | XGBoost: 3.8%
-  Features: Energy_Similarity=0.06, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.71, Gamma_Pattern_Similarity=0.50
-
-K_7539 <-> L_7533 | XGBoost: 2.6%
-  Features: Energy_Similarity=0.04, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.45, Gamma_Pattern_Similarity=0.50
+K_8319 <-> L_8322 | XGBoost: 3.8%
+  Features: Energy_Similarity=0.07, Spin_Similarity=0.50, Parity_Similarity=0.50, Specificity=0.45, Gamma_Pattern_Similarity=0.50
 
