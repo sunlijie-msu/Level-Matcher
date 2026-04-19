@@ -4206,7 +4206,7 @@
                 "gammaIntensity": {
                     "value": 1.46,
                     "uncertainty": {
-                        "value": 19.0,
+                        "value": 0.19,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.46 19"
@@ -4247,7 +4247,7 @@
                 "gammaIntensity": {
                     "value": 98.6,
                     "uncertainty": {
-                        "value": 14.0,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "98.6 14"
@@ -4268,7 +4268,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 14.0,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.0 14"
@@ -4289,7 +4289,7 @@
                 "gammaIntensity": {
                     "value": 87.1,
                     "uncertainty": {
-                        "value": 14.0,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "87.1 14"
@@ -4370,7 +4370,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.0 12"
@@ -4391,7 +4391,7 @@
                 "gammaIntensity": {
                     "value": 73.2,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "73.2 12"
@@ -4432,7 +4432,7 @@
                 "gammaIntensity": {
                     "value": 8.59,
                     "uncertainty": {
-                        "value": 31.0,
+                        "value": 0.31,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "8.59 31"
@@ -4473,7 +4473,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 6.0,
+                        "value": 0.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.0 6"
@@ -4494,7 +4494,7 @@
                 "gammaIntensity": {
                     "value": 20.2,
                     "uncertainty": {
-                        "value": 5.0,
+                        "value": 0.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "20.2 5"
@@ -4515,7 +4515,7 @@
                 "gammaIntensity": {
                     "value": 23.5,
                     "uncertainty": {
-                        "value": 5.0,
+                        "value": 0.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "23.5 5"
@@ -4556,7 +4556,7 @@
                 "gammaIntensity": {
                     "value": 25.0,
                     "uncertainty": {
-                        "value": 14.0,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "25.0 14"
@@ -4577,7 +4577,7 @@
                 "gammaIntensity": {
                     "value": 73.7,
                     "uncertainty": {
-                        "value": 70.0,
+                        "value": 7.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "73.7 70"
@@ -4598,7 +4598,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 25.0,
+                        "value": 2.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.0 25"
@@ -4639,7 +4639,7 @@
                 "gammaIntensity": {
                     "value": 0.84,
                     "uncertainty": {
-                        "value": 20.0,
+                        "value": 0.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "0.84 20"
@@ -4700,7 +4700,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 20.0,
+                        "value": 0.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.00 20"
@@ -4902,7 +4902,7 @@
                 "gammaIntensity": {
                     "value": 68.1,
                     "uncertainty": {
-                        "value": 33.0,
+                        "value": 3.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "68.1 33"
@@ -4923,7 +4923,7 @@
                 "gammaIntensity": {
                     "value": 42.6,
                     "uncertainty": {
-                        "value": 73.0,
+                        "value": 7.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "42.6 73"
@@ -4964,7 +4964,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 29.0,
+                        "value": 2.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.0 29"
@@ -4985,7 +4985,7 @@
                 "gammaIntensity": {
                     "value": 14.9,
                     "uncertainty": {
-                        "value": 11.0,
+                        "value": 1.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "14.9 11"
@@ -5006,7 +5006,7 @@
                 "gammaIntensity": {
                     "value": 4.4,
                     "uncertainty": {
-                        "value": 4.0,
+                        "value": 0.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.4 4"
@@ -5027,7 +5027,7 @@
                 "gammaIntensity": {
                     "value": 4.6,
                     "uncertainty": {
-                        "value": 4.0,
+                        "value": 0.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.6 4"
@@ -5048,7 +5048,7 @@
                 "gammaIntensity": {
                     "value": 15.5,
                     "uncertainty": {
-                        "value": 11.0,
+                        "value": 1.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "15.5 11"
@@ -5069,7 +5069,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 15.0,
+                        "value": 1.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.0 15"
@@ -5090,7 +5090,7 @@
                 "gammaIntensity": {
                     "value": 38.9,
                     "uncertainty": {
-                        "value": 11.0,
+                        "value": 1.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "38.9 11"
@@ -5111,7 +5111,7 @@
                 "gammaIntensity": {
                     "value": 32.8,
                     "uncertainty": {
-                        "value": 11.0,
+                        "value": 1.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "32.8 11"
@@ -5355,7 +5355,7 @@
                 "gammaIntensity": {
                     "value": 52.0,
                     "uncertainty": {
-                        "value": 25.0,
+                        "value": 2.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "52.0 25"
@@ -5418,7 +5418,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 34.0,
+                        "value": 3.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.0 34"
@@ -5539,7 +5539,7 @@
                 "gammaIntensity": {
                     "value": 3.6,
                     "uncertainty": {
-                        "value": 6.0,
+                        "value": 0.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.6 6"
@@ -5600,7 +5600,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 6.0,
+                        "value": 0.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.0 6"
@@ -5641,7 +5641,7 @@
                 "gammaIntensity": {
                     "value": 94.1,
                     "uncertainty": {
-                        "value": 11.0,
+                        "value": 1.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "94.1 11"
@@ -5682,7 +5682,7 @@
                 "gammaIntensity": {
                     "value": 15.4,
                     "uncertainty": {
-                        "value": 19.0,
+                        "value": 1.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "15.4 19"
@@ -5823,7 +5823,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 11.0,
+                        "value": 1.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.0 11"
@@ -5864,7 +5864,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.0 13"
@@ -5945,7 +5945,7 @@
                 "gammaIntensity": {
                     "value": 83.4,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "83.4 13"
@@ -6453,7 +6453,7 @@
                 "gammaIntensity": {
                     "value": 13.5,
                     "uncertainty": {
-                        "value": 11.0,
+                        "value": 1.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "13.5 11"
@@ -6514,7 +6514,7 @@
                 "gammaIntensity": {
                     "value": 43.2,
                     "uncertainty": {
-                        "value": 17.0,
+                        "value": 1.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "43.2 17"
@@ -6615,7 +6615,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 31.0,
+                        "value": 3.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.0 31"
@@ -6656,7 +6656,7 @@
                 "gammaIntensity": {
                     "value": 9.1,
                     "uncertainty": {
-                        "value": 11.0,
+                        "value": 1.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "9.1 11"
@@ -6677,7 +6677,7 @@
                 "gammaIntensity": {
                     "value": 35.5,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "35.5 13"
@@ -6698,7 +6698,7 @@
                 "gammaIntensity": {
                     "value": 22.0,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "22.0 13"
@@ -6759,7 +6759,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 25.0,
+                        "value": 2.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.0 25"
@@ -6944,7 +6944,7 @@
                 "gammaIntensity": {
                     "value": 7.0,
                     "uncertainty": {
-                        "value": 10.0,
+                        "value": 1.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "7.0 10"
@@ -6965,7 +6965,7 @@
                 "gammaIntensity": {
                     "value": 6.1,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6.1 13"
@@ -6986,7 +6986,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 23.0,
+                        "value": 2.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.0 23"
@@ -7007,7 +7007,7 @@
                 "gammaIntensity": {
                     "value": 66.2,
                     "uncertainty": {
-                        "value": 19.0,
+                        "value": 1.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "66.2 19"
@@ -7048,7 +7048,7 @@
                 "gammaIntensity": {
                     "value": 9.8,
                     "uncertainty": {
-                        "value": 15.0,
+                        "value": 1.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "9.8 15"
@@ -7190,7 +7190,7 @@
                 "gammaIntensity": {
                     "value": 33.2,
                     "uncertainty": {
-                        "value": 28.0,
+                        "value": 2.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "33.2 28"
@@ -7231,7 +7231,7 @@
                 "gammaIntensity": {
                     "value": 11.5,
                     "uncertainty": {
-                        "value": 28.0,
+                        "value": 2.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "11.5 28"
@@ -7272,7 +7272,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 28.0,
+                        "value": 2.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.0 28"
@@ -7475,7 +7475,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 25.0,
+                        "value": 2.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.0 25"
@@ -7516,7 +7516,7 @@
                 "gammaIntensity": {
                     "value": 25.0,
                     "uncertainty": {
-                        "value": 25.0,
+                        "value": 2.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "25.0 25"
@@ -7900,7 +7900,7 @@
                 "gammaIntensity": {
                     "value": 11.1,
                     "uncertainty": {
-                        "value": 32.0,
+                        "value": 3.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "11.1 32"
@@ -8064,7 +8064,7 @@
                 "gammaIntensity": {
                     "value": 6.5,
                     "uncertainty": {
-                        "value": 16.0,
+                        "value": 1.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6.5 16"
@@ -8106,7 +8106,7 @@
                 "gammaIntensity": {
                     "value": 4.8,
                     "uncertainty": {
-                        "value": 16.0,
+                        "value": 1.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.8 16"
@@ -8167,7 +8167,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 32.0,
+                        "value": 3.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "100.0 32"
@@ -8777,7 +8777,7 @@
                 "gammaIntensity": {
                     "value": 28.7,
                     "uncertainty": {
-                        "value": 66.0,
+                        "value": 6.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "28.7 66"
@@ -8838,7 +8838,7 @@
                 "gammaIntensity": {
                     "value": 22.6,
                     "uncertainty": {
-                        "value": 23.0,
+                        "value": 2.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "22.6 23"
@@ -8899,7 +8899,7 @@
                 "gammaIntensity": {
                     "value": 3.0,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.0 12"
@@ -8920,7 +8920,7 @@
                 "gammaIntensity": {
                     "value": 5.5,
                     "uncertainty": {
-                        "value": 10.0,
+                        "value": 1.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "5.5 10"
@@ -8941,7 +8941,7 @@
                 "gammaIntensity": {
                     "value": 10.3,
                     "uncertainty": {
-                        "value": 14.0,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "10.3 14"
@@ -9002,7 +9002,7 @@
                 "gammaIntensity": {
                     "value": 61.9,
                     "uncertainty": {
-                        "value": 55.0,
+                        "value": 5.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "61.9 55"
@@ -9125,7 +9125,7 @@
                 "gammaIntensity": {
                     "value": 3.7,
                     "uncertainty": {
-                        "value": 7.0,
+                        "value": 0.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.7 7"
@@ -9226,7 +9226,7 @@
                 "gammaIntensity": {
                     "value": 3.9,
                     "uncertainty": {
-                        "value": 4.0,
+                        "value": 0.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.9 4"
@@ -9247,7 +9247,7 @@
                 "gammaIntensity": {
                     "value": 1.0,
                     "uncertainty": {
-                        "value": 3.0,
+                        "value": 0.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.0 3"
@@ -9288,7 +9288,7 @@
                 "gammaIntensity": {
                     "value": 12.2,
                     "uncertainty": {
-                        "value": 7.0,
+                        "value": 0.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "12.2 7"
@@ -9349,7 +9349,7 @@
                 "gammaIntensity": {
                     "value": 0.6,
                     "uncertainty": {
-                        "value": 3.0,
+                        "value": 0.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "0.6 3"
@@ -9370,7 +9370,7 @@
                 "gammaIntensity": {
                     "value": 1.8,
                     "uncertainty": {
-                        "value": 3.0,
+                        "value": 0.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.8 3"
@@ -9391,7 +9391,7 @@
                 "gammaIntensity": {
                     "value": 0.6,
                     "uncertainty": {
-                        "value": 4.0,
+                        "value": 0.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "0.6 4"
@@ -9412,7 +9412,7 @@
                 "gammaIntensity": {
                     "value": 15.4,
                     "uncertainty": {
-                        "value": 10.0,
+                        "value": 1.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "15.4 10"
@@ -9433,7 +9433,7 @@
                 "gammaIntensity": {
                     "value": 2.2,
                     "uncertainty": {
-                        "value": 7.0,
+                        "value": 0.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.2 7"
@@ -9754,7 +9754,7 @@
                 "gammaIntensity": {
                     "value": 11.6,
                     "uncertainty": {
-                        "value": 26.0,
+                        "value": 2.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "11.6 26"
@@ -9815,7 +9815,7 @@
                 "gammaIntensity": {
                     "value": 8.8,
                     "uncertainty": {
-                        "value": 24.0,
+                        "value": 2.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "8.8 24"
@@ -9877,7 +9877,7 @@
                 "gammaIntensity": {
                     "value": 6.4,
                     "uncertainty": {
-                        "value": 34.0,
+                        "value": 3.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6.4 34"
@@ -11900,7 +11900,7 @@
                 "gammaIntensity": {
                     "value": 1.82,
                     "uncertainty": {
-                        "value": 91.0,
+                        "value": 0.91,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.82 91"
@@ -11921,7 +11921,7 @@
                 "gammaIntensity": {
                     "value": 1.82,
                     "uncertainty": {
-                        "value": 91.0,
+                        "value": 0.91,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.82 91"
@@ -11942,7 +11942,7 @@
                 "gammaIntensity": {
                     "value": 3.6,
                     "uncertainty": {
-                        "value": 18.0,
+                        "value": 1.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.6 18"
@@ -11963,7 +11963,7 @@
                 "gammaIntensity": {
                     "value": 1.82,
                     "uncertainty": {
-                        "value": 91.0,
+                        "value": 0.91,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.82 91"
@@ -11984,7 +11984,7 @@
                 "gammaIntensity": {
                     "value": 1.82,
                     "uncertainty": {
-                        "value": 91.0,
+                        "value": 0.91,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.82 91"
@@ -12005,7 +12005,7 @@
                 "gammaIntensity": {
                     "value": 10.9,
                     "uncertainty": {
-                        "value": 11.0,
+                        "value": 1.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "10.9 11"
@@ -12109,7 +12109,7 @@
                 "gammaIntensity": {
                     "value": 1.16,
                     "uncertainty": {
-                        "value": 58.0,
+                        "value": 0.58,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.16 58"
@@ -12130,7 +12130,7 @@
                 "gammaIntensity": {
                     "value": 0.58,
                     "uncertainty": {
-                        "value": 29.0,
+                        "value": 0.29,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "0.58 29"
@@ -12151,7 +12151,7 @@
                 "gammaIntensity": {
                     "value": 1.74,
                     "uncertainty": {
-                        "value": 93.0,
+                        "value": 0.93,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.74 93"
@@ -12172,7 +12172,7 @@
                 "gammaIntensity": {
                     "value": 2.3,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.3 12"
@@ -12193,7 +12193,7 @@
                 "gammaIntensity": {
                     "value": 0.58,
                     "uncertainty": {
-                        "value": 29.0,
+                        "value": 0.29,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "0.58 29"
@@ -12234,7 +12234,7 @@
                 "gammaIntensity": {
                     "value": 6.4,
                     "uncertainty": {
-                        "value": 7.0,
+                        "value": 0.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6.4 7"
@@ -12255,7 +12255,7 @@
                 "gammaIntensity": {
                     "value": 1.16,
                     "uncertainty": {
-                        "value": 58.0,
+                        "value": 0.58,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.16 58"
@@ -12296,7 +12296,7 @@
                 "gammaIntensity": {
                     "value": 2.3,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.3 12"
@@ -12398,7 +12398,7 @@
                 "gammaIntensity": {
                     "value": 4.4,
                     "uncertainty": {
-                        "value": 24.0,
+                        "value": 2.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.4 24"
@@ -12439,7 +12439,7 @@
                 "gammaIntensity": {
                     "value": 15.5,
                     "uncertainty": {
-                        "value": 60.0,
+                        "value": 6.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "15.5 60"
@@ -12481,7 +12481,7 @@
                 "gammaIntensity": {
                     "value": 23.6,
                     "uncertainty": {
-                        "value": 24.0,
+                        "value": 2.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "23.6 24"
@@ -12502,7 +12502,7 @@
                 "gammaIntensity": {
                     "value": 16.5,
                     "uncertainty": {
-                        "value": 60.0,
+                        "value": 6.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "16.5 60"
@@ -12523,7 +12523,7 @@
                 "gammaIntensity": {
                     "value": 20.7,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "20.7 21"
@@ -12544,7 +12544,7 @@
                 "gammaIntensity": {
                     "value": 7.3,
                     "uncertainty": {
-                        "value": 30.0,
+                        "value": 3.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "7.3 30"
@@ -12605,7 +12605,7 @@
                 "gammaIntensity": {
                     "value": 15.5,
                     "uncertainty": {
-                        "value": 60.0,
+                        "value": 6.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "15.5 60"
@@ -12626,7 +12626,7 @@
                 "gammaIntensity": {
                     "value": 1.47,
                     "uncertainty": {
-                        "value": 74.0,
+                        "value": 0.74,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.47 74"
@@ -12647,7 +12647,7 @@
                 "gammaIntensity": {
                     "value": 7.1,
                     "uncertainty": {
-                        "value": 31.0,
+                        "value": 3.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "7.1 31"
@@ -12668,7 +12668,7 @@
                 "gammaIntensity": {
                     "value": 10.7,
                     "uncertainty": {
-                        "value": 31.0,
+                        "value": 3.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "10.7 31"
@@ -12770,7 +12770,7 @@
                 "gammaIntensity": {
                     "value": 11.4,
                     "uncertainty": {
-                        "value": 57.0,
+                        "value": 5.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "11.4 57"
@@ -12791,7 +12791,7 @@
                 "gammaIntensity": {
                     "value": 2.3,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.3 12"
@@ -12812,7 +12812,7 @@
                 "gammaIntensity": {
                     "value": 4.6,
                     "uncertainty": {
-                        "value": 23.0,
+                        "value": 2.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.6 23"
@@ -12833,7 +12833,7 @@
                 "gammaIntensity": {
                     "value": 6.8,
                     "uncertainty": {
-                        "value": 34.0,
+                        "value": 3.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6.8 34"
@@ -12854,7 +12854,7 @@
                 "gammaIntensity": {
                     "value": 1.14,
                     "uncertainty": {
-                        "value": 57.0,
+                        "value": 0.57,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.14 57"
@@ -12875,7 +12875,7 @@
                 "gammaIntensity": {
                     "value": 1.14,
                     "uncertainty": {
-                        "value": 57.0,
+                        "value": 0.57,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.14 57"
@@ -12896,7 +12896,7 @@
                 "gammaIntensity": {
                     "value": 9.1,
                     "uncertainty": {
-                        "value": 46.0,
+                        "value": 4.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "9.1 46"
@@ -12917,7 +12917,7 @@
                 "gammaIntensity": {
                     "value": 18.0,
                     "uncertainty": {
-                        "value": 18.0,
+                        "value": 1.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "18.0 18"
@@ -12978,7 +12978,7 @@
                 "gammaIntensity": {
                     "value": 6.8,
                     "uncertainty": {
-                        "value": 38.0,
+                        "value": 3.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6.8 38"
@@ -12999,7 +12999,7 @@
                 "gammaIntensity": {
                     "value": 12.5,
                     "uncertainty": {
-                        "value": 40.0,
+                        "value": 4.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "12.5 40"
@@ -13020,7 +13020,7 @@
                 "gammaIntensity": {
                     "value": 25.0,
                     "uncertainty": {
-                        "value": 25.0,
+                        "value": 2.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "25.0 25"
@@ -13062,7 +13062,7 @@
                 "gammaIntensity": {
                     "value": 10.7,
                     "uncertainty": {
-                        "value": 40.0,
+                        "value": 4.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "10.7 40"
@@ -13083,7 +13083,7 @@
                 "gammaIntensity": {
                     "value": 20.1,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "20.1 21"
@@ -13124,7 +13124,7 @@
                 "gammaIntensity": {
                     "value": 1.04,
                     "uncertainty": {
-                        "value": 52.0,
+                        "value": 0.52,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.04 52"
@@ -13145,7 +13145,7 @@
                 "gammaIntensity": {
                     "value": 18.6,
                     "uncertainty": {
-                        "value": 19.0,
+                        "value": 1.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "18.6 19"
@@ -13166,7 +13166,7 @@
                 "gammaIntensity": {
                     "value": 10.1,
                     "uncertainty": {
-                        "value": 38.0,
+                        "value": 3.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "10.1 38"
@@ -13187,7 +13187,7 @@
                 "gammaIntensity": {
                     "value": 1.04,
                     "uncertainty": {
-                        "value": 52.0,
+                        "value": 0.52,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.04 52"
@@ -13208,7 +13208,7 @@
                 "gammaIntensity": {
                     "value": 20.8,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "20.8 21"
@@ -13291,7 +13291,7 @@
                 "gammaIntensity": {
                     "value": 4.2,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.2 21"
@@ -13312,7 +13312,7 @@
                 "gammaIntensity": {
                     "value": 7.6,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "7.6 21"
@@ -13433,7 +13433,7 @@
                 "gammaIntensity": {
                     "value": 1.04,
                     "uncertainty": {
-                        "value": 52.0,
+                        "value": 0.52,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.04 52"
@@ -13495,7 +13495,7 @@
                 "gammaIntensity": {
                     "value": 3.9,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.9 21"
@@ -13516,7 +13516,7 @@
                 "gammaIntensity": {
                     "value": 18.0,
                     "uncertainty": {
-                        "value": 18.0,
+                        "value": 1.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "18.0 18"
@@ -13537,7 +13537,7 @@
                 "gammaIntensity": {
                     "value": 2.6,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.6 13"
@@ -13558,7 +13558,7 @@
                 "gammaIntensity": {
                     "value": 7.7,
                     "uncertainty": {
-                        "value": 39.0,
+                        "value": 3.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "7.7 39"
@@ -13579,7 +13579,7 @@
                 "gammaIntensity": {
                     "value": 5.1,
                     "uncertainty": {
-                        "value": 26.0,
+                        "value": 2.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "5.1 26"
@@ -13600,7 +13600,7 @@
                 "gammaIntensity": {
                     "value": 11.5,
                     "uncertainty": {
-                        "value": 59.0,
+                        "value": 5.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "11.5 59"
@@ -13642,7 +13642,7 @@
                 "gammaIntensity": {
                     "value": 28.2,
                     "uncertainty": {
-                        "value": 28.0,
+                        "value": 2.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "28.2 28"
@@ -13663,7 +13663,7 @@
                 "gammaIntensity": {
                     "value": 33.3,
                     "uncertainty": {
-                        "value": 33.0,
+                        "value": 3.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "33.3 33"
@@ -13684,7 +13684,7 @@
                 "gammaIntensity": {
                     "value": 4.5,
                     "uncertainty": {
-                        "value": 18.0,
+                        "value": 1.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.5 18"
@@ -13705,7 +13705,7 @@
                 "gammaIntensity": {
                     "value": 24.0,
                     "uncertainty": {
-                        "value": 25.0,
+                        "value": 2.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "24.0 25"
@@ -13726,7 +13726,7 @@
                 "gammaIntensity": {
                     "value": 6.2,
                     "uncertainty": {
-                        "value": 20.0,
+                        "value": 2.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6.2 20"
@@ -13768,7 +13768,7 @@
                 "gammaIntensity": {
                     "value": 2.2,
                     "uncertainty": {
-                        "value": 11.0,
+                        "value": 1.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.2 11"
@@ -13789,7 +13789,7 @@
                 "gammaIntensity": {
                     "value": 13.2,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "13.2 13"
@@ -13810,7 +13810,7 @@
                 "gammaIntensity": {
                     "value": 31.6,
                     "uncertainty": {
-                        "value": 33.0,
+                        "value": 3.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "31.6 33"
@@ -13872,7 +13872,7 @@
                 "gammaIntensity": {
                     "value": 10.4,
                     "uncertainty": {
-                        "value": 40.0,
+                        "value": 4.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "10.4 40"
@@ -13933,7 +13933,7 @@
                 "gammaIntensity": {
                     "value": 2.4,
                     "uncertainty": {
-                        "value": 10.0,
+                        "value": 1.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.4 10"
@@ -13974,7 +13974,7 @@
                 "gammaIntensity": {
                     "value": 1.9,
                     "uncertainty": {
-                        "value": 8.0,
+                        "value": 0.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.9 8"
@@ -13995,7 +13995,7 @@
                 "gammaIntensity": {
                     "value": 5.8,
                     "uncertainty": {
-                        "value": 29.0,
+                        "value": 2.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "5.8 29"
@@ -14057,7 +14057,7 @@
                 "gammaIntensity": {
                     "value": 11.6,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "11.6 12"
@@ -14098,7 +14098,7 @@
                 "gammaIntensity": {
                     "value": 27.5,
                     "uncertainty": {
-                        "value": 28.0,
+                        "value": 2.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "27.5 28"
@@ -14199,7 +14199,7 @@
                 "gammaIntensity": {
                     "value": 1.11,
                     "uncertainty": {
-                        "value": 64.0,
+                        "value": 0.64,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.11 64"
@@ -14220,7 +14220,7 @@
                 "gammaIntensity": {
                     "value": 1.27,
                     "uncertainty": {
-                        "value": 64.0,
+                        "value": 0.64,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.27 64"
@@ -14261,7 +14261,7 @@
                 "gammaIntensity": {
                     "value": 12.7,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "12.7 13"
@@ -14323,7 +14323,7 @@
                 "gammaIntensity": {
                     "value": 25.4,
                     "uncertainty": {
-                        "value": 26.0,
+                        "value": 2.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "25.4 26"
@@ -14344,7 +14344,7 @@
                 "gammaIntensity": {
                     "value": 1.8,
                     "uncertainty": {
-                        "value": 80.0,
+                        "value": 0.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.80 80"
@@ -14365,7 +14365,7 @@
                 "gammaIntensity": {
                     "value": 11.1,
                     "uncertainty": {
-                        "value": 11.0,
+                        "value": 1.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "11.1 11"
@@ -14386,7 +14386,7 @@
                 "gammaIntensity": {
                     "value": 1.2,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.2 12"
@@ -14447,7 +14447,7 @@
                 "gammaIntensity": {
                     "value": 4.8,
                     "uncertainty": {
-                        "value": 24.0,
+                        "value": 2.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.8 24"
@@ -14488,7 +14488,7 @@
                 "gammaIntensity": {
                     "value": 4.6,
                     "uncertainty": {
-                        "value": 23.0,
+                        "value": 2.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.6 23"
@@ -14509,7 +14509,7 @@
                 "gammaIntensity": {
                     "value": 2.3,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.3 12"
@@ -14530,7 +14530,7 @@
                 "gammaIntensity": {
                     "value": 6.8,
                     "uncertainty": {
-                        "value": 34.0,
+                        "value": 3.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6.8 34"
@@ -14551,7 +14551,7 @@
                 "gammaIntensity": {
                     "value": 2.3,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.3 12"
@@ -14572,7 +14572,7 @@
                 "gammaIntensity": {
                     "value": 9.1,
                     "uncertainty": {
-                        "value": 46.0,
+                        "value": 4.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "9.1 46"
@@ -14593,7 +14593,7 @@
                 "gammaIntensity": {
                     "value": 1.14,
                     "uncertainty": {
-                        "value": 57.0,
+                        "value": 0.57,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.14 57"
@@ -14614,7 +14614,7 @@
                 "gammaIntensity": {
                     "value": 12.5,
                     "uncertainty": {
-                        "value": 14.0,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "12.5 14"
@@ -14635,7 +14635,7 @@
                 "gammaIntensity": {
                     "value": 4.6,
                     "uncertainty": {
-                        "value": 23.0,
+                        "value": 2.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.6 23"
@@ -14656,7 +14656,7 @@
                 "gammaIntensity": {
                     "value": 20.4,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "20.4 21"
@@ -14697,7 +14697,7 @@
                 "gammaIntensity": {
                     "value": 2.3,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.3 12"
@@ -14718,7 +14718,7 @@
                 "gammaIntensity": {
                     "value": 2.3,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.3 12"
@@ -14739,7 +14739,7 @@
                 "gammaIntensity": {
                     "value": 4.6,
                     "uncertainty": {
-                        "value": 23.0,
+                        "value": 2.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.6 23"
@@ -14781,7 +14781,7 @@
                 "gammaIntensity": {
                     "value": 16.5,
                     "uncertainty": {
-                        "value": 18.0,
+                        "value": 1.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "16.5 18"
@@ -14885,7 +14885,7 @@
                 "gammaIntensity": {
                     "value": 25.0,
                     "uncertainty": {
-                        "value": 25.0,
+                        "value": 2.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "25.0 25"
@@ -14906,7 +14906,7 @@
                 "gammaIntensity": {
                     "value": 14.8,
                     "uncertainty": {
-                        "value": 16.0,
+                        "value": 1.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "14.8 16"
@@ -14927,7 +14927,7 @@
                 "gammaIntensity": {
                     "value": 17.1,
                     "uncertainty": {
-                        "value": 18.0,
+                        "value": 1.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "17.1 18"
@@ -14948,7 +14948,7 @@
                 "gammaIntensity": {
                     "value": 3.5,
                     "uncertainty": {
-                        "value": 17.0,
+                        "value": 1.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.5 17"
@@ -14969,7 +14969,7 @@
                 "gammaIntensity": {
                     "value": 1.72,
                     "uncertainty": {
-                        "value": 86.0,
+                        "value": 0.86,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.72 86"
@@ -14990,7 +14990,7 @@
                 "gammaIntensity": {
                     "value": 3.5,
                     "uncertainty": {
-                        "value": 17.0,
+                        "value": 1.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.5 17"
@@ -15011,7 +15011,7 @@
                 "gammaIntensity": {
                     "value": 8.6,
                     "uncertainty": {
-                        "value": 45.0,
+                        "value": 4.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "8.6 45"
@@ -15032,7 +15032,7 @@
                 "gammaIntensity": {
                     "value": 1.72,
                     "uncertainty": {
-                        "value": 86.0,
+                        "value": 0.86,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.72 86"
@@ -15053,7 +15053,7 @@
                 "gammaIntensity": {
                     "value": 1.72,
                     "uncertainty": {
-                        "value": 86.0,
+                        "value": 0.86,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.72 86"
@@ -15074,7 +15074,7 @@
                 "gammaIntensity": {
                     "value": 6.9,
                     "uncertainty": {
-                        "value": 35.0,
+                        "value": 3.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6.9 35"
@@ -15095,7 +15095,7 @@
                 "gammaIntensity": {
                     "value": 1.72,
                     "uncertainty": {
-                        "value": 86.0,
+                        "value": 0.86,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.72 86"
@@ -15136,7 +15136,7 @@
                 "gammaIntensity": {
                     "value": 3.5,
                     "uncertainty": {
-                        "value": 17.0,
+                        "value": 1.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.5 17"
@@ -15157,7 +15157,7 @@
                 "gammaIntensity": {
                     "value": 20.7,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "20.7 21"
@@ -15178,7 +15178,7 @@
                 "gammaIntensity": {
                     "value": 3.5,
                     "uncertainty": {
-                        "value": 17.0,
+                        "value": 1.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.5 17"
@@ -15199,7 +15199,7 @@
                 "gammaIntensity": {
                     "value": 23.5,
                     "uncertainty": {
-                        "value": 24.0,
+                        "value": 2.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "23.5 24"
@@ -15240,7 +15240,7 @@
                 "gammaIntensity": {
                     "value": 10.3,
                     "uncertainty": {
-                        "value": 52.0,
+                        "value": 5.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "10.3 52"
@@ -15261,7 +15261,7 @@
                 "gammaIntensity": {
                     "value": 8.6,
                     "uncertainty": {
-                        "value": 45.0,
+                        "value": 4.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "8.6 45"
@@ -15282,7 +15282,7 @@
                 "gammaIntensity": {
                     "value": 3.5,
                     "uncertainty": {
-                        "value": 17.0,
+                        "value": 1.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.5 17"
@@ -15303,7 +15303,7 @@
                 "gammaIntensity": {
                     "value": 11.2,
                     "uncertainty": {
-                        "value": 23.0,
+                        "value": 2.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "11.2 23"
@@ -15345,7 +15345,7 @@
                 "gammaIntensity": {
                     "value": 25.6,
                     "uncertainty": {
-                        "value": 23.0,
+                        "value": 2.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "25.6 23"
@@ -15366,7 +15366,7 @@
                 "gammaIntensity": {
                     "value": 36.5,
                     "uncertainty": {
-                        "value": 53.0,
+                        "value": 5.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "36.5 53"
@@ -15450,7 +15450,7 @@
                 "gammaIntensity": {
                     "value": 6.4,
                     "uncertainty": {
-                        "value": 33.0,
+                        "value": 3.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6.4 33"
@@ -15471,7 +15471,7 @@
                 "gammaIntensity": {
                     "value": 5.1,
                     "uncertainty": {
-                        "value": 26.0,
+                        "value": 2.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "5.1 26"
@@ -15492,7 +15492,7 @@
                 "gammaIntensity": {
                     "value": 20.5,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "20.5 21"
@@ -15513,7 +15513,7 @@
                 "gammaIntensity": {
                     "value": 9.0,
                     "uncertainty": {
-                        "value": 46.0,
+                        "value": 4.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "9.0 46"
@@ -15534,7 +15534,7 @@
                 "gammaIntensity": {
                     "value": 6.4,
                     "uncertainty": {
-                        "value": 33.0,
+                        "value": 3.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6.4 33"
@@ -15555,7 +15555,7 @@
                 "gammaIntensity": {
                     "value": 2.6,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.6 13"
@@ -15576,7 +15576,7 @@
                 "gammaIntensity": {
                     "value": 10.3,
                     "uncertainty": {
-                        "value": 51.0,
+                        "value": 5.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "10.3 51"
@@ -15597,7 +15597,7 @@
                 "gammaIntensity": {
                     "value": 6.4,
                     "uncertainty": {
-                        "value": 33.0,
+                        "value": 3.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6.4 33"
@@ -15618,7 +15618,7 @@
                 "gammaIntensity": {
                     "value": 5.1,
                     "uncertainty": {
-                        "value": 26.0,
+                        "value": 2.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "5.1 26"
@@ -15660,7 +15660,7 @@
                 "gammaIntensity": {
                     "value": 5.5,
                     "uncertainty": {
-                        "value": 27.0,
+                        "value": 2.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "5.5 27"
@@ -15702,7 +15702,7 @@
                 "gammaIntensity": {
                     "value": 3.6,
                     "uncertainty": {
-                        "value": 18.0,
+                        "value": 1.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.6 18"
@@ -15723,7 +15723,7 @@
                 "gammaIntensity": {
                     "value": 5.5,
                     "uncertainty": {
-                        "value": 27.0,
+                        "value": 2.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "5.5 27"
@@ -15744,7 +15744,7 @@
                 "gammaIntensity": {
                     "value": 9.1,
                     "uncertainty": {
-                        "value": 46.0,
+                        "value": 4.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "9.1 46"
@@ -15786,7 +15786,7 @@
                 "gammaIntensity": {
                     "value": 2.7,
                     "uncertainty": {
-                        "value": 14.0,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.7 14"
@@ -15807,7 +15807,7 @@
                 "gammaIntensity": {
                     "value": 9.6,
                     "uncertainty": {
-                        "value": 10.0,
+                        "value": 1.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "9.6 10"
@@ -15849,7 +15849,7 @@
                 "gammaIntensity": {
                     "value": 5.5,
                     "uncertainty": {
-                        "value": 28.0,
+                        "value": 2.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "5.5 28"
@@ -15870,7 +15870,7 @@
                 "gammaIntensity": {
                     "value": 8.2,
                     "uncertainty": {
-                        "value": 8.0,
+                        "value": 0.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "8.2 8"
@@ -15891,7 +15891,7 @@
                 "gammaIntensity": {
                     "value": 11.0,
                     "uncertainty": {
-                        "value": 11.0,
+                        "value": 1.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "11.0 11"
@@ -15932,7 +15932,7 @@
                 "gammaIntensity": {
                     "value": 8.3,
                     "uncertainty": {
-                        "value": 42.0,
+                        "value": 4.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "8.3 42"
@@ -15973,7 +15973,7 @@
                 "gammaIntensity": {
                     "value": 7.3,
                     "uncertainty": {
-                        "value": 38.0,
+                        "value": 3.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "7.3 38"
@@ -15994,7 +15994,7 @@
                 "gammaIntensity": {
                     "value": 4.2,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.2 21"
@@ -16015,7 +16015,7 @@
                 "gammaIntensity": {
                     "value": 10.4,
                     "uncertainty": {
-                        "value": 52.0,
+                        "value": 5.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "10.4 52"
@@ -16057,7 +16057,7 @@
                 "gammaIntensity": {
                     "value": 7.3,
                     "uncertainty": {
-                        "value": 38.0,
+                        "value": 3.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "7.3 38"
@@ -16098,7 +16098,7 @@
                 "gammaIntensity": {
                     "value": 29.2,
                     "uncertainty": {
-                        "value": 29.0,
+                        "value": 2.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "29.2 29"
@@ -16119,7 +16119,7 @@
                 "gammaIntensity": {
                     "value": 4.2,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.2 21"
@@ -16241,7 +16241,7 @@
                 "gammaIntensity": {
                     "value": 26.2,
                     "uncertainty": {
-                        "value": 26.0,
+                        "value": 2.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "26.2 26"
@@ -16282,7 +16282,7 @@
                 "gammaIntensity": {
                     "value": 9.2,
                     "uncertainty": {
-                        "value": 9.0,
+                        "value": 0.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "9.2 9"
@@ -16303,7 +16303,7 @@
                 "gammaIntensity": {
                     "value": 18.5,
                     "uncertainty": {
-                        "value": 19.0,
+                        "value": 1.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "18.5 19"
@@ -16345,7 +16345,7 @@
                 "gammaIntensity": {
                     "value": 16.7,
                     "uncertainty": {
-                        "value": 17.0,
+                        "value": 1.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "16.7 17"
@@ -16407,7 +16407,7 @@
                 "gammaIntensity": {
                     "value": 3.3,
                     "uncertainty": {
-                        "value": 17.0,
+                        "value": 1.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.3 17"
@@ -16428,7 +16428,7 @@
                 "gammaIntensity": {
                     "value": 13.3,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "13.3 13"
@@ -16469,7 +16469,7 @@
                 "gammaIntensity": {
                     "value": 33.3,
                     "uncertainty": {
-                        "value": 33.0,
+                        "value": 3.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "33.3 33"
@@ -16490,7 +16490,7 @@
                 "gammaIntensity": {
                     "value": 21.0,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "21.0 21"
@@ -16532,7 +16532,7 @@
                 "gammaIntensity": {
                     "value": 9.7,
                     "uncertainty": {
-                        "value": 10.0,
+                        "value": 1.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "9.7 10"
@@ -16553,7 +16553,7 @@
                 "gammaIntensity": {
                     "value": 6.5,
                     "uncertainty": {
-                        "value": 32.0,
+                        "value": 3.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6.5 32"
@@ -16574,7 +16574,7 @@
                 "gammaIntensity": {
                     "value": 11.3,
                     "uncertainty": {
-                        "value": 11.0,
+                        "value": 1.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "11.3 11"
@@ -16595,7 +16595,7 @@
                 "gammaIntensity": {
                     "value": 12.9,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "12.9 13"
@@ -16656,7 +16656,7 @@
                 "gammaIntensity": {
                     "value": 7.7,
                     "uncertainty": {
-                        "value": 8.0,
+                        "value": 0.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "7.7 8"
@@ -16677,7 +16677,7 @@
                 "gammaIntensity": {
                     "value": 20.5,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "20.5 21"
@@ -16840,7 +16840,7 @@
                 "gammaIntensity": {
                     "value": 5.3,
                     "uncertainty": {
-                        "value": 26.0,
+                        "value": 2.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "5.3 26"
@@ -16902,7 +16902,7 @@
                 "gammaIntensity": {
                     "value": 21.3,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "21.3 21"
@@ -16923,7 +16923,7 @@
                 "gammaIntensity": {
                     "value": 21.3,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "21.3 21"
@@ -16965,7 +16965,7 @@
                 "gammaIntensity": {
                     "value": 17.0,
                     "uncertainty": {
-                        "value": 17.0,
+                        "value": 1.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "17.0 17"
@@ -17286,7 +17286,7 @@
                 "gammaIntensity": {
                     "value": 1.32,
                     "uncertainty": {
-                        "value": 66.0,
+                        "value": 0.66,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.32 66"
@@ -17328,7 +17328,7 @@
                 "gammaIntensity": {
                     "value": 7.9,
                     "uncertainty": {
-                        "value": 40.0,
+                        "value": 4.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "7.9 40"
@@ -17349,7 +17349,7 @@
                 "gammaIntensity": {
                     "value": 1.32,
                     "uncertainty": {
-                        "value": 66.0,
+                        "value": 0.66,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.32 66"
@@ -17370,7 +17370,7 @@
                 "gammaIntensity": {
                     "value": 1.32,
                     "uncertainty": {
-                        "value": 66.0,
+                        "value": 0.66,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.32 66"
@@ -17391,7 +17391,7 @@
                 "gammaIntensity": {
                     "value": 13.2,
                     "uncertainty": {
-                        "value": 66.0,
+                        "value": 6.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "13.2 66"
@@ -17433,7 +17433,7 @@
                 "gammaIntensity": {
                     "value": 15.8,
                     "uncertainty": {
-                        "value": 16.0,
+                        "value": 1.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "15.8 16"
@@ -17454,7 +17454,7 @@
                 "gammaIntensity": {
                     "value": 15.8,
                     "uncertainty": {
-                        "value": 16.0,
+                        "value": 1.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "15.8 16"
@@ -17475,7 +17475,7 @@
                 "gammaIntensity": {
                     "value": 1.32,
                     "uncertainty": {
-                        "value": 66.0,
+                        "value": 0.66,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.32 66"
@@ -17619,7 +17619,7 @@
                 "gammaIntensity": {
                     "value": 31.3,
                     "uncertainty": {
-                        "value": 31.0,
+                        "value": 3.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "31.3 31"
@@ -17703,7 +17703,7 @@
                 "gammaIntensity": {
                     "value": 2.4,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.4 12"
@@ -17724,7 +17724,7 @@
                 "gammaIntensity": {
                     "value": 4.8,
                     "uncertainty": {
-                        "value": 24.0,
+                        "value": 2.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.8 24"
@@ -17745,7 +17745,7 @@
                 "gammaIntensity": {
                     "value": 3.6,
                     "uncertainty": {
-                        "value": 18.0,
+                        "value": 1.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.6 18"
@@ -17766,7 +17766,7 @@
                 "gammaIntensity": {
                     "value": 2.4,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.4 12"
@@ -17829,7 +17829,7 @@
                 "gammaIntensity": {
                     "value": 31.3,
                     "uncertainty": {
-                        "value": 31.0,
+                        "value": 3.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "31.3 31"
@@ -17850,7 +17850,7 @@
                 "gammaIntensity": {
                     "value": 22.9,
                     "uncertainty": {
-                        "value": 23.0,
+                        "value": 2.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "22.9 23"
@@ -17871,7 +17871,7 @@
                 "gammaIntensity": {
                     "value": 8.3,
                     "uncertainty": {
-                        "value": 42.0,
+                        "value": 4.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "8.3 42"
@@ -17892,7 +17892,7 @@
                 "gammaIntensity": {
                     "value": 9.4,
                     "uncertainty": {
-                        "value": 48.0,
+                        "value": 4.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "9.4 48"
@@ -17913,7 +17913,7 @@
                 "gammaIntensity": {
                     "value": 11.5,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "11.5 13"
@@ -17934,7 +17934,7 @@
                 "gammaIntensity": {
                     "value": 25.0,
                     "uncertainty": {
-                        "value": 25.0,
+                        "value": 2.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "25.0 25"
@@ -18236,7 +18236,7 @@
                 "gammaIntensity": {
                     "value": 5.1,
                     "uncertainty": {
-                        "value": 26.0,
+                        "value": 2.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "5.1 26"
@@ -18298,7 +18298,7 @@
                 "gammaIntensity": {
                     "value": 12.8,
                     "uncertainty": {
-                        "value": 64.0,
+                        "value": 6.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "12.8 64"
@@ -18340,7 +18340,7 @@
                 "gammaIntensity": {
                     "value": 28.2,
                     "uncertainty": {
-                        "value": 28.0,
+                        "value": 2.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "28.2 28"
@@ -18402,7 +18402,7 @@
                 "gammaIntensity": {
                     "value": 5.3,
                     "uncertainty": {
-                        "value": 26.0,
+                        "value": 2.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "5.3 26"
@@ -18504,7 +18504,7 @@
                 "gammaIntensity": {
                     "value": 1.1,
                     "uncertainty": {
-                        "value": 55.0,
+                        "value": 0.55,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.10 55"
@@ -18525,7 +18525,7 @@
                 "gammaIntensity": {
                     "value": 0.55,
                     "uncertainty": {
-                        "value": 28.0,
+                        "value": 0.28,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "0.55 28"
@@ -18546,7 +18546,7 @@
                 "gammaIntensity": {
                     "value": 2.2,
                     "uncertainty": {
-                        "value": 11.0,
+                        "value": 1.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.2 11"
@@ -18567,7 +18567,7 @@
                 "gammaIntensity": {
                     "value": 1.1,
                     "uncertainty": {
-                        "value": 55.0,
+                        "value": 0.55,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.10 55"
@@ -18588,7 +18588,7 @@
                 "gammaIntensity": {
                     "value": 0.55,
                     "uncertainty": {
-                        "value": 28.0,
+                        "value": 0.28,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "0.55 28"
@@ -18609,7 +18609,7 @@
                 "gammaIntensity": {
                     "value": 4.4,
                     "uncertainty": {
-                        "value": 22.0,
+                        "value": 2.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.4 22"
@@ -18711,7 +18711,7 @@
                 "gammaIntensity": {
                     "value": 12.7,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "12.7 13"
@@ -18732,7 +18732,7 @@
                 "gammaIntensity": {
                     "value": 16.9,
                     "uncertainty": {
-                        "value": 17.0,
+                        "value": 1.7,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "16.9 17"
@@ -18753,7 +18753,7 @@
                 "gammaIntensity": {
                     "value": 11.3,
                     "uncertainty": {
-                        "value": 11.0,
+                        "value": 1.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "11.3 11"
@@ -18815,7 +18815,7 @@
                 "gammaIntensity": {
                     "value": 15.5,
                     "uncertainty": {
-                        "value": 16.0,
+                        "value": 1.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "15.5 16"
@@ -18877,7 +18877,7 @@
                 "gammaIntensity": {
                     "value": 5.2,
                     "uncertainty": {
-                        "value": 26.0,
+                        "value": 2.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "5.2 26"
@@ -18898,7 +18898,7 @@
                 "gammaIntensity": {
                     "value": 19.0,
                     "uncertainty": {
-                        "value": 19.0,
+                        "value": 1.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "19.0 19"
@@ -18919,7 +18919,7 @@
                 "gammaIntensity": {
                     "value": 32.8,
                     "uncertainty": {
-                        "value": 33.0,
+                        "value": 3.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "32.8 33"
@@ -18980,7 +18980,7 @@
                 "gammaIntensity": {
                     "value": 5.0,
                     "uncertainty": {
-                        "value": 25.0,
+                        "value": 2.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "5.0 25"
@@ -19186,7 +19186,7 @@
                 "gammaIntensity": {
                     "value": 12.5,
                     "uncertainty": {
-                        "value": 65.0,
+                        "value": 6.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "12.5 65"
@@ -19269,7 +19269,7 @@
                 "gammaIntensity": {
                     "value": 35.0,
                     "uncertainty": {
-                        "value": 35.0,
+                        "value": 3.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "35.0 35"
@@ -19311,7 +19311,7 @@
                 "gammaIntensity": {
                     "value": 35.0,
                     "uncertainty": {
-                        "value": 35.0,
+                        "value": 3.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "35.0 35"
@@ -19353,7 +19353,7 @@
                 "gammaIntensity": {
                     "value": 12.5,
                     "uncertainty": {
-                        "value": 65.0,
+                        "value": 6.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "12.5 65"
@@ -19394,7 +19394,7 @@
                 "gammaIntensity": {
                     "value": 2.5,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.5 13"
@@ -19415,7 +19415,7 @@
                 "gammaIntensity": {
                     "value": 2.5,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.5 13"
@@ -19436,7 +19436,7 @@
                 "gammaIntensity": {
                     "value": 2.5,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.5 13"
@@ -19477,7 +19477,7 @@
                 "gammaIntensity": {
                     "value": 7.5,
                     "uncertainty": {
-                        "value": 38.0,
+                        "value": 3.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "7.5 38"
@@ -19498,7 +19498,7 @@
                 "gammaIntensity": {
                     "value": 7.5,
                     "uncertainty": {
-                        "value": 38.0,
+                        "value": 3.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "7.5 38"
@@ -19540,7 +19540,7 @@
                 "gammaIntensity": {
                     "value": 32.5,
                     "uncertainty": {
-                        "value": 33.0,
+                        "value": 3.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "32.5 33"
@@ -19561,7 +19561,7 @@
                 "gammaIntensity": {
                     "value": 15.0,
                     "uncertainty": {
-                        "value": 15.0,
+                        "value": 1.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "15.0 15"
@@ -19645,7 +19645,7 @@
                 "gammaIntensity": {
                     "value": 13.6,
                     "uncertainty": {
-                        "value": 14.0,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "13.6 14"
@@ -19666,7 +19666,7 @@
                 "gammaIntensity": {
                     "value": 6.8,
                     "uncertainty": {
-                        "value": 34.0,
+                        "value": 3.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "6.8 34"
@@ -19687,7 +19687,7 @@
                 "gammaIntensity": {
                     "value": 25.0,
                     "uncertainty": {
-                        "value": 25.0,
+                        "value": 2.5,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "25.0 25"
@@ -19770,7 +19770,7 @@
                 "gammaIntensity": {
                     "value": 18.2,
                     "uncertainty": {
-                        "value": 18.0,
+                        "value": 1.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "18.2 18"
@@ -19891,7 +19891,7 @@
                 "gammaIntensity": {
                     "value": 1.16,
                     "uncertainty": {
-                        "value": 58.0,
+                        "value": 0.58,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.16 58"
@@ -19912,7 +19912,7 @@
                 "gammaIntensity": {
                     "value": 2.3,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.3 12"
@@ -19933,7 +19933,7 @@
                 "gammaIntensity": {
                     "value": 1.16,
                     "uncertainty": {
-                        "value": 58.0,
+                        "value": 0.58,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.16 58"
@@ -19954,7 +19954,7 @@
                 "gammaIntensity": {
                     "value": 1.16,
                     "uncertainty": {
-                        "value": 58.0,
+                        "value": 0.58,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.16 58"
@@ -19975,7 +19975,7 @@
                 "gammaIntensity": {
                     "value": 2.3,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.3 12"
@@ -19996,7 +19996,7 @@
                 "gammaIntensity": {
                     "value": 1.16,
                     "uncertainty": {
-                        "value": 58.0,
+                        "value": 0.58,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.16 58"
@@ -20038,7 +20038,7 @@
                 "gammaIntensity": {
                     "value": 1.16,
                     "uncertainty": {
-                        "value": 58.0,
+                        "value": 0.58,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.16 58"
@@ -20099,7 +20099,7 @@
                 "gammaIntensity": {
                     "value": 5.8,
                     "uncertainty": {
-                        "value": 29.0,
+                        "value": 2.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "5.8 29"
@@ -20140,7 +20140,7 @@
                 "gammaIntensity": {
                     "value": 21.1,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "21.1 21"
@@ -20242,7 +20242,7 @@
                 "gammaIntensity": {
                     "value": 2.6,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.6 13"
@@ -20263,7 +20263,7 @@
                 "gammaIntensity": {
                     "value": 7.9,
                     "uncertainty": {
-                        "value": 8.0,
+                        "value": 0.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "7.9 8"
@@ -20304,7 +20304,7 @@
                 "gammaIntensity": {
                     "value": 2.4,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.4 13"
@@ -20325,7 +20325,7 @@
                 "gammaIntensity": {
                     "value": 3.2,
                     "uncertainty": {
-                        "value": 16.0,
+                        "value": 1.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.2 16"
@@ -20366,7 +20366,7 @@
                 "gammaIntensity": {
                     "value": 2.4,
                     "uncertainty": {
-                        "value": 13.0,
+                        "value": 1.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.4 13"
@@ -20387,7 +20387,7 @@
                 "gammaIntensity": {
                     "value": 4.0,
                     "uncertainty": {
-                        "value": 21.0,
+                        "value": 2.1,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.0 21"
@@ -20429,7 +20429,7 @@
                 "gammaIntensity": {
                     "value": 8.9,
                     "uncertainty": {
-                        "value": 10.0,
+                        "value": 1.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "8.9 10"
@@ -20892,7 +20892,7 @@
                 "gammaIntensity": {
                     "value": 11.2,
                     "uncertainty": {
-                        "value": 12.0,
+                        "value": 1.2,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "11.2 12"
@@ -20934,7 +20934,7 @@
                 "gammaIntensity": {
                     "value": 8.2,
                     "uncertainty": {
-                        "value": 9.0,
+                        "value": 0.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "8.2 9"
@@ -20955,7 +20955,7 @@
                 "gammaIntensity": {
                     "value": 29.9,
                     "uncertainty": {
-                        "value": 30.0,
+                        "value": 3.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "29.9 30"
@@ -20996,7 +20996,7 @@
                 "gammaIntensity": {
                     "value": 18.3,
                     "uncertainty": {
-                        "value": 20.0,
+                        "value": 2.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "18.3 20"
@@ -21017,7 +21017,7 @@
                 "gammaIntensity": {
                     "value": 18.3,
                     "uncertainty": {
-                        "value": 20.0,
+                        "value": 2.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "18.3 20"
@@ -21038,7 +21038,7 @@
                 "gammaIntensity": {
                     "value": 19.5,
                     "uncertainty": {
-                        "value": 20.0,
+                        "value": 2.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "19.5 20"
@@ -21059,7 +21059,7 @@
                 "gammaIntensity": {
                     "value": 11.0,
                     "uncertainty": {
-                        "value": 56.0,
+                        "value": 5.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "11.0 56"
@@ -21122,7 +21122,7 @@
                 "gammaIntensity": {
                     "value": 18.3,
                     "uncertainty": {
-                        "value": 20.0,
+                        "value": 2.0,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "18.3 20"
@@ -21164,7 +21164,7 @@
                 "gammaIntensity": {
                     "value": 17.9,
                     "uncertainty": {
-                        "value": 89.0,
+                        "value": 8.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "17.9 89"
@@ -21269,7 +21269,7 @@
                 "gammaIntensity": {
                     "value": 2.6,
                     "uncertainty": {
-                        "value": 14.0,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.6 14"
@@ -21290,7 +21290,7 @@
                 "gammaIntensity": {
                     "value": 1.75,
                     "uncertainty": {
-                        "value": 88.0,
+                        "value": 0.88,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.75 88"
@@ -21351,7 +21351,7 @@
                 "gammaIntensity": {
                     "value": 0.88,
                     "uncertainty": {
-                        "value": 44.0,
+                        "value": 0.44,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "0.88 44"
@@ -21392,7 +21392,7 @@
                 "gammaIntensity": {
                     "value": 1.75,
                     "uncertainty": {
-                        "value": 88.0,
+                        "value": 0.88,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.75 88"
@@ -21413,7 +21413,7 @@
                 "gammaIntensity": {
                     "value": 4.4,
                     "uncertainty": {
-                        "value": 23.0,
+                        "value": 2.3,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "4.4 23"
@@ -21434,7 +21434,7 @@
                 "gammaIntensity": {
                     "value": 1.75,
                     "uncertainty": {
-                        "value": 88.0,
+                        "value": 0.88,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "1.75 88"
@@ -21475,7 +21475,7 @@
                 "gammaIntensity": {
                     "value": 0.88,
                     "uncertainty": {
-                        "value": 44.0,
+                        "value": 0.44,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "0.88 44"
@@ -21496,7 +21496,7 @@
                 "gammaIntensity": {
                     "value": 2.6,
                     "uncertainty": {
-                        "value": 14.0,
+                        "value": 1.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "2.6 14"
@@ -21517,7 +21517,7 @@
                 "gammaIntensity": {
                     "value": 0.88,
                     "uncertainty": {
-                        "value": 44.0,
+                        "value": 0.44,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "0.88 44"
@@ -21538,7 +21538,7 @@
                 "gammaIntensity": {
                     "value": 8.8,
                     "uncertainty": {
-                        "value": 44.0,
+                        "value": 4.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "8.8 44"
@@ -21559,7 +21559,7 @@
                 "gammaIntensity": {
                     "value": 5.3,
                     "uncertainty": {
-                        "value": 26.0,
+                        "value": 2.6,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "5.3 26"
@@ -21702,7 +21702,7 @@
                 "gammaIntensity": {
                     "value": 3.6,
                     "uncertainty": {
-                        "value": 18.0,
+                        "value": 1.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.6 18"
@@ -21827,7 +21827,7 @@
                 "gammaIntensity": {
                     "value": 3.6,
                     "uncertainty": {
-                        "value": 18.0,
+                        "value": 1.8,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "3.6 18"
@@ -21848,7 +21848,7 @@
                 "gammaIntensity": {
                     "value": 10.7,
                     "uncertainty": {
-                        "value": 54.0,
+                        "value": 5.4,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "10.7 54"
@@ -21930,7 +21930,7 @@
                 "gammaIntensity": {
                     "value": 28.6,
                     "uncertainty": {
-                        "value": 29.0,
+                        "value": 2.9,
                         "type": "symmetric"
                     },
                     "evaluatorInput": "28.6 29"

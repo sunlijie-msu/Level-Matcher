@@ -1,10 +1,5 @@
 ---
-name: ensdf
-description: "Evaluated Nuclear Structure Data File (ENSDF) Format Instructions."
----
-
 applyTo: "**"
-
 ---
 # Evaluated Nuclear Structure Data File (ENSDF) Instructions for GitHub Copilot
 

@@ -392,9 +392,11 @@ def parse_g_record(line):
 
     Column layout (0-indexed, matching ENSDF 80-column standard):
     -  9-18 : Gamma energy (keV)
-    - 19-20 : Energy uncertainty (DE)
+    - 19-20 : Energy uncertainty (DE); converted from last-digit notation to absolute keV
     - 22-28 : Relative photon intensity (RI)
-    - 29-30 : RI uncertainty (DRI); 'LT'/'GT' are limit markers, not numeric uncertainties
+    - 29-30 : RI uncertainty (DRI); converted from last-digit notation to absolute intensity
+              units using the decimal precision of RI (e.g., RI="98.6" DRI="14" -> 1.4).
+              'LT'/'GT' are limit markers stored as 0.0.
     """
     if len(line) < 23:
         return None
@@ -425,12 +427,14 @@ def parse_g_record(line):
         except ValueError:
             pass  # LT/GT or other non-numeric markers: leave as 0.0
 
-    # DRI: 'LT'/'GT' are limit qualifiers, not numeric uncertainties -> store as 0.0
+    # DRI: 'LT'/'GT' are limit qualifiers, not numeric uncertainties -> store as 0.0.
+    # Valid DRI values follow the same "last-digit" notation as DE: convert to absolute
+    # uncertainty using the precision of the RI string (e.g., RI="98.6" DRI="14" -> 1.4).
     intensity_uncertainty_value = 0.0
     if intensity_uncertainty_string and intensity_uncertainty_string not in ('LT', 'GT'):
         try:
-            intensity_uncertainty_value = float(intensity_uncertainty_string)
-        except ValueError:
+            intensity_uncertainty_value = calculate_absolute_uncertainty(intensity_string, intensity_uncertainty_string)
+        except (ValueError, Exception):
             pass
 
     return {

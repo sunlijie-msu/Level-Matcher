@@ -78,8 +78,10 @@ Scoring_Config = {
         #   Lenient: tolerates large separations
         # Sigma_Scale=0.2 (moderate): 1σ→81.9%, 2σ→44.9%, 3σ→16.5%, 4σ→4.1%, 5σ→0.7%
         #   Standard: penalizes >2σ strongly
-        # Sigma_Scale=0.5 (strict):   1σ→60.7%, 2σ→13.5%, 3σ→1.1%, 4σ→0.0%, 5σ→0.0%
-        #   Aggressive: rejects >2σ
+        # Sigma_Scale=0.5 (statistical standard): 1σ→60.7%, 2σ→13.5%, 3σ→1.1%, 4σ→0.0%, 5σ→0.0%
+        #   Reproduces the standard normal kernel exp(-z²/2). Mirrors the 68-95-99.7 rule
+        #   in the sense that 3σ separations are near-zero, consistent with standard hypothesis testing.
+        #   Recommended for datasets with reliable energy calibration and small systematic offsets.
         # Sigma_Scale=1.0 (extreme):  1σ→36.8%, 2σ→1.8%, 3σ→0.0%, 4σ→0.0%, 5σ→0.0%
         #   Ultra-strict: even 1σ penalized
         'Sigma_Scale': 0.2
@@ -226,8 +228,10 @@ def calculate_energy_similarity(energy_1, energy_uncertainty_1, energy_2, energy
     #   Lenient: tolerates large separations
     # Sigma_Scale=0.2 (moderate): 1σ→81.9%, 2σ→44.9%, 3σ→16.5%, 4σ→4.1%, 5σ→0.7%
     #   Standard: penalizes >2σ strongly
-    # Sigma_Scale=0.5 (strict):   1σ→60.7%, 2σ→13.5%, 3σ→1.1%, 4σ→0.0%, 5σ→0.0%
-    #   Aggressive: rejects >2σ
+    # Sigma_Scale=0.5 (statistical standard): 1σ→60.7%, 2σ→13.5%, 3σ→1.1%, 4σ→0.0%, 5σ→0.0%
+    #   Reproduces the standard normal kernel exp(-z²/2). Mirrors the 68-95-99.7 rule
+    #   in the sense that 3σ separations are near-zero, consistent with standard hypothesis testing.
+    #   Recommended for datasets with reliable energy calibration and small systematic offsets.
     # Sigma_Scale=1.0 (extreme):  1σ→36.8%, 2σ→1.8%, 3σ→0.0%, 4σ→0.0%, 5σ→0.0%
     #   Ultra-strict: even 1σ penalized
     """

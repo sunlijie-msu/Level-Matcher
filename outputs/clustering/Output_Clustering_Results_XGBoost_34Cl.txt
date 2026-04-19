@@ -1253,7 +1253,7 @@ Cluster 236:
     [K] K_8154: E=8154.2±1.0 keV, Spin-Parity=None (Anchor)
     [L] L_8155: E=8155.6±1.5 keV, Spin-Parity=1- (Match Probability: 65.7%)
 
-Cluster 237:
+Cluster 237: human evaluator prefers no match
   Anchor: K_8154 | E=8154.2±1.0 keV | Spin-Parity=None
   Members:
     [K] K_8154: E=8154.2±1.0 keV, Spin-Parity=None (Anchor)
