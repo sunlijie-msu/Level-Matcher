@@ -82,7 +82,7 @@ Scoring_Config = {
         #   Aggressive: rejects >2σ
         # Sigma_Scale=1.0 (extreme):  1σ→36.8%, 2σ→1.8%, 3σ→0.0%, 4σ→0.0%, 5σ→0.0%
         #   Ultra-strict: even 1σ penalized
-        'Sigma_Scale': 0.5
+        'Sigma_Scale': 0.2
     },
     'Spin': {
         # Similarity scores for Spin (J) comparisons (0.0 to 1.0)
