@@ -54,6 +54,22 @@ Technical Components:
      • Uses `Rescue_Exponent` (default 0.5) to dampen energy penalties when physics strongly agrees.
      Teaches XGBoost that structural fingerprints (Gamma) definitively identify levels despite calibration shifts.
 
+5. **calculate_label Workflow** (Training Label Generation):
+   ```mermaid
+   flowchart TD
+       A["5 Input Scores: energy, spin, parity, specificity, gamma"] --> B{"Step 1: Hard Veto\nspin ≤ 0.05 OR parity ≤ 0.025?"}
+       B -->|"Yes — definitive mismatch"| C["Return 0.0"]
+       B -->|"No"| D["Step 2: Neutral Remap — 0.5 unknown → 0.85"]
+       D --> E{"Step 3: Physics Rescue\nspin ≥ 0.85 AND parity ≥ 0.85\nOR gamma ≥ 0.85?"}
+       E -->|"Yes — offset is calibration error"| F["effective_energy = energy ^ 0.5"]
+       E -->|"No — raw energy unchanged"| G["effective_energy = energy"]
+       F --> H["Step 4: Probability Formula"]
+       G --> H
+       H --> I["physics_confidence = sqrt(spin_factor x parity_factor x gamma_factor)"]
+       I --> J["probability = effective_energy x physics_confidence x specificity"]
+       J --> K["clamp to 0.0 - 0.99"]
+   ```
+
 """
 
 import re
@@ -805,49 +821,50 @@ def generate_synthetic_training_data():
     correlation_threshold = Scoring_Config['Feature_Correlation']['Threshold']
     rescue_exponent = Scoring_Config['Feature_Correlation']['Rescue_Exponent']
     
-    # 3. Define Physics Logic for Labeling (with Feature Correlation) calculate_label = veto physics mismatches → remap unknowns → boost energy when physics agrees → multiply energy × physics quality × ambiguity penalty.
+    # 3. Define Physics Logic for Labeling — calculate_label converts 5 feature scores into a
+    #    single match probability label using the four-step workflow charted in the module header.
     def calculate_label(energy_similarity, spin_similarity, parity_similarity, specificity, gamma_similarity):
-        # HARD VETO: If physics explicitly mismatches (score <= near-zero), reject.
-        # Allow small tolerance if config uses 0.05 for mismatched.
+        # Step 1: Hard Veto — definitive physics mismatch rejects the pair immediately.
+        #   spin  ≤ Mismatch_Strong (0.05): both-firm ΔJ=1 spin mismatch.
+        #   parity ≤ Mismatch_Weak/2 (0.025): catches firm parity mismatch (0.0) while
+        #   letting tentative parity mismatch (Mismatch_Weak = 0.05) proceed with penalty.
         if spin_similarity <= Scoring_Config['Spin'].get('Mismatch_Strong', 0.05) or \
            parity_similarity <= Scoring_Config['Parity'].get('Mismatch_Weak', 0.1) / 2:
             return 0.0
 
-        # ADJUSTMENT FOR NEUTRAL/TENTATIVE:
-        # Map raw scores to "Confidence Factors" to prevent multiplicative decay from killing good matches.
-        # If Score is Neutral (0.5), treat it as "No Info" -> Factor ~0.85 (slight penalty vs perfect).
+        # Step 2: Neutral Score Remap — replace 0.5 (missing data) with 0.85.
+        #   Without remapping, three unknown scores multiply to 0.5³ = 0.125, falsely
+        #   collapsing the probability. 0.85 applies a slight penalty for missing data instead.
         def calculate_confidence_factor(value):
             if value == Scoring_Config['General']['Neutral_Score']:
                 return 0.85
             return value
 
-        spin_factor = calculate_confidence_factor(spin_similarity)
+        spin_factor   = calculate_confidence_factor(spin_similarity)
         parity_factor = calculate_confidence_factor(parity_similarity)
-        gamma_factor = calculate_confidence_factor(gamma_similarity)
+        gamma_factor  = calculate_confidence_factor(gamma_similarity)
 
-        # Feature Correlation: Physics Rescue
-        # Condition 1: Perfect Quantum Numbers (Spin/Parity >= Threshold)
-        # Condition 2: Strong Gamma Decay Fingerprint (Gamma >= Threshold)
-        # Physics rationale: If internal structure (Gamma/Spin/Parity) matches strongly,
-        # energy disagreement is likely due to calibration. We "rescue" the energy score
-        # by boosting it (reducing the penalty) rather than using the raw low score.
-        # NOTE: Rescue != Firm Match. It prevents a 0% veto (Survival), allowing the candidate
-        # to remain in consideration. It typically raises probability from <1% to ~15-25%
-        # for poor energy matches, which may pass the pairwise filter but not yet cluster.
+        # Step 3: Physics Rescue — soften the energy penalty when physics strongly agrees.
+        #   Trigger: (spin ≥ 0.85 AND parity ≥ 0.85) OR gamma ≥ 0.85
+        #   Effect:  effective_energy_similarity = energy ^ rescue_exponent (default 0.5 = sqrt)
+        #   Example: energy=0.04 → 0.20; energy=0.25 → 0.50; energy=0.64 → 0.80
+        #   Rationale: identical Jπ or gamma fingerprint implies energy offset is a calibration
+        #   error, not a genuine mismatch. Rescue raises probability from <1% to ~15–25%,
+        #   keeping the pair in contention rather than confirming a match.
         effective_energy_similarity = energy_similarity
         if correlation_enabled:
             is_quantum_match = (spin_similarity >= correlation_threshold and parity_similarity >= correlation_threshold)
-            is_gamma_match = (gamma_similarity >= correlation_threshold)
+            is_gamma_match   = (gamma_similarity >= correlation_threshold)
 
             if is_quantum_match or is_gamma_match:
-                 # Apply rescue: energy → energy^exponent (e.g., sqrt transforms 0.04→0.2, 0.25→0.50, 0.64→0.80)
-                 effective_energy_similarity = energy_similarity ** rescue_exponent
+                effective_energy_similarity = energy_similarity ** rescue_exponent
 
-        # PROBABILITY FORMULA:
-        # Base confidence from Energy * Physics Quality * Specificity
-        # Use geometric mean of physics factors to balance them.
+        # Step 4: Probability Formula
+        #   physics_confidence = √(spin_factor × parity_factor × gamma_factor)
+        #     All three physics factors contribute — one weak factor pulls the product down.
+        #   probability = effective_energy_similarity × physics_confidence × specificity
+        #     specificity penalizes ambiguous spin-parity assignments (many options → lower confidence).
         physics_confidence = np.sqrt(spin_factor * parity_factor * gamma_factor)
-        
         probability = effective_energy_similarity * physics_confidence * specificity
         return min(max(probability, 0.0), 0.99)
 
