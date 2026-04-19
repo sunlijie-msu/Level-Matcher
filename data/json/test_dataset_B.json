@@ -90,7 +90,7 @@
                     "values": [
                         {
                             "twoTimesSpin": 4,
-                            "isTentativeSpin": true,
+                            "isTentativeSpin": false,
                             "parity": "+",
                             "isTentativeParity": true
                         }

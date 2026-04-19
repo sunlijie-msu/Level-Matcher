@@ -505,6 +505,16 @@ def calculate_gamma_decay_pattern_similarity(gamma_decays_1, gamma_decays_2):
             for gamma in clean_list:
                 gamma['intensity'] *= scale
                 gamma['intensity_uncertainty'] *= scale
+
+        # Apply minimum uncertainty floor for gammas with no stated DRI (intensity_uncertainty == 0).
+        # When DRI is absent from ENSDF, the intensity is measured to some precision that was not
+        # explicitly propagated. On the normalized 0-100 scale, using combined_uncertainty=1.0
+        # (the calculate_z_score fallback) means Z = |ΔRI| in absolute units, which flags any
+        # difference > 3 as a mismatch regardless of the actual measurement precision.
+        # Floor: max(5% relative, 1.0 absolute), representing typical ENSDF reporting precision.
+        for gamma in clean_list:
+            if gamma['intensity'] > 0 and gamma['intensity_uncertainty'] == 0:
+                gamma['intensity_uncertainty'] = max(gamma['intensity'] * 0.05, 1.0)
                 
         return clean_list, has_intensity
 
