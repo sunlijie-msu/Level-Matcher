@@ -72,7 +72,7 @@ Step 5: Constrained Clustering (Graph Partitioning)
 """
 
 # Configuration Parameters
-pairwise_output_threshold = 0.001  # Minimum probability for outputting level pairs (0.1%)
+pairwise_output_threshold = 0.01  # Minimum probability for outputting level pairs (0.1%)
 clustering_merge_threshold = 0.15  # Minimum probability for cluster merging (15%)
 
 # Feature names for explicit labeling (prevents sklearn warnings)

@@ -73,8 +73,16 @@ Scoring_Config = {
         # Controls how strictly energy values must match. 
         # - Higher value (e.g. 1.0) = stricter (score drops fast if energy differs).
         # - Lower value (e.g. 0.1) = looser (score stays high even with differences).
-         # Sigma_Scale=0.1 (loose):   1σ→90.5%, 2σ→67.0%, 3σ→40.7%, 4σ→20.2%, 5σ→8.2%
-        'Sigma_Scale': 0.1
+        # Energy similarity decay with increasing energy separation (z_score in sigma units):
+        # Sigma_Scale=0.1 (loose):   1σ→90.5%, 2σ→67.0%, 3σ→40.7%, 4σ→20.2%, 5σ→8.2%
+        #   Lenient: tolerates large separations
+        # Sigma_Scale=0.2 (moderate): 1σ→81.9%, 2σ→44.9%, 3σ→16.5%, 4σ→4.1%, 5σ→0.7%
+        #   Standard: penalizes >2σ strongly
+        # Sigma_Scale=0.5 (strict):   1σ→60.7%, 2σ→13.5%, 3σ→1.1%, 4σ→0.0%, 5σ→0.0%
+        #   Aggressive: rejects >2σ
+        # Sigma_Scale=1.0 (extreme):  1σ→36.8%, 2σ→1.8%, 3σ→0.0%, 4σ→0.0%, 5σ→0.0%
+        #   Ultra-strict: even 1σ penalized
+        'Sigma_Scale': 0.5
     },
     'Spin': {
         # Similarity scores for Spin (J) comparisons (0.0 to 1.0)
