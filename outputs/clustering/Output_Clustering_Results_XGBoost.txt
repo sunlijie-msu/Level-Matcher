@@ -1353,7 +1353,7 @@ Cluster 255:
   Members:
     [K] K_8305: E=8305.5±1.0 keV, Spin-Parity=2,3 (Anchor)
 
-Cluster 256:
+Cluster 256: human evaluator prefers K_8319 - L_8317 match
   Anchor: L_8316 | E=8316.6±0.3 keV | Spin-Parity=4+
   Members:
     [K] K_8319: E=8319.1±1.0 keV, Spin-Parity=None (Match Probability: 19.0%)
