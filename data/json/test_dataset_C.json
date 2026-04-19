@@ -172,8 +172,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 5.0,
-                        "type": "symmetric"
+                        "type": "unreported"
                     },
                     "evaluatorInput": "100"
                 },

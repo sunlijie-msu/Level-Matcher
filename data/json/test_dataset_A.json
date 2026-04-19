@@ -131,7 +131,7 @@
                             "twoTimesSpin": 2,
                             "isTentativeSpin": true,
                             "parity": "-",
-                            "isTentativeParity": true
+                            "isTentativeParity": false
                         }
                     ],
                     "evaluatorInput": "(1)-"
@@ -154,7 +154,7 @@
                             "twoTimesSpin": 4,
                             "isTentativeSpin": true,
                             "parity": "+",
-                            "isTentativeParity": true
+                            "isTentativeParity": false
                         }
                     ],
                     "evaluatorInput": "(2)+"
@@ -247,8 +247,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 5.0,
-                        "type": "symmetric"
+                        "type": "unreported"
                     },
                     "evaluatorInput": "100"
                 },
@@ -310,8 +309,7 @@
                 "gammaIntensity": {
                     "value": 100.0,
                     "uncertainty": {
-                        "value": 5.0,
-                        "type": "symmetric"
+                        "type": "unreported"
                     },
                     "evaluatorInput": "100"
                 },

@@ -131,6 +131,7 @@ def parse_spin_parity(spin_parity_string):
     - Tentative single:     "(2)-", "(3/2)+"
     - Tentative lists:      "(2,3)-", "(1,2)+"   [parity outside parentheses]
     - Tentative ranges:     "(1:3)-", "(0:2)+"   [parity outside parentheses]
+    - Firm spin, tentative parity: "2(+)", "3/2(-)"   [spin firm, parity in parens]
     - Bare ranges:          "1:3"                [no tentative markers, no parity]
     - Mixed-parity lists:   "1+,2-"
     """
@@ -190,6 +191,28 @@ def parse_spin_parity(spin_parity_string):
     results = []
     for part in [part.strip() for part in working_string.split(',')]:
         if not part:
+            continue
+
+        # Handle "J(π)" notation: spin is firm, parity is tentative.
+        # Example: "2(+)" → J=2 firm, parity '+' tentative.
+        # Example: "3/2(-)" → J=3/2 firm, parity '-' tentative.
+        # This must be checked before the generic parity-stripping logic below,
+        # which would otherwise misidentify the closing ')' as a non-parity character.
+        firm_spin_tentative_parity_match = re.match(r'^([0-9/]+)\(([+-])\)$', part)
+        if firm_spin_tentative_parity_match:
+            spin_raw_firm = firm_spin_tentative_parity_match.group(1)
+            tentative_parity = firm_spin_tentative_parity_match.group(2)
+            try:
+                spin_value_parsed = float(eval(spin_raw_firm))
+                two_times_spin_value = int(round(spin_value_parsed * 2))
+                results.append({
+                    "twoTimesSpin": two_times_spin_value,
+                    "isTentativeSpin": is_globally_tentative,
+                    "parity": tentative_parity,
+                    "isTentativeParity": True
+                })
+            except (ValueError, SyntaxError):
+                pass
             continue
 
         # Extract parity local to this part (e.g. "1+" in the list "1+,2-").
@@ -472,11 +495,20 @@ def convert_ens_files_to_datasets(raw_dir, xref_path, output_dir):
         if lines and len(lines[0]) > 9:
             dsid = lines[0][9:39].strip()
 
-        # 2. Match DSID to XREF letter
+        # 2. Match DSID to XREF letter.
+        # Primary path: normalize the DSID extracted from the identification record and look
+        # it up in the XREF map.  Fallback path: if the file has no identification record
+        # (e.g. synthetic test datasets that start immediately with L records), extract the
+        # dataset letter directly from the filename pattern "*_test_{letter}.ens".
         letter = match_dsid_to_letter(dsid, xref_map)
         if letter is None:
-            print(f"Warning: DSID '{dsid}' in '{ens_filename}' did not match any XREF entry. Skipping.")
-            continue
+            test_filename_match = re.search(r'test_([a-zA-Z])\.ens$', ens_filename, re.IGNORECASE)
+            if test_filename_match:
+                letter = test_filename_match.group(1).upper()
+                print(f"Note: No XREF match for '{ens_filename}'; using filename-derived label '{letter}'.")
+            else:
+                print(f"Warning: DSID '{dsid}' in '{ens_filename}' did not match any XREF entry. Skipping.")
+                continue
 
         print(f"Processing '{ens_filename}' -> Dataset {letter} (DSID: {dsid})...")
 

@@ -593,22 +593,31 @@ def calculate_gamma_decay_pattern_similarity(gamma_decays_1, gamma_decays_2):
     else:
         # Binary mode: Energy-only matching (no intensity data)
         # Example: When intensities unreported, count energy matches within 3.0 sigma
+        # Uses best-Z-score matching (same greedy strategy as intensity mode) rather than
+        # first-acceptable-match, ensuring consistent one-to-one assignment across modes.
         matches_count = 0
         matched_indices_2 = set()
         
         for gamma_1 in gamma_list_1:
+            best_match_index = -1
+            best_z_score_energy = 999.0
+
             for index, gamma_2 in enumerate(gamma_list_2):
-                if index in matched_indices_2: continue
-                
+                if index in matched_indices_2:
+                    continue
+
                 z_score_energy = calculate_z_score(
-                    gamma_1['energy'], gamma_1['energy_uncertainty'], 
+                    gamma_1['energy'], gamma_1['energy_uncertainty'],
                     gamma_2['energy'], gamma_2['energy_uncertainty']
                 )
-                
-                if z_score_energy <= energy_match_threshold:
-                    matches_count += 1
-                    matched_indices_2.add(index)
-                    break
+
+                if z_score_energy <= energy_match_threshold and z_score_energy < best_z_score_energy:
+                    best_z_score_energy = z_score_energy
+                    best_match_index = index
+
+            if best_match_index != -1:
+                matches_count += 1
+                matched_indices_2.add(best_match_index)
         
         # Subset-robust: matches_count / smaller_dataset_size
         minimum_length = min(len(gamma_list_1), len(gamma_list_2))
