@@ -11,13 +11,11 @@ Developed and refined through daily evaluation tasks at the Nuclear Data Group a
 
 ## Development Timeline
 
-- **2026-04-19** — `Feature_Engineer.py` comprehensively restructured.
-  - `calculate_label` logic reordered to the canonical sequence: Neutral Remap → Physics Veto → Physics Rescue.
-  - `Scoring_Config` inline documentation rewritten: all veto boundaries documented with explicit inclusive-boundary language (REJECTED / NOT vetoed), compact maintainable comments derived from config values rather than hardcoded.
-  - `'Threshold'` key renamed to `'Rescue_Threshold'` throughout config and all code references.
-  - Spin and Parity veto thresholds set to `0.04`, isolating only quantum-number-forbidden scores.
-  - Synthetic training data generation made fully config-driven: all magic numbers eliminated and derived from `Scoring_Config` at runtime.
-  - XGBoost hyperparameters optimized via systematic four-configuration diagnostic; confirmed feature importance hierarchy: Parity > Spin > Gamma Decay Pattern > Energy > Specificity.
+- **2026-04-19** — ENSDF parsing correctness improvements; physics feature engineering hardened; model performance improved; pipeline usability updated.
+  - **`Dataset_Parser.py`**: Gamma intensity uncertainty (DRI) conversion corrected from raw last-digit notation to absolute intensity units, consistent with ENSDF convention. Limit markers (`LT`/`GT`) stored as zero rather than propagated. Parsing and energy matching fixes applied. Real $^{34}$S test ENS files added to `data/raw/`.
+  - **`Feature_Engineer.py`**: `calculate_label` execution order corrected to the canonical sequence (Neutral Remap → Physics Veto → Physics Rescue). `Scoring_Config` restructured to be fully config-driven with no hardcoded values. Veto thresholds recalibrated to isolate only quantum-number-forbidden spin-parity assignments. Rescue threshold and effective variable naming clarified throughout.
+  - **`Level_Matcher.py`**: XGBoost hyperparameters optimized via systematic multi-configuration diagnostic. Inference dataset selection promoted to a named top-level configuration variable for straightforward user access.
+  - **`README.md`**: Comprehensive rewrite covering algorithm selection rationale, corrected feature importance hierarchy, and complete development history.
 
 - **2026-04-17** — Applied to the first real-world evaluation task for $^{34}\text{Cl}$.
   - Pairwise inference across 27,615 candidate pairs from $^{32}\text{S}(p,\gamma)^{34}\text{Cl}$ and $^{33}\text{S}(p,p)$ resonance datasets.
