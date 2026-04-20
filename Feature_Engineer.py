@@ -149,31 +149,21 @@ Scoring_Config = {
         'Sigma_Scale': 0.2
     },
     'Spin': {
-        # Spin (J) similarity scores — "firm" = confirmed (no parentheses in ENSDF),
-        # "tentative" = uncertain (parenthesized, e.g., (2)). ΔJ = |J₁ − J₂|.
-        #
-        # Score summary (veto condition: score ≤ Spin_Veto_Max = 0.05, see Label section):
-        # Note: Mismatch_Strong (0.05) equals Spin_Veto_Max exactly — it is Rejected (≤ is inclusive).
-        #   Mismatch_Weak (0.20) is strictly above the threshold — it is NOT vetoed.
-        'Match_Firm': 1.0,       # ΔJ=0, both firm,       e.g.,  2  vs  2    → NOT vetoed
-        'Match_Strong': 0.8,     # ΔJ=0, any tentative,   e.g.,  2  vs (2)   → NOT vetoed
-        'Mismatch_Weak': 0.2,    # ΔJ=1, any tentative,   e.g., 2 vs (3)   → NOT vetoed (0.20 > Spin_Veto_Max 0.05)
-        'Mismatch_Strong': 0.05, # ΔJ=1, both firm,       e.g.,  2  vs  3    → Rejected  (0.05 ≤ Spin_Veto_Max 0.05)
-        'Mismatch_Firm': 0.0     # ΔJ≥2,                  e.g.,  2  vs  4    → Rejected  (0.00 ≤ Spin_Veto_Max 0.05)
+        # Spin (J) similarity scores. "firm" = confirmed in ENSDF, "tentative" = parenthesized e.g. (2).
+        # Scores ≤ Spin_Veto_Max (Label section) → label = 0.0, regardless of all other features.
+        'Match_Firm': 1.0,       # ΔJ=0, both firm     e.g., 2  vs  2
+        'Match_Strong': 0.8,     # ΔJ=0, any tentative e.g., 2  vs (2)
+        'Mismatch_Weak': 0.2,    # ΔJ=1, any tentative e.g., 2  vs (3)
+        'Mismatch_Strong': 0.05, # ΔJ=1, both firm     e.g., 2  vs  3
+        'Mismatch_Firm': 0.0     # ΔJ≥2                e.g., 2  vs  4
     },
     'Parity': {
-        # Parity (π) similarity scores — parity is binary (+/−), so only same/different cases exist.
-        # "firm" = confirmed, "tentative" = uncertain (parenthesized, e.g., (+)).
-        #
-        # Score summary (veto condition: score ≤ Parity_Veto_Max = 0.025, see Label section):
-        #
-        # Note: Mismatch_Weak (0.05) is strictly above Parity_Veto_Max (0.025) — it is NOT vetoed.
-        #   Mismatch_Firm (0.00) is below Parity_Veto_Max (0.025) — it is Rejected.
-        #   Parity_Veto_Max is set to 0.025 (between 0.00 and 0.05) precisely to split these two cases.
-        'Match_Firm': 1.0,      # same parity, both firm,         e.g., + vs +    → NOT vetoed
-        'Match_Strong': 0.8,    # same parity, any tentative,     e.g., + vs (+)  → NOT vetoed
-        'Mismatch_Weak': 0.05,  # opposite parity, any tentative, e.g., + vs (−)  → NOT vetoed (0.05 > Parity_Veto_Max 0.025)
-        'Mismatch_Firm': 0.0    # opposite parity, both firm,     e.g., + vs −    → Rejected  (0.00 ≤ Parity_Veto_Max 0.025)
+        # Parity (π) similarity scores. Binary (+/−): same or different, firm or tentative.
+        # Scores ≤ Parity_Veto_Max (Label section) → label = 0.0, regardless of all other features.
+        'Match_Firm': 1.0,      # same parity, both firm         e.g., + vs +
+        'Match_Strong': 0.8,    # same parity, any tentative     e.g., + vs (+)
+        'Mismatch_Weak': 0.05,  # opposite parity, any tentative e.g., + vs (−)
+        'Mismatch_Firm': 0.0    # opposite parity, both firm     e.g., + vs −
     },
     'Specificity': {
         # Ambiguity penalty: specificity = 1/f(multiplicity), multiplicity = options_count_1 × options_count_2.
@@ -234,28 +224,12 @@ Scoring_Config = {
         'Neutral_Remap_Factor': 0.85
     },
     'Label': {
-        # Hard-veto thresholds — the condition is: score ≤ threshold → label = 0.0 (Rejected).
-        # The ≤ operator is inclusive: a score exactly equal to the threshold IS Rejected.
-        # All other features (energy, gamma) are ignored for a Rejected pair.
+        # Hard-veto: score ≤ threshold → label = 0.0 (REJECTED). The ≤ is inclusive.
+        # When you change these values, update the two decision lines below to reflect which
+        # named scores from the Spin/Parity sections above now fall on each side of the boundary.
         #
-        # Spin veto (Spin_Veto_Max = 0.05) — full decision table:
-        #   spin_similarity = 0.00 (Mismatch_Firm,   ΔJ≥2)            0.00 ≤ 0.05 → Rejected
-        #   spin_similarity = 0.05 (Mismatch_Strong, ΔJ=1, both firm) 0.05 ≤ 0.05 → Rejected  (inclusive boundary)
-        #   spin_similarity = 0.20 (Mismatch_Weak,   ΔJ=1, tentative) 0.20 > 0.05 → NOT vetoed
-        #   spin_similarity = 0.80 (Match_Strong,    ΔJ=0, tentative) 0.80 > 0.05 → NOT vetoed
-        #   spin_similarity = 1.00 (Match_Firm,      ΔJ=0, both firm) 1.00 > 0.05 → NOT vetoed
-        #
-        # Parity veto (Parity_Veto_Max = 0.025) — full decision table:
-        #   parity_similarity = 0.00 (Mismatch_Firm, both firm)       0.00 ≤ 0.025 → Rejected
-        #   parity_similarity = 0.05 (Mismatch_Weak, any tentative)   0.05 > 0.025 → NOT vetoed
-        #   parity_similarity = 0.80 (Match_Strong,  any tentative)   0.80 > 0.025 → NOT vetoed
-        #   parity_similarity = 1.00 (Match_Firm,    both firm)       1.00 > 0.025 → NOT vetoed
-        #
-        # Parity_Veto_Max = 0.025 sits between Mismatch_Firm (0.00) and Mismatch_Weak (0.05),
-        #   which is exactly the intended split: firm mismatch → Rejected, tentative mismatch → NOT vetoed.
-        #
-        # Tuning: raise Spin_Veto_Max to 0.20 to also reject tentative ΔJ=1 mismatches.
-        #         lower Spin_Veto_Max to 0.00 to only reject ΔJ≥2 mismatches.
+        # Spin_Veto_Max   = 0.04:  Mismatch_Firm (0.00) ≤ 0.04 → REJECTED  |  Mismatch_Strong (0.05) > 0.04 → NOT vetoed | Mismatch_Weak (0.2) > 0.04 → NOT vetoed
+        # Parity_Veto_Max = 0.04:  Mismatch_Firm (0.00) ≤ 0.04 → REJECTED  |  Mismatch_Weak   (0.05) > 0.04 → NOT vetoed
         'Spin_Veto_Max': 0.04,
         'Parity_Veto_Max': 0.04
     }
@@ -924,16 +898,24 @@ def generate_synthetic_training_data():
       the model assigns higher probability even with moderate energy_similarity (e.g., 0.4-0.7).
     """
     training_points = []
-    
-    # 1. Gather all possible discrete scores from Config
-    spin_scores = list(Scoring_Config['Spin'].values()) + [Scoring_Config['General']['Neutral_Score']]
-    parity_scores = list(Scoring_Config['Parity'].values()) + [Scoring_Config['General']['Neutral_Score']]
-    gamma_scores = [0.0, 0.3, Scoring_Config['General']['Neutral_Score'], 0.7, 0.86, 1.0]  # Include Rescue_Threshold (0.86) to teach the rescue boundary
-    
-    # 2. Feature Correlation Configuration
+
+    # 1. Read all config values once — all subsequent logic uses these variables only.
+    #    No config keys are referenced anywhere else in this function, so changing Scoring_Config
+    #    automatically propagates to all grid coverage, labels, and contrast cases below.
+    neutral_score       = Scoring_Config['General']['Neutral_Score']
+    rescue_threshold    = Scoring_Config['Feature_Correlation']['Rescue_Threshold']
     correlation_enabled = Scoring_Config['Feature_Correlation']['Enabled']
-    correlation_threshold = Scoring_Config['Feature_Correlation']['Rescue_Threshold']
-    rescue_exponent = Scoring_Config['Feature_Correlation']['Rescue_Exponent']
+    rescue_exponent     = Scoring_Config['Feature_Correlation']['Rescue_Exponent']
+
+    # Spin/parity grids: every discrete score value from config + neutral. Auto-adapts to any score changes.
+    spin_scores   = list(Scoring_Config['Spin'].values())   + [neutral_score]
+    parity_scores = list(Scoring_Config['Parity'].values()) + [neutral_score]
+
+    # Gamma grid: always includes the exact Rescue_Threshold so the model learns the boundary,
+    # plus a value just below it to teach the contrast (no rescue vs rescue).
+    # gamma_below_rescue is derived from rescue_threshold and adapts when the threshold changes.
+    gamma_below_rescue = round(max(0.0, rescue_threshold - 0.15), 4)
+    gamma_scores = sorted(set([0.0, 0.3, neutral_score, gamma_below_rescue, rescue_threshold, 1.0]))
     
     # 3. Define Physics Logic for Labeling — calculate_label converts 5 feature scores into a
     #    single match probability label using the four-step workflow charted in the module header.
@@ -960,8 +942,8 @@ def generate_synthetic_training_data():
         #   triggering rescue — the two uses of 0.85 (remap factor, rescue threshold) are independent.
         effective_energy_similarity = energy_similarity
         if correlation_enabled:
-            is_quantum_match = (spin_similarity >= correlation_threshold and parity_similarity >= correlation_threshold)
-            is_gamma_match   = (gamma_similarity >= correlation_threshold)
+            is_quantum_match = (spin_similarity >= rescue_threshold and parity_similarity >= rescue_threshold)
+            is_gamma_match   = (gamma_similarity >= rescue_threshold)
 
             if is_quantum_match or is_gamma_match:
                 effective_energy_similarity = energy_similarity ** rescue_exponent
@@ -993,12 +975,11 @@ def generate_synthetic_training_data():
     # 5. Feature Correlation Teaching Set (Critical for learning the interaction)
     # Explicitly oversample the region where energy is mediocre but physics is perfect.
     # This teaches XGBoost to split on Spin/Parity/Gamma first, then apply different energy slopes.
-    perfect_spin = Scoring_Config['Spin']['Match_Firm']
-    perfect_parity = Scoring_Config['Parity']['Match_Firm']
-    imperfect_spin = Scoring_Config['Spin']['Match_Strong']  # e.g., 0.8 (tentative match)
-    imperfect_parity = Scoring_Config['Parity']['Match_Strong']  # e.g., 0.8 (tentative match)
-    neutral_score = Scoring_Config['General']['Neutral_Score']
-    rescue_threshold = Scoring_Config['Feature_Correlation']['Rescue_Threshold']
+    perfect_spin     = Scoring_Config['Spin']['Match_Firm']
+    perfect_parity   = Scoring_Config['Parity']['Match_Firm']
+    imperfect_spin   = Scoring_Config['Spin']['Match_Strong']   # e.g., 0.8 (tentative match)
+    imperfect_parity = Scoring_Config['Parity']['Match_Strong'] # e.g., 0.8 (tentative match)
+    # neutral_score and rescue_threshold are already defined in step 1 above
     
     # Mediocre AND Low energy range where correlation effect is most visible
     # Validation Note: Added low values (0.05, 0.1) to ensure model learns rescue even at poor energy matches.
@@ -1053,7 +1034,7 @@ def generate_synthetic_training_data():
         spin = Scoring_Config['Spin']['Match_Firm']
         parity = Scoring_Config['Parity']['Match_Firm']
         specificity = 1.0
-        gamma = np.random.choice([Scoring_Config['General']['Neutral_Score'], 0.9, 1.0])
+        gamma = np.random.choice([neutral_score, rescue_threshold, 1.0])
         training_points.append(([energy, spin, parity, specificity, gamma], 0.99))
 
     training_features = np.array([record[0] for record in training_points])
