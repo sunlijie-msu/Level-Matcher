@@ -1,4 +1,4 @@
-**Level Matcher** — Part of the AI/ML Technical Innovation at the FRIB Nuclear Data Group (nucleardata@frib.msu.edu).
+**Level Matcher**: Part of the AI/ML Technical Innovation at the FRIB Nuclear Data Group (nucleardata@frib.msu.edu).
 
 ## Overview
 
@@ -11,25 +11,33 @@ Developed and refined through daily evaluation tasks at the Nuclear Data Group a
 
 ## Development Timeline
 
-- **2026-04-17**: Applied to the first real-world evaluation task for $^{34}\text{Cl}$.
-  - Pairwise inference across 27,615 candidate pairs from $^{32}\text{S}(p,\gamma)^{34}\text{Cl}$ and $^{33}\text{S}(p,p)$ resonance datasets
-  - Detached subprocess architecture adopted to isolate gradient boosting training from the IDE event loop, eliminating VS Code UI freeze events
+- **2026-04-19** — `Feature_Engineer.py` comprehensively restructured.
+  - `calculate_label` logic reordered to the canonical sequence: Neutral Remap → Physics Veto → Physics Rescue.
+  - `Scoring_Config` inline documentation rewritten: all veto boundaries documented with explicit inclusive-boundary language (REJECTED / NOT vetoed), compact maintainable comments derived from config values rather than hardcoded.
+  - `'Threshold'` key renamed to `'Rescue_Threshold'` throughout config and all code references.
+  - Spin and Parity veto thresholds set to `0.04`, isolating only quantum-number-forbidden scores.
+  - Synthetic training data generation made fully config-driven: all magic numbers eliminated and derived from `Scoring_Config` at runtime.
+  - XGBoost hyperparameters optimized via systematic four-configuration diagnostic; confirmed feature importance hierarchy: Parity > Spin > Gamma Decay Pattern > Energy > Specificity.
 
-- **2026-01-24**: Hardened for diagnostic rigor and modularized for public release.
-  - 80/20 stratified training-validation split with early stopping (patience = 50 rounds)
-  - Five-panel diagnostic visualization: RMSE, MAE, and LogLoss learning curves; Feature Importance (Gain); overfitting analysis (train-validation RMSE gap)
-  - Schema standardization across all ingested datasets
-  - Public-facing consistency reporting module integrated
+- **2026-04-17** — Applied to the first real-world evaluation task for $^{34}\text{Cl}$.
+  - Pairwise inference across 27,615 candidate pairs from $^{32}\text{S}(p,\gamma)^{34}\text{Cl}$ and $^{33}\text{S}(p,p)$ resonance datasets.
+  - Detached subprocess architecture adopted to isolate gradient boosting training from the IDE event loop, eliminating VS Code UI freeze events.
 
-- **2026-01-05**: Expanded into a full physics-informed matching pipeline.
-  - Regex-based ENSDF-to-JSON ingestion with schema validation
-  - Physics-informed feature engineering: five nuclear descriptors with hard-veto logic for quantum number violations
-  - Dual matching engine: XGBoost and LightGBM gradient-boosted ensembles for pairwise inference
-  - Graph-based clique-constrained clustering for mutually consistent level groupings
-  - High-resolution level scheme visualization for visual audit
+- **2026-01-24** — Hardened for diagnostic rigor and modularized for public release.
+  - 80/20 training-validation split with early stopping (patience = 50 rounds).
+  - Five-panel diagnostic visualization: RMSE, MAE, and LogLoss learning curves; feature importance (Gain); overfitting analysis (train-validation RMSE gap).
+  - Schema standardization across all ingested datasets.
+  - Public-facing consistency reporting module integrated.
 
-- **2025-10-20**: Initial prototype as a LightGBM ranking model.
-  - Repository: https://github.com/sunlijie-msu/Level-Matcher
+- **2026-01-05** — Expanded into a full physics-informed matching pipeline.
+  - Regex-based ENSDF-to-JSON ingestion with schema validation.
+  - Physics-informed feature engineering: five nuclear descriptors with hard-veto logic for quantum number violations.
+  - Dual matching engine: XGBoost and LightGBM gradient-boosted ensembles for pairwise inference.
+  - Graph-based, clique-constrained clustering for mutually consistent level groupings.
+  - High-resolution level scheme visualization for visual audit.
+
+- **2025-10-20** — Initial prototype as a LightGBM ranking model.
+  - Repository: [github.com/sunlijie-msu/Level-Matcher](https://github.com/sunlijie-msu/Level-Matcher).
 
 
 ---
@@ -160,7 +168,7 @@ Nuclear level schemes typically contain fewer than 500 levels. Algorithms like L
 
 **LogLoss Deep Dive**: Binary cross-entropy measures how well predicted probabilities match true labels. Lower LogLoss indicates better-calibrated probabilities, essential for ranking match candidates reliably. Implementation uses manual computation with prediction clipping to $[10^{-15}, 1-10^{-15}]$ to avoid numerical errors.
 
-**Feature Importance (Gain) Deep Dive**: XGBoost's Gain metric measures total loss reduction when a feature is used for splits. For nuclear data, the expected hierarchy is: `Spin_Similarity` (highest Gain) > `Parity_Similarity` > `Energy_Similarity` > `Gamma_Decay_Pattern_Similarity` > `Specificity`.
+**Feature Importance (Gain) Deep Dive**: XGBoost's Gain metric measures total loss reduction when a feature is used for splits. Measured hierarchy: `Parity_Similarity` > `Spin_Similarity` > `Gamma_Decay_Pattern_Similarity` > `Energy_Similarity` > `Specificity`. Parity and Spin dominate because their hard-veto thresholds create the sharpest decision boundaries in the training data.
 
 ### 3.3 Interpreting Diagnostic Results
 - **Golden State**: Minimal Train/Validation gap (<0.01 RMSE) and validation LogLoss < 0.3.
@@ -182,7 +190,7 @@ The model processes five primary features, transforming raw experimental data in
 5.  **Specificity**: Measures the uniqueness of a level's assignment to penalize high-multiplicity ambiguity ($\text{Specificity} = 1/\sqrt{N}$).
 
 ### 4.1 Physics Rescue Mechanism
-When quantum numbers or gamma patterns show exceptional agreement (Similarity $\ge 0.85$), the system activates a rescue protocol:
+When quantum numbers or gamma patterns show exceptional agreement (Similarity $\ge 0.86$), the system activates a rescue protocol:
 - **Formula**: $\text{Effective Energy} = (\text{Energy Similarity})^{0.5}$
 - **Rationale**: Prevents rejection of valid matches where energy calibration differs but internal structure is identical.
 
@@ -227,7 +235,7 @@ Level-Matcher/
 
 1.  **Ingestion**: `Dataset_Parser.py` normalizes ENSDF datasets into `data/json/` JSON datasets.
 2.  **Synthesis**: `Level_Matcher.py` generates synthetic training data to seed the ensemble.
-3.  **Training**: The XGBoost + LightGBM ensembles are trained with early stopping.
+3.  **Training**: The XGBoost model is trained on synthetic data with early stopping and monotonic constraints.
 4.  **Inference**: Models perform cross-dataset comparisons outputting probabilities to `outputs/pairwise/`.
 5.  **Clustering**: The graph algorithm consolidates matches into physical level states.
 6.  **Verification**: `Combined_Visualizer.py` reads the standardized JSON datasets and clustering logs to generate final plots for visual audit.
