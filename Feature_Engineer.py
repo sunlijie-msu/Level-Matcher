@@ -49,62 +49,61 @@ Functional Architecture:
                                               to XGBoost
 
 Technical Components:
-1. **Data Ingestion** (`parse_json_datasets`):
-   - Parses NNDC JSON schema with nested uncertainty structure.
-   - Extracts: Level properties (Energy, Jπ) and Gamma Decay fingerprints.
-   - Attaches gamma_decays list with energy/intensity and their uncertainties.
-   - **Uncertainty Handling**: Dataset_Parser.py infers uncertainties from precision during ENSDF parsing.
-     JSON contains either explicit uncertainties (type="symmetric") or inferred (type="inferred").
-     Feature_Engineer trusts parser output; fallbacks only for edge cases (manual data, corrupted JSON).
+1. **`parse_json_datasets(dataset_codes)`** — Data Ingestion:
+   Parses NNDC JSON schema → list of level dicts with keys:
+   `energy_value`, `energy_uncertainty`, `spin_parity_list`, `gamma_decays`.
+   Uncertainties come from Dataset_Parser.py (inferred from ENSDF precision); fallback = 5.0 keV.
 
-2. **Similarity Kernels** (`calculate_*_similarity`):
-   Each function takes two level measurements as input and returns a score ∈ [0, 1].
-   All scores are monotonic-increasing: higher value = stronger match evidence.
-   - **Energy** (`calculate_energy_similarity`):
-       Gaussian kernel exp(-Sigma_Scale × z²) where z = ΔE / σ_combined.
-       Returns ∈ (0, 1]. Sigma_Scale from Scoring_Config['Energy']['Sigma_Scale'].
-   - **Spin** (`calculate_spin_similarity`):
-       Optimistic matching: maximum score across all Jπ option pairs.
-       Returns one of {0.0, 0.05, 0.2, 0.8, 1.0} or Neutral_Score (0.5) if data missing.
-   - **Parity** (`calculate_parity_similarity`):
-       Same optimistic strategy as spin. Discrete scores from Scoring_Config['Parity'].
-       Returns one of {0.0, 0.05, 0.8, 1.0} or Neutral_Score (0.5) if data missing.
-   - **Gamma Decay Pattern** (`calculate_gamma_decay_pattern_similarity`):
-       Greedy one-to-one best-Z-score gamma matching.
-       Intensity mode: overlap = average (Z ≤ 3σ) or minimum (Z > 3σ), normalized by smaller dataset.
-       Binary mode: match count / smaller dataset size, when intensities are absent.
-       Returns Neutral_Score (0.5) if gamma data missing.
+2. **`calculate_*_similarity()`** — Similarity Kernels, each returns a score ∈ [0, 1]:
+   - `calculate_energy_similarity()`:
+       energy_similarity = exp(−Sigma_Scale × z²),  z = |ΔE| / √(σ₁² + σ₂²)
+   - `calculate_spin_similarity()`:
+       max over all Jπ pairs of {Match_Firm=1.0, Match_Strong=0.8, Mismatch_Weak=0.2,
+       Mismatch_Strong=0.05, Mismatch_Firm=0.0}. Returns Neutral_Score=0.5 if data missing.
+   - `calculate_parity_similarity()`:
+       Same optimistic-max strategy. Returns Neutral_Score=0.5 if data missing.
+   - `calculate_gamma_decay_pattern_similarity()`:
+       Greedy best-Z-score one-to-one gamma matching (threshold 3σ).
+       Intensity mode: overlap = avg (Z≤3σ) or min (Z>3σ), / min(total₁, total₂).
+       Binary mode (no intensity data): matched_count / min(len₁, len₂).
+       Returns Neutral_Score=0.5 if gamma data missing.
 
-3. **5D Feature Vector** (`extract_features`):
-   Calls all four similarity kernels plus computes specificity inline.
-   Returns np.array([energy_similarity, spin_similarity, parity_similarity,
-                     specificity, gamma_decay_pattern_similarity]), all ∈ [0, 1].
-   - **Specificity** (computed inline, not a separate function):
-       Ambiguity penalty = 1/f(multiplicity) where multiplicity = options_count_1 × options_count_2.
-       Formula configurable: sqrt (default), linear, log, or tunable via Scoring_Config['Specificity'].
+3. **`extract_features(level_1, level_2)`** — 5D Feature Vector:
+   Calls all four kernels above; computes `specificity` inline (no separate function).
+   Returns: `np.array([energy_similarity, spin_similarity, parity_similarity,
+                        specificity, gamma_decay_pattern_similarity])`, all ∈ [0, 1].
+   specificity = 1 / f(multiplicity),  multiplicity = len(spin_parity_list_1) × len(spin_parity_list_2)
+   f is configurable: sqrt (default), linear, log, tunable via Scoring_Config['Specificity']['Formula'].
 
-4. **Training Data** (`generate_synthetic_training_data`):
-   Generates (features, labels) pairs to teach XGBoost the physics-informed matching logic.
-   - Grid-based feature space coverage + oversampled correlation cases + random sampling + perfect-match boost.
-   - Labels computed by `calculate_label()` (nested function, see workflow below).
-   - **Feature Correlation** ("Physics Rescue"):
-     If spin+parity both ≥ Threshold OR gamma ≥ Threshold, energy is softened via energy^Rescue_Exponent.
-     Teaches XGBoost that calibration offsets do not invalidate matches with perfect internal structure.
+4. **`generate_synthetic_training_data()`** — Training Label Generation:
+   Calls `calculate_label(energy_similarity, spin_similarity, parity_similarity,
+                           specificity, gamma_similarity)` for each synthetic point.
+   `calculate_label` applies 3 sequential conditional adjustments then outputs a scalar label ∈ [0, 0.99].
+   See mermaid chart below for the exact formula at each step.
 
-5. **calculate_label Workflow** (Training Label Generation):
+5. **`calculate_label()` — 3 Conditional Adjustments + 1 Formula:**
+
+   **What gets adjusted and what stays raw:**
+   ```
+   Input variable       Adjustment 1 (Physics Veto)   Adjustment 2 (Neutral Remap)   Adjustment 3 (Physics Rescue)   In formula
+   ─────────────────    ──────────────────     ───────────────────    ────────────────────    ──────────
+   energy_similarity    read (veto check)      unchanged              → eff_energy            eff_energy
+   spin_similarity      veto condition         → eff_spin             read (rescue check)     eff_spin
+   parity_similarity    veto condition         → eff_parity           read (rescue check)     eff_parity
+   gamma_similarity     —                      → eff_gamma            read (rescue check)     eff_gamma
+   specificity          —                      unchanged              unchanged               specificity
+   ```
    ```mermaid
    flowchart TD
-       A["5 Input Scores: energy, spin, parity, specificity, gamma"] --> B{"Step 1: Hard Veto\nspin ≤ Spin_Veto_Max OR parity ≤ Parity_Veto_Max?"}
-       B -->|"Yes — definitive mismatch"| C["Return 0.0"]
-       B -->|"No"| D["Step 2: Neutral Remap\nNeutral_Score (0.5) → Neutral_Remap_Factor (0.85)\nfor effective_spin, effective_parity, effective_gamma only"]
-       D --> E{"Step 3: Physics Rescue\nRAW spin ≥ Threshold AND parity ≥ Threshold\nOR RAW gamma ≥ Threshold?"}
-       E -->|"Yes — energy offset is calibration error"| F["effective_energy = energy ^ Rescue_Exponent"]
-       E -->|"No — raw energy unchanged"| G["effective_energy = energy"]
-       F --> H["Step 4: Probability Formula"]
+       A["energy_similarity, spin_similarity, parity_similarity, specificity, gamma_similarity"]
+       A --> B{"Adjustment 1 — Hard Veto\nspin_similarity ≤ Spin_Veto_Max\nOR parity_similarity ≤ Parity_Veto_Max ?"}
+       B -->|"True"| C["return 0.0"]
+       B -->|"False"| D["Adjustment 2 — Neutral Remap\neff_spin   = 0.85 if spin_similarity   == 0.5 else spin_similarity\neff_parity = 0.85 if parity_similarity == 0.5 else parity_similarity\neff_gamma  = 0.85 if gamma_similarity  == 0.5 else gamma_similarity\n(energy_similarity and specificity are NOT remapped)"]
+       D --> E{"Adjustment 3 — Physics Rescue\n(spin_similarity ≥ Threshold AND parity_similarity ≥ Threshold)\nOR gamma_similarity ≥ Threshold ?"}
+       E -->|"True"| F["eff_energy = energy_similarity ^ Rescue_Exponent"]
+       E -->|"False"| G["eff_energy = energy_similarity"]
+       F --> H["label = eff_energy × sqrt(eff_spin × eff_parity × eff_gamma) × specificity\nreturn clamp(label, 0.0, 0.99)"]
        G --> H
-       H --> I["physics_confidence = sqrt(eff_spin x eff_parity x eff_gamma)"]
-       I --> J["probability = effective_energy x physics_confidence x specificity"]
-       J --> K["clamp to [0.0, 0.99]"]
    ```
 
 """
