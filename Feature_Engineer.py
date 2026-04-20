@@ -96,13 +96,13 @@ Technical Components:
    flowchart TD
        A["5 Input Scores: energy, spin, parity, specificity, gamma"] --> B{"Step 1: Hard Veto\nspin ≤ Spin_Veto_Max OR parity ≤ Parity_Veto_Max?"}
        B -->|"Yes — definitive mismatch"| C["Return 0.0"]
-       B -->|"No"| D["Step 2: Neutral Remap\nNeutral_Score (0.5) → Neutral_Remap_Factor (0.85)\nfor spin_factor, parity_factor, gamma_factor only"]
+       B -->|"No"| D["Step 2: Neutral Remap\nNeutral_Score (0.5) → Neutral_Remap_Factor (0.85)\nfor effective_spin, effective_parity, effective_gamma only"]
        D --> E{"Step 3: Physics Rescue\nRAW spin ≥ Threshold AND parity ≥ Threshold\nOR RAW gamma ≥ Threshold?"}
        E -->|"Yes — energy offset is calibration error"| F["effective_energy = energy ^ Rescue_Exponent"]
        E -->|"No — raw energy unchanged"| G["effective_energy = energy"]
        F --> H["Step 4: Probability Formula"]
        G --> H
-       H --> I["physics_confidence = sqrt(spin_factor x parity_factor x gamma_factor)"]
+       H --> I["physics_confidence = sqrt(eff_spin x eff_parity x eff_gamma)"]
        I --> J["probability = effective_energy x physics_confidence x specificity"]
        J --> K["clamp to [0.0, 0.99]"]
    ```
@@ -880,25 +880,19 @@ def generate_synthetic_training_data():
            parity_similarity <= Scoring_Config['Label']['Parity_Veto_Max']:
             return 0.0
 
-        # Step 2: Neutral Score Remap — replace Neutral_Score (0.5, meaning "data missing") with
-        #   Neutral_Remap_Factor (configured in Scoring_Config['General']).
-        #   Prevents unknown data from multiplicatively collapsing probability:
-        #     three unknowns: 0.5³ = 0.125 (collapse) vs 0.85³ = 0.614 (slight penalty).
-        #   IMPORTANT: Rescue (Step 3) checks RAW input similarities, NOT these remapped factors.
-        #   Neutral_Score (0.5) < Feature_Correlation.Threshold (0.85), so all-neutral input
-        #   does NOT accidentally trigger rescue — the two uses of 0.85 are entirely independent.
+        # Step 2: Neutral Score Remap — Neutral_Score (0.5, "data missing") → Neutral_Remap_Factor.
+        #   Prevents multiplicative collapse: three unknowns at 0.5³=0.125 vs 0.85³=0.614.
+        #   Step 3 reads RAW input similarities, not these effective values — so 0.5 never triggers rescue.
         neutral_score  = Scoring_Config['General']['Neutral_Score']
         neutral_remap  = Scoring_Config['General']['Neutral_Remap_Factor']
-        spin_factor, parity_factor, gamma_factor = [
+        effective_spin_similarity, effective_parity_similarity, effective_gamma_similarity = [
             neutral_remap if score == neutral_score else score
             for score in (spin_similarity, parity_similarity, gamma_similarity)
         ]
 
-        # Step 3: Physics Rescue — soften the energy penalty when physics strongly agrees.
-        #   Trigger: (spin ≥ Threshold AND parity ≥ Threshold) OR gamma ≥ Threshold
-        #   Uses RAW input similarities (not remapped), so Neutral_Score (0.5) never triggers rescue.
-        #   Effect:  effective_energy_similarity = energy ^ Rescue_Exponent (default 0.5 = sqrt)
-        #   Example: energy=0.04 → 0.20; energy=0.25 → 0.50; energy=0.64 → 0.80
+        # Step 3: Physics Rescue — if RAW spin+parity ≥ Threshold OR RAW gamma ≥ Threshold,
+        #   soften the energy penalty: effective_energy_similarity = energy ^ Rescue_Exponent.
+        #   Example: energy=0.04→0.20, energy=0.25→0.50, energy=0.64→0.80
         effective_energy_similarity = energy_similarity
         if correlation_enabled:
             is_quantum_match = (spin_similarity >= correlation_threshold and parity_similarity >= correlation_threshold)
@@ -908,9 +902,8 @@ def generate_synthetic_training_data():
                 effective_energy_similarity = energy_similarity ** rescue_exponent
 
         # Step 4: Probability Formula
-        #   physics_confidence = √(spin_factor × parity_factor × gamma_factor)
-        #   probability = effective_energy_similarity × physics_confidence × specificity
-        physics_confidence = np.sqrt(spin_factor * parity_factor * gamma_factor)
+        #   label = effective_energy × √(effective_spin × effective_parity × effective_gamma) × specificity
+        physics_confidence = np.sqrt(effective_spin_similarity * effective_parity_similarity * effective_gamma_similarity)
         probability = effective_energy_similarity * physics_confidence * specificity
         return min(max(probability, 0.0), 0.99)
 
