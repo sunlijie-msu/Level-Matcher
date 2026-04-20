@@ -1,5 +1,6 @@
 ---
-applyTo: "**"
+name: ensdf
+description: Reference guide for Evaluated Nuclear Structure Data File (ENSDF) format standards, including 80-column fixed formatting, character encoding for superscripts, Greek letters, mathematical symbols, nuclear science references (NSR), and record type specifications (L, G). Use when working with ENSDF data parsing, validation, or creating ENSDF-compliant comments and documentation.
 ---
 # Evaluated Nuclear Structure Data File (ENSDF) Instructions for GitHub Copilot
 
