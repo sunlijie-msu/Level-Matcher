@@ -2,7 +2,7 @@
 
 ## Overview
 
-Level Matcher is a physics-informed nuclear level matching system for Evaluated Nuclear Structure Data File (ENSDF) workflows. It combines XGBoost gradient boosting with physics-informed feature engineering to match nuclear energy levels across independent experimental datasets.
+Level Matcher is a physics-informed nuclear level matching system for Evaluated Nuclear Structure Data File (ENSDF) workflows. It is designed to parse raw ENSDF files, build standardized JSON datasets, and perform pairwise and clustered inference on real-world nuclear level schemes that do not have ground-truth labels. Model training is performed only on synthetic, physics-generated examples so that real evaluation datasets remain reserved for inference.
 
 Developed and refined through daily evaluation tasks at the Nuclear Data Group at the Facility for Rare Isotope Beams (FRIB), Michigan State University.
 
@@ -11,17 +11,17 @@ Developed and refined through daily evaluation tasks at the Nuclear Data Group a
 
 ## Development Timeline
 
-- **2026-04-19** — ENSDF parsing correctness improvements; physics feature engineering hardened; model performance improved; pipeline usability updated.
-  - **`Dataset_Parser.py`**: Gamma intensity uncertainty (DRI) conversion corrected from raw last-digit notation to absolute intensity units, consistent with ENSDF convention. Limit markers (`LT`/`GT`) stored as zero rather than propagated. Parsing and energy matching fixes applied. Real $^{34}$S test ENS files added to `data/raw/`.
-  - **`Feature_Engineer.py`**: `calculate_label` execution order corrected to the canonical sequence (Neutral Remap → Physics Veto → Physics Rescue). `Scoring_Config` restructured to be fully config-driven with no hardcoded values. Veto thresholds recalibrated to isolate only quantum-number-forbidden spin-parity assignments. Rescue threshold and effective variable naming clarified throughout.
-  - **`Level_Matcher.py`**: XGBoost hyperparameters optimized via systematic multi-configuration diagnostic. Inference dataset selection promoted to a named top-level configuration variable for straightforward user access.
-  - **`README.md`**: Comprehensive rewrite covering algorithm selection rationale, corrected feature importance hierarchy, and complete development history.
+- **2026-04-19** — Adapted Level-Matcher for robust, operational inference on real-world nuclear datasets by improving ENSDF parsing accuracy, physics-informed scoring logic and feature engineering, and inference workflow.
+  - **`Dataset_Parser.py`**: Corrected relative-intensity uncertainty handling, refined parsing and energy matching, and added $^{34}$Cl real ENS data files for parser and inference development.
+  - **`Feature_Engineer.py`**: Reorganized label generation, clarified veto and rescue logic, and moved scoring and synthetic-data behavior fully under `Scoring_Config`.
+  - **`Level_Matcher.py`**: Added user-facing inference dataset selection, tuned XGBoost on synthetic data only, and updated the documentation to describe the inference-first workflow.
+
 
 - **2026-04-17** — Applied to the first real-world evaluation task for $^{34}\text{Cl}$.
   - Pairwise inference across 27,615 candidate pairs from $^{32}\text{S}(p,\gamma)^{34}\text{Cl}$ and $^{33}\text{S}(p,p)$ resonance datasets.
   - Detached subprocess architecture adopted to isolate gradient boosting training from the IDE event loop, eliminating VS Code UI freeze events.
 
-- **2026-01-24** — Hardened for diagnostic rigor and modularized for public release.
+- **2026-01-24** — Refined for diagnostic rigor and modularized for public release.
   - 80/20 training-validation split with early stopping (patience = 50 rounds).
   - Five-panel diagnostic visualization: RMSE, MAE, and LogLoss learning curves; feature importance (Gain); overfitting analysis (train-validation RMSE gap).
   - Schema standardization across all ingested datasets.
@@ -42,7 +42,7 @@ Developed and refined through daily evaluation tasks at the Nuclear Data Group a
 
 ## High-Level Structure and Workflow Explanation
 
-The system operates as a recursive diagnostic pipeline that transforms raw experimental logs into a unified, clique-constrained nuclear level scheme.
+The system operates as an inference-first pipeline that transforms raw ENSDF records into a unified, clique-constrained nuclear level scheme.
 
 ```text
 [Raw ENSDF Logs] --> [Dataset_Parser] --> [JSON Datasets]
@@ -51,7 +51,7 @@ The system operates as a recursive diagnostic pipeline that transforms raw exper
 [Physics Constraints] --> [Feature_Engineer] --+--> [Synthetic Training Data]
                                                |
                                                v
-[Training] <----------- [Level_Matcher] <------+--> [XGBoost / LightGBM Ensembles]
+[Training] <----------- [Level_Matcher] <------+--> [XGBoost Inference Model]
     |                                          |
     v                                          v
 [Diagnostic Visuals] <--- [Metrics_Visualizer] [Pairwise Inference]
@@ -150,9 +150,9 @@ Nuclear level schemes typically contain fewer than 500 levels. Algorithms like L
 
 | Subset | Proportion | Size ($\sim$) | Objective | Model Interaction |
 | :--- | :--- | :--- | :--- | :--- |
-| **Training Set** | 80% | 17,758 | Pattern learning | Weight updates via Gradient Descent |
-| **Validation Set** | 20% | 4,440 | Overfitting monitor | Evaluated without weight updates |
-| **Test Set (A/B/C)**| Real Data | 30 | Final inference | Never seen during training phase |
+| **Synthetic Training Set** | 80% | 17,758 | Pattern learning | Weight updates via gradient descent |
+| **Synthetic Validation Set** | 20% | 4,440 | Overfitting monitor | Evaluated without weight updates |
+| **Inference Datasets** | User-selected | Varies | Real-world level matching | Never used for model optimization; no ground-truth labels assumed |
 
 ### 3.2 Diagnostic Metrics
 
@@ -231,12 +231,12 @@ Level-Matcher/
 
 ## 7. Workflow & Usage
 
-1.  **Ingestion**: `Dataset_Parser.py` normalizes ENSDF datasets into `data/json/` JSON datasets.
-2.  **Synthesis**: `Level_Matcher.py` generates synthetic training data to seed the ensemble.
-3.  **Training**: The XGBoost model is trained on synthetic data with early stopping and monotonic constraints.
-4.  **Inference**: Models perform cross-dataset comparisons outputting probabilities to `outputs/pairwise/`.
-5.  **Clustering**: The graph algorithm consolidates matches into physical level states.
-6.  **Verification**: `Combined_Visualizer.py` reads the standardized JSON datasets and clustering logs to generate final plots for visual audit.
+1. **Parse raw ENSDF files**: Run `Dataset_Parser.py` to scan all `.ens` files in `data/raw/` and write standardized JSON datasets to `data/json/`.
+2. **Select inference targets**: In `Level_Matcher.py`, set `inference_dataset_labels` to the dataset letters you want to match.
+3. **Train on synthetic physics data**: `Level_Matcher.py` generates synthetic labeled examples and trains XGBoost with early stopping and monotonic constraints.
+4. **Run real-world inference**: The trained model evaluates all cross-dataset level pairs for the selected real datasets and writes probabilities to `outputs/pairwise/`.
+5. **Cluster matched levels**: The graph algorithm consolidates pairwise matches into physically consistent level groups.
+6. **Review outputs**: `Combined_Visualizer.py` renders the standardized JSON datasets and clustering results for visual audit.
 
 ---
 
