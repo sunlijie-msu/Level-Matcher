@@ -110,13 +110,13 @@ Technical Components:
            return 0.0
 
    Adjustment 3 — Physics Rescue (reads RAW spin_similarity, parity_similarity, gamma_similarity):
-       trigger = (spin_similarity >= Threshold and parity_similarity >= Threshold) or gamma_similarity >= Threshold
+       trigger = (spin_similarity >= Rescue_Threshold and parity_similarity >= Rescue_Threshold) or gamma_similarity >= Rescue_Threshold
        effective_energy_similarity = energy_similarity ** Rescue_Exponent   if trigger
                                    = energy_similarity                       otherwise
-       RAW values are used so that Neutral_Score=0.5 < Threshold=0.85 never accidentally triggers rescue;
-       if eff_spin=0.85 (remapped) were used instead, any unknown quantum numbers would trigger rescue.
+       RAW values are used so that Neutral_Score=0.5 < Rescue_Threshold=0.86 never accidentally triggers rescue;
+       if eff_spin=0.85 (remapped) were used instead, any unknown quantum numbers would wrongly trigger rescue.
 
-   Final formula:
+   Final formula, very critical:
        physics_confidence = sqrt(effective_spin_similarity * effective_parity_similarity * effective_gamma_similarity)
        return clamp(effective_energy_similarity * physics_confidence * specificity, 0.0, 0.99)
 
@@ -136,77 +136,128 @@ import os
 
 Scoring_Config = {
     'Energy': {
-        # Controls how strictly energy values must match. 
-        # - Higher value (e.g. 1.0) = stricter (score drops fast if energy differs).
-        # - Lower value (e.g. 0.1) = looser (score stays high even with differences).
-        # Energy similarity decay with increasing energy separation (z_score in sigma units):
-        # Sigma_Scale=0.1 (loose):   1σ→90.5%, 2σ→67.0%, 3σ→40.7%, 4σ→20.2%, 5σ→8.2%
-        #   Lenient: tolerates large separations
+        # Formula: energy_similarity = exp(−Sigma_Scale × z²),  z = |ΔE| / √(σ₁² + σ₂²)
+        # Sigma_Scale controls how fast the score decays with increasing energy separation.
+        # Sigma_Scale=0.1 (loose):    1σ→90.5%, 2σ→67.0%, 3σ→40.7%, 4σ→20.2%, 5σ→8.2%
+        #   Use when datasets have large systematic offsets or unreliable energy calibration.
         # Sigma_Scale=0.2 (moderate): 1σ→81.9%, 2σ→44.9%, 3σ→16.5%, 4σ→4.1%, 5σ→0.7%
-        #   Standard: penalizes >2σ strongly
-        # Sigma_Scale=0.5 (statistical standard): 1σ→60.7%, 2σ→13.5%, 3σ→1.1%, 4σ→0.0%, 5σ→0.0%
-        #   Reproduces the standard normal kernel exp(-z²/2). Mirrors the 68-95-99.7 rule
-        #   in the sense that 3σ separations are near-zero, consistent with standard hypothesis testing.
-        #   Recommended for datasets with reliable energy calibration and small systematic offsets.
+        #   Penalizes >2σ strongly. Recommended for most nuclear datasets.
+        # Sigma_Scale=0.5 (strict):   1σ→60.7%, 2σ→13.5%, 3σ→1.1%, 4σ→0.0%, 5σ→0.0%
+        #   Reproduces the standard normal kernel exp(−z²/2). Use when calibration is reliable.
         # Sigma_Scale=1.0 (extreme):  1σ→36.8%, 2σ→1.8%, 3σ→0.0%, 4σ→0.0%, 5σ→0.0%
-        #   Ultra-strict: even 1σ penalized
+        #   Ultra-strict: even a 1σ separation is heavily penalized.
         'Sigma_Scale': 0.2
     },
     'Spin': {
-        # Similarity scores for Spin (J) comparisons (0.0 to 1.0)
-        'Match_Firm': 1.0,         # both firm, e.g., 2 vs 2
-        'Match_Strong': 0.8,    # any tentative, e.g., 2 vs (2)
-        'Mismatch_Weak': 0.2,      # any tentative, e.g., 2 vs (3) with ΔJ=1
-        'Mismatch_Strong': 0.05,    # both firm, e.g., 2 vs 3 with ΔJ=1
-        'Mismatch_Firm': 0.0               # any ΔJ ≥ 2
+        # Spin (J) similarity scores — "firm" = confirmed (no parentheses in ENSDF),
+        # "tentative" = uncertain (parenthesized, e.g., (2)). ΔJ = |J₁ − J₂|.
+        #
+        # Score summary (veto condition: score ≤ Spin_Veto_Max = 0.05, see Label section):
+        # Note: Mismatch_Strong (0.05) equals Spin_Veto_Max exactly — it is Rejected (≤ is inclusive).
+        #   Mismatch_Weak (0.20) is strictly above the threshold — it is NOT vetoed.
+        'Match_Firm': 1.0,       # ΔJ=0, both firm,       e.g.,  2  vs  2    → NOT vetoed
+        'Match_Strong': 0.8,     # ΔJ=0, any tentative,   e.g.,  2  vs (2)   → NOT vetoed
+        'Mismatch_Weak': 0.2,    # ΔJ=1, any tentative,   e.g., 2 vs (3)   → NOT vetoed (0.20 > Spin_Veto_Max 0.05)
+        'Mismatch_Strong': 0.05, # ΔJ=1, both firm,       e.g.,  2  vs  3    → Rejected  (0.05 ≤ Spin_Veto_Max 0.05)
+        'Mismatch_Firm': 0.0     # ΔJ≥2,                  e.g.,  2  vs  4    → Rejected  (0.00 ≤ Spin_Veto_Max 0.05)
     },
     'Parity': {
-        # Similarity scores for Parity (Pi) comparisons (0.0 to 1.0)
-        'Match_Firm': 1.0,         # both firm, e.g., + vs + or - vs -
-        'Match_Strong': 0.8,    # any tentative, e.g., + vs (+)
-        'Mismatch_Weak': 0.05, # any tentative, e.g., + vs (-)
-        'Mismatch_Firm': 0.0       # both firm, e.g., + vs -
+        # Parity (π) similarity scores — parity is binary (+/−), so only same/different cases exist.
+        # "firm" = confirmed, "tentative" = uncertain (parenthesized, e.g., (+)).
+        #
+        # Score summary (veto condition: score ≤ Parity_Veto_Max = 0.025, see Label section):
+        #
+        # Note: Mismatch_Weak (0.05) is strictly above Parity_Veto_Max (0.025) — it is NOT vetoed.
+        #   Mismatch_Firm (0.00) is below Parity_Veto_Max (0.025) — it is Rejected.
+        #   Parity_Veto_Max is set to 0.025 (between 0.00 and 0.05) precisely to split these two cases.
+        'Match_Firm': 1.0,      # same parity, both firm,         e.g., + vs +    → NOT vetoed
+        'Match_Strong': 0.8,    # same parity, any tentative,     e.g., + vs (+)  → NOT vetoed
+        'Mismatch_Weak': 0.05,  # opposite parity, any tentative, e.g., + vs (−)  → NOT vetoed (0.05 > Parity_Veto_Max 0.025)
+        'Mismatch_Firm': 0.0    # opposite parity, both firm,     e.g., + vs −    → Rejected  (0.00 ≤ Parity_Veto_Max 0.025)
     },
     'Specificity': {
-        # Ambiguity penalty for levels with multiple Jπ options
-        # Formula determines how harshly to penalize multiplicity (options_count_1 × options_count_2)
+        # Ambiguity penalty: specificity = 1/f(multiplicity), multiplicity = options_count_1 × options_count_2.
+        # Applied when a level has multiple Jπ assignments (e.g., "1/2,3/2" → 2 options each → mult=4).
+        #
+        # Specificity score at each multiplicity:
+        # Multiplicity | sqrt (default) | linear |  log   | tunable (α=0.5)
+        # -------------|----------------|--------|--------|----------------
+        # 1 (resolved) |    100%        |  100%  |  100%  |   100%
+        # 2            |     71%        |   50%  |   77%  |    67%
+        # 4            |     50%        |   25%  |   62%  |    40%
+        # 9            |     33%        |   11%  |   51%  |    20%
+        # 16           |     25%        |    6%  |   44%  |    13%
+        #
+        # 'sqrt'    (default, balanced):  1/√mult            — moderate penalty, recommended starting point
+        # 'linear'  (aggressive):         1/mult             — strong penalty, for reliable spin resolution
+        # 'log'     (gentle):             1/(1+log₁₀(mult))  — weak penalty, for data with high ambiguity
+        # 'tunable' (custom):             1/(1+α×(mult−1))   — Alpha controls steepness (higher = stricter)
         'Formula': 'sqrt',  # Options: 'sqrt', 'linear', 'log', 'tunable'
-        # Only used if Formula='tunable': specificity = 1/(1 + Alpha*(mult-1))
-        # Higher Alpha → steeper penalty. Example: Alpha=0.5 gives mult=9→18% (82% penalty)
-        'Alpha': 0.5
+        'Alpha': 0.5        # Only used when Formula='tunable'. Higher → steeper penalty.
     },
     'Feature_Correlation': {
-        # Controls how perfect spin/parity matching can "rescue" mediocre energy similarity.
-        # Physics rationale: If two levels have identical quantum numbers (Jπ) and are isolated
-        # (no nearby levels with same Spin-Parity), energy disagreement may be due to measurement error
-        # or calibration issues rather than genuine mismatch.
+        # Physics Rescue: when quantum numbers or gamma decay pattern strongly agree, soften the
+        # energy penalty. Rationale: confirmed Jπ match with energy disagreement likely indicates
+        # measurement calibration error rather than a genuine mismatch.
         #
-        # When Enabled: If spin_similarity >= Threshold AND parity_similarity >= Threshold,
-        # the effective energy similarity is boosted: effective_energy = energy^Rescue_Exponent
-        # Example: Rescue_Exponent=0.5 (sqrt) transforms energy=0.4→0.63, energy=0.6→0.77
+        # Rescue_Threshold controls which spin/parity scores are "strong enough" to trigger rescue:
+        #   Rescue_Threshold=0.86:  Match_Firm (1.0) triggers rescue    ✓
+        #                           Match_Strong (0.8) does NOT rescue   ✗  (tentative match excluded)
+        #   Rescue_Threshold=0.79:  Match_Strong (0.8) also rescues      ✓  (more lenient)
+        #   Rescue_Threshold=1.0:   only exact Match_Firm (1.0) rescues  ✓  (strictest)
+        #
+        # Rescue_Exponent transforms energy_similarity when rescue triggers (energy → energy^exponent):
+        #   Rescue_Exponent=0.5 (sqrt, aggressive): 0.1→32%, 0.2→45%, 0.4→63%, 0.6→77%, 0.8→89%
+        #   Rescue_Exponent=0.7 (gentler):          0.1→20%, 0.2→30%, 0.4→52%, 0.6→71%, 0.8→84%
+        #   Rescue_Exponent=1.0 (disabled):         no change to energy_similarity
         'Enabled': True,
-        'Threshold': 0.85,        # Minimum spin/parity similarity to trigger rescue (firm matches only)
-        'Rescue_Exponent': 0.5    # Exponent for energy boost: energy → energy^exponent (0.5 = square root, 0.7 = gentler)
+        'Rescue_Threshold': 0.86,  # Minimum score to trigger rescue: 0.86 → firm-match-only (1.0 ≥ 0.86; 0.8 < 0.86)
+        'Rescue_Exponent': 0.5     # Energy boost exponent: 0.5=sqrt (aggressive), 0.7=gentler, 1.0=no boost
     },
     'General': {
-        # Score used when data is missing (e.g. unknown). Perform **Manual Imputation**. Machine Learning models receive a concrete number of 0.5, not a missing value, so it treats it like any other feature value.
+        # Neutral_Score: assigned when data is completely missing (no spin, parity, or gamma data).
+        # ML models require a concrete number — 0.5 means "unknown", midpoint of the [0, 1] range.
+        # Do not change without restructuring the entire scoring and veto logic.
         'Neutral_Score': 0.5,
-        # Replacement factor applied to Neutral_Score inside calculate_label (Step 2 remap).
-        # Prevents 0.5^N multiplicative collapse when multiple features are unknown:
-        #   three unknowns: 0.5³ = 0.125 (collapse) vs 0.85³ = 0.614 (slight penalty).
-        # Must be > Neutral_Score and ≤ 1.0. Lower → stronger penalty for missing data.
-        # NOTE: This value and Feature_Correlation.Threshold are independently tunable —
-        # they share the default of 0.85 coincidentally but serve entirely different purposes.
+        # Neutral_Remap_Factor: inside calculate_label, Neutral_Score (0.5) is remapped to this value
+        # before computing the final probability product. Prevents multiplicative collapse:
+        #   3 unknowns without remap:  0.5³ = 0.125  (severely penalizes missing data)
+        #   3 unknowns with remap:    0.85³ = 0.614  ("unknown" ≠ "mismatch" — only mild penalty)
+        # Tuning guide:
+        #   0.70 → 3 unknowns = 0.343  (harsh penalty for missing data)
+        #   0.80 → 3 unknowns = 0.512  (moderate penalty)
+        #   0.85 → 3 unknowns = 0.614  (default — mild penalty)
+        #   0.90 → 3 unknowns = 0.729  (lenient — use when missing data is the norm)
+        # Must be > Neutral_Score (0.5) and ≤ 1.0.
+        # Note: Neutral_Remap_Factor and Feature_Correlation.Rescue_Threshold are independently tunable —
+        #   they happen to be near 0.85/0.86 by coincidence but serve entirely different purposes.
         'Neutral_Remap_Factor': 0.85
     },
     'Label': {
-        # Hard-veto thresholds for calculate_label Step 1.
-        # Pairs with similarity ≤ these values are immediately rejected (return 0.0).
-        # Spin_Veto_Max = Spin.Mismatch_Strong (0.05): vetoes both-firm ΔJ=1 spin mismatches.
-        # Parity_Veto_Max sits between Parity.Mismatch_Firm (0.0) and Parity.Mismatch_Weak (0.05):
-        #   catches firm parity mismatches while letting tentative mismatches (0.05) through with penalty.
-        'Spin_Veto_Max': 0.05,
-        'Parity_Veto_Max': 0.025
+        # Hard-veto thresholds — the condition is: score ≤ threshold → label = 0.0 (Rejected).
+        # The ≤ operator is inclusive: a score exactly equal to the threshold IS Rejected.
+        # All other features (energy, gamma) are ignored for a Rejected pair.
+        #
+        # Spin veto (Spin_Veto_Max = 0.05) — full decision table:
+        #   spin_similarity = 0.00 (Mismatch_Firm,   ΔJ≥2)            0.00 ≤ 0.05 → Rejected
+        #   spin_similarity = 0.05 (Mismatch_Strong, ΔJ=1, both firm) 0.05 ≤ 0.05 → Rejected  (inclusive boundary)
+        #   spin_similarity = 0.20 (Mismatch_Weak,   ΔJ=1, tentative) 0.20 > 0.05 → NOT vetoed
+        #   spin_similarity = 0.80 (Match_Strong,    ΔJ=0, tentative) 0.80 > 0.05 → NOT vetoed
+        #   spin_similarity = 1.00 (Match_Firm,      ΔJ=0, both firm) 1.00 > 0.05 → NOT vetoed
+        #
+        # Parity veto (Parity_Veto_Max = 0.025) — full decision table:
+        #   parity_similarity = 0.00 (Mismatch_Firm, both firm)       0.00 ≤ 0.025 → Rejected
+        #   parity_similarity = 0.05 (Mismatch_Weak, any tentative)   0.05 > 0.025 → NOT vetoed
+        #   parity_similarity = 0.80 (Match_Strong,  any tentative)   0.80 > 0.025 → NOT vetoed
+        #   parity_similarity = 1.00 (Match_Firm,    both firm)       1.00 > 0.025 → NOT vetoed
+        #
+        # Parity_Veto_Max = 0.025 sits between Mismatch_Firm (0.00) and Mismatch_Weak (0.05),
+        #   which is exactly the intended split: firm mismatch → Rejected, tentative mismatch → NOT vetoed.
+        #
+        # Tuning: raise Spin_Veto_Max to 0.20 to also reject tentative ΔJ=1 mismatches.
+        #         lower Spin_Veto_Max to 0.00 to only reject ΔJ≥2 mismatches.
+        'Spin_Veto_Max': 0.04,
+        'Parity_Veto_Max': 0.04
     }
 }
 
@@ -877,11 +928,11 @@ def generate_synthetic_training_data():
     # 1. Gather all possible discrete scores from Config
     spin_scores = list(Scoring_Config['Spin'].values()) + [Scoring_Config['General']['Neutral_Score']]
     parity_scores = list(Scoring_Config['Parity'].values()) + [Scoring_Config['General']['Neutral_Score']]
-    gamma_scores = [0.0, 0.3, Scoring_Config['General']['Neutral_Score'], 0.7, 0.85, 1.0]  # Standardized 0.85 for rescue threshold
+    gamma_scores = [0.0, 0.3, Scoring_Config['General']['Neutral_Score'], 0.7, 0.86, 1.0]  # Include Rescue_Threshold (0.86) to teach the rescue boundary
     
     # 2. Feature Correlation Configuration
     correlation_enabled = Scoring_Config['Feature_Correlation']['Enabled']
-    correlation_threshold = Scoring_Config['Feature_Correlation']['Threshold']
+    correlation_threshold = Scoring_Config['Feature_Correlation']['Rescue_Threshold']
     rescue_exponent = Scoring_Config['Feature_Correlation']['Rescue_Exponent']
     
     # 3. Define Physics Logic for Labeling — calculate_label converts 5 feature scores into a
@@ -920,7 +971,7 @@ def generate_synthetic_training_data():
         #   return clamp(effective_energy_similarity * physics_confidence * specificity, 0.0, 0.99)
         physics_confidence = np.sqrt(effective_spin_similarity * effective_parity_similarity * effective_gamma_similarity)
         probability = effective_energy_similarity * physics_confidence * specificity
-        return min(max(probability, 0.0), 0.99)
+        return min(max(probability, 0.0), 0.999)
 
     # 4. Systematic Grid Generation (Cover the feature space)
     # Energy grid: dense near 0 (mismatch) and 1 (match)
@@ -947,7 +998,7 @@ def generate_synthetic_training_data():
     imperfect_spin = Scoring_Config['Spin']['Match_Strong']  # e.g., 0.8 (tentative match)
     imperfect_parity = Scoring_Config['Parity']['Match_Strong']  # e.g., 0.8 (tentative match)
     neutral_score = Scoring_Config['General']['Neutral_Score']
-    rescue_threshold = Scoring_Config['Feature_Correlation']['Threshold']
+    rescue_threshold = Scoring_Config['Feature_Correlation']['Rescue_Threshold']
     
     # Mediocre AND Low energy range where correlation effect is most visible
     # Validation Note: Added low values (0.05, 0.1) to ensure model learns rescue even at poor energy matches.
