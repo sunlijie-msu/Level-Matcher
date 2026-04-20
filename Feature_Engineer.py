@@ -68,43 +68,57 @@ Technical Components:
        Binary mode (no intensity data): matched_count / min(len₁, len₂).
        Returns Neutral_Score=0.5 if gamma data missing.
 
-3. **`extract_features(level_1, level_2)`** — 5D Feature Vector:
-   Calls all four kernels above; computes `specificity` inline (no separate function).
-   Returns: `np.array([energy_similarity, spin_similarity, parity_similarity,
-                        specificity, gamma_decay_pattern_similarity])`, all ∈ [0, 1].
-   specificity = 1 / f(multiplicity),  multiplicity = len(spin_parity_list_1) × len(spin_parity_list_2)
-   f is configurable: sqrt (default), linear, log, tunable via Scoring_Config['Specificity']['Formula'].
+3. extract_features(level_1, level_2) → np.array of shape (5,), all values ∈ [0, 1]:
+       [0] energy_similarity = calculate_energy_similarity(
+               level_1['energy_value'], level_1['energy_uncertainty'],
+               level_2['energy_value'], level_2['energy_uncertainty'])
+       [1] spin_similarity = calculate_spin_similarity(
+               level_1['spin_parity_list'], level_2['spin_parity_list'])
+       [2] parity_similarity = calculate_parity_similarity(
+               level_1['spin_parity_list'], level_2['spin_parity_list'])
+       [3] specificity = 1 / f(multiplicity)
+               multiplicity = len(spin_parity_list_1) * len(spin_parity_list_2)
+               f selected by Scoring_Config['Specificity']['Formula']:
+                   'sqrt'    → 1 / sqrt(multiplicity)
+                   'linear'  → 1 / multiplicity
+                   'log'     → 1 / (1 + log10(multiplicity))
+                   'tunable' → 1 / (1 + Alpha * (multiplicity - 1))
+       [4] gamma_decay_pattern_similarity = calculate_gamma_decay_pattern_similarity(
+               level_1['gamma_decays'], level_2['gamma_decays'])
 
-4. **`generate_synthetic_training_data()`** — Training Label Generation:
-   Calls `calculate_label(energy_similarity, spin_similarity, parity_similarity,
-                           specificity, gamma_similarity)` for each synthetic point.
-   `calculate_label` applies 3 sequential conditional adjustments then outputs a scalar label ∈ [0, 0.99].
-   See mermaid chart below for the exact formula at each step.
+4. generate_synthetic_training_data() → (training_features, training_labels):
+       training_features: np.array shape (N, 5) — rows are [energy, spin, parity, specificity, gamma]
+       training_labels:   np.array shape (N,)   — each label = calculate_label(*row)
+       Coverage: grid over all discrete spin/parity/gamma scores from Scoring_Config × dense energy_grid
+       × specificity values {1.0, 0.7, 0.5}, plus oversampled physics-rescue contrast cases
+       (mediocre energy × perfect/imperfect/mixed quantum numbers), 500 random samples,
+       and 50 near-perfect-match points forced to label=0.99.
 
-5. **`calculate_label()` — 3 Conditional Adjustments + 1 Formula:**
+5. calculate_label(energy_similarity, spin_similarity, parity_similarity, specificity, gamma_similarity)
+   → float ∈ [0, 0.99]:
+   3 sequential adjustments on the 5 RAW input parameters, then one final formula.
+   Adjustments 2 and 3 both read the RAW input params — not the effective_* variables from Adjustment 1.
 
-   **What gets adjusted and what stays raw:**
-   ```
-   Input variable       Adjustment 1 (Physics Veto)   Adjustment 2 (Neutral Remap)   Adjustment 3 (Physics Rescue)   In formula
-   ─────────────────    ──────────────────     ───────────────────    ────────────────────    ──────────
-   energy_similarity    read (veto check)      unchanged              → eff_energy            eff_energy
-   spin_similarity      veto condition         → eff_spin             read (rescue check)     eff_spin
-   parity_similarity    veto condition         → eff_parity           read (rescue check)     eff_parity
-   gamma_similarity     —                      → eff_gamma            read (rescue check)     eff_gamma
-   specificity          —                      unchanged              unchanged               specificity
-   ```
-   ```mermaid
-   flowchart TD
-       A["energy_similarity, spin_similarity, parity_similarity, specificity, gamma_similarity"]
-       A --> B{"Adjustment 1 — Hard Veto\nspin_similarity ≤ Spin_Veto_Max\nOR parity_similarity ≤ Parity_Veto_Max ?"}
-       B -->|"True"| C["return 0.0"]
-       B -->|"False"| D["Adjustment 2 — Neutral Remap\neff_spin   = 0.85 if spin_similarity   == 0.5 else spin_similarity\neff_parity = 0.85 if parity_similarity == 0.5 else parity_similarity\neff_gamma  = 0.85 if gamma_similarity  == 0.5 else gamma_similarity\n(energy_similarity and specificity are NOT remapped)"]
-       D --> E{"Adjustment 3 — Physics Rescue\n(spin_similarity ≥ Threshold AND parity_similarity ≥ Threshold)\nOR gamma_similarity ≥ Threshold ?"}
-       E -->|"True"| F["eff_energy = energy_similarity ^ Rescue_Exponent"]
-       E -->|"False"| G["eff_energy = energy_similarity"]
-       F --> H["label = eff_energy × sqrt(eff_spin × eff_parity × eff_gamma) × specificity\nreturn clamp(label, 0.0, 0.99)"]
-       G --> H
-   ```
+   Adjustment 1 — Neutral Remap (always applied; energy_similarity and specificity are NOT remapped):
+       effective_spin_similarity   = Neutral_Remap_Factor if spin_similarity   == Neutral_Score else spin_similarity
+       effective_parity_similarity = Neutral_Remap_Factor if parity_similarity == Neutral_Score else parity_similarity
+       effective_gamma_similarity  = Neutral_Remap_Factor if gamma_similarity  == Neutral_Score else gamma_similarity
+       Prevents multiplicative collapse: three unknowns → 0.5³=0.125 without remap, 0.85³=0.614 with remap.
+
+   Adjustment 2 — Physics Veto (reads RAW spin_similarity and parity_similarity):
+       if spin_similarity <= Spin_Veto_Max or parity_similarity <= Parity_Veto_Max:
+           return 0.0
+
+   Adjustment 3 — Physics Rescue (reads RAW spin_similarity, parity_similarity, gamma_similarity):
+       trigger = (spin_similarity >= Threshold and parity_similarity >= Threshold) or gamma_similarity >= Threshold
+       effective_energy_similarity = energy_similarity ** Rescue_Exponent   if trigger
+                                   = energy_similarity                       otherwise
+       RAW values are used so that Neutral_Score=0.5 < Threshold=0.85 never accidentally triggers rescue;
+       if eff_spin=0.85 (remapped) were used instead, any unknown quantum numbers would trigger rescue.
+
+   Final formula:
+       physics_confidence = sqrt(effective_spin_similarity * effective_parity_similarity * effective_gamma_similarity)
+       return clamp(effective_energy_similarity * physics_confidence * specificity, 0.0, 0.99)
 
 """
 
@@ -873,15 +887,9 @@ def generate_synthetic_training_data():
     # 3. Define Physics Logic for Labeling — calculate_label converts 5 feature scores into a
     #    single match probability label using the four-step workflow charted in the module header.
     def calculate_label(energy_similarity, spin_similarity, parity_similarity, specificity, gamma_similarity):
-        # Step 1: Hard Veto — definitive physics mismatch rejects the pair immediately.
-        #   Thresholds are in Scoring_Config['Label'] for easy adjustment.
-        if spin_similarity <= Scoring_Config['Label']['Spin_Veto_Max'] or \
-           parity_similarity <= Scoring_Config['Label']['Parity_Veto_Max']:
-            return 0.0
-
-        # Step 2: Neutral Score Remap — Neutral_Score (0.5, "data missing") → Neutral_Remap_Factor.
+        # Adjustment 1: Neutral Remap — Neutral_Score (0.5, "data missing") → Neutral_Remap_Factor.
+        #   Applied to spin, parity, gamma only. energy_similarity and specificity are NOT remapped.
         #   Prevents multiplicative collapse: three unknowns at 0.5³=0.125 vs 0.85³=0.614.
-        #   Step 3 reads RAW input similarities, not these effective values — so 0.5 never triggers rescue.
         neutral_score  = Scoring_Config['General']['Neutral_Score']
         neutral_remap  = Scoring_Config['General']['Neutral_Remap_Factor']
         effective_spin_similarity, effective_parity_similarity, effective_gamma_similarity = [
@@ -889,9 +897,16 @@ def generate_synthetic_training_data():
             for score in (spin_similarity, parity_similarity, gamma_similarity)
         ]
 
-        # Step 3: Physics Rescue — if RAW spin+parity ≥ Threshold OR RAW gamma ≥ Threshold,
-        #   soften the energy penalty: effective_energy_similarity = energy ^ Rescue_Exponent.
-        #   Example: energy=0.04→0.20, energy=0.25→0.50, energy=0.64→0.80
+        # Adjustment 2: Physics Veto — definitive quantum number mismatch, reject immediately.
+        #   Reads RAW spin_similarity and parity_similarity (not the effective_* vars above).
+        if spin_similarity <= Scoring_Config['Label']['Spin_Veto_Max'] or \
+           parity_similarity <= Scoring_Config['Label']['Parity_Veto_Max']:
+            return 0.0
+
+        # Adjustment 3: Physics Rescue — soften the energy penalty when physics strongly agrees.
+        #   Reads RAW spin_similarity, parity_similarity, gamma_similarity (not the effective_* vars).
+        #   Using RAW values prevents Neutral_Score=0.5 from being remapped to 0.85 and falsely
+        #   triggering rescue — the two uses of 0.85 (remap factor, rescue threshold) are independent.
         effective_energy_similarity = energy_similarity
         if correlation_enabled:
             is_quantum_match = (spin_similarity >= correlation_threshold and parity_similarity >= correlation_threshold)
@@ -900,8 +915,9 @@ def generate_synthetic_training_data():
             if is_quantum_match or is_gamma_match:
                 effective_energy_similarity = energy_similarity ** rescue_exponent
 
-        # Step 4: Probability Formula
-        #   label = effective_energy × √(effective_spin × effective_parity × effective_gamma) × specificity
+        # Final formula:
+        #   physics_confidence = sqrt(effective_spin_similarity * effective_parity_similarity * effective_gamma_similarity)
+        #   return clamp(effective_energy_similarity * physics_confidence * specificity, 0.0, 0.99)
         physics_confidence = np.sqrt(effective_spin_similarity * effective_parity_similarity * effective_gamma_similarity)
         probability = effective_energy_similarity * physics_confidence * specificity
         return min(max(probability, 0.0), 0.99)
