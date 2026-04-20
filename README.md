@@ -1,16 +1,13 @@
-**Level Matcher:** Part of the AI/ML Technical Innovation at the FRIB Nuclear Data Group (nucleardata@frib.msu.edu).
+**Level Matcher** — Part of the AI/ML Technical Innovation at the FRIB Nuclear Data Group (nucleardata@frib.msu.edu).
 
 ## Overview
 
-A physics-informed nuclear level matching system designed for Evaluated Nuclear Structure Data File (ENSDF) workflows.
-Developed and refined through daily evaluation tasks at the Nuclear Data Group at the Facility for Rare Isotope Beams (FRIB).
+Level Matcher is a physics-informed nuclear level matching system for Evaluated Nuclear Structure Data File (ENSDF) workflows. It combines XGBoost gradient boosting with physics-informed feature engineering to match nuclear energy levels across independent experimental datasets.
 
-This tool employs dual machine learning models (Extreme Gradient Boosting + Light Gradient Boosting Machine) along with physics-informed feature engineering to accurately match nuclear energy levels across different experimental datasets.
+Developed and refined through daily evaluation tasks at the Nuclear Data Group at the Facility for Rare Isotope Beams (FRIB), Michigan State University.
 
-A prototype version of Level Matcher is available as an open-source repository at
-[github.com/FRIBND/Level-Matcher](https://github.com/FRIBND/Level-Matcher).
-
-To support the broader nuclear data community, a fully developed version of Level Matcher will be integrated into the Consistency Check and Evaluation Toolkit Java Codes as part of the NSDD ENSDF Analysis and Utility Programs.
+- **Open-source prototype**: [github.com/FRIBND/Level-Matcher](https://github.com/FRIBND/Level-Matcher)
+- **Integration roadmap**: A production version will be incorporated into the Consistency Check and Evaluation Toolkit Java codes as part of the NSDD ENSDF Analysis and Utility Programs.
 
 ## Development Timeline
 
