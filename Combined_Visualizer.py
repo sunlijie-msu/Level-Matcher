@@ -60,8 +60,8 @@ clustering_x_axis_margin = 0.3               # Extra blank space padding on left
 # ============================================================================
 Font_Config = {
     # Level Scheme Visualizer
-    'level_labels': 20,       # Energy and Spin labels next to bars
-    'gamma_labels': 16,        # Branching ratio labels on arrows
+    'level_labels': 8,        # Energy and Spin labels next to bars (small for dense datasets)
+    'gamma_labels': 6,        # Branching ratio labels on arrows
     'axis_labels': 20,        # X and Y axis labels (Dataset Names, "Energy (keV)")
     'tick_labels': 16,        # Axis tick values
     'title': 20,              # Main figure title
@@ -130,15 +130,27 @@ def load_dataset(dataset_code):
 def plot_level_schemes():
     """Generate visualization of input level schemes from all datasets with gamma transitions."""
     datasets = ['K', 'L']
-    figure, axis = plt.subplots(figsize=(10, 10))
-    
-    # X-axis positions for each dataset column
-    x_positions = {'K': 0, 'L': 3.0}
+
+    # Pre-load all datasets to count levels for proportional figure sizing
+    preloaded_data = {code: load_dataset(code) for code in datasets}
+    maximum_level_count = max(
+        (len([level for level in preloaded_data[code][0]
+              if level.get('energy') is not None or level.get('energy_value') is not None])
+         for code in datasets),
+        default=100
+    )
+    # Scale figure height proportionally: 0.12 inches per level, minimum 20 inches
+    figure_height = max(20, maximum_level_count * 0.12)
+    figure, axis = plt.subplots(figsize=(16, figure_height))
+
+    # X-axis positions for each dataset column (wider spacing to accommodate dense labels)
+    x_positions = {'K': 0, 'L': 5.0}
     line_width = 0.8
     maximum_energy = 0
+    maximum_label_position = 0  # Track the highest spread label position for ylim
     
     for dataset_code in datasets:
-        raw_levels, gammas_table = load_dataset(dataset_code)
+        raw_levels, gammas_table = preloaded_data[dataset_code]
         
         # Extract level data
         levels_data = []
@@ -189,49 +201,47 @@ def plot_level_schemes():
         # Sort by energy
         levels_data.sort(key=lambda x: x['energy'])
         
-        # Calculate text positions with collision resolution
+        # Compute adaptive minimum label spacing based on level density
+        # Divisor 2.0 keeps total label spread within the data energy range
         energies = [x['energy'] for x in levels_data]
-        text_y_positions = spread_text_positions(energies, minimum_distance=250)
+        energy_range = (max(energies) - min(energies)) if len(energies) > 1 else 1000
+        adaptive_minimum_distance = max(30, energy_range / max(len(energies) * 2.0, 1))
+        text_y_positions = spread_text_positions(energies, minimum_distance=adaptive_minimum_distance)
+
+        # Track highest label position across all datasets for ylim
+        if len(text_y_positions) > 0:
+            maximum_label_position = max(maximum_label_position, max(text_y_positions))
         
-        # Calculate vertical offsets for level bars when too close (within 150 keV)
-        bar_offsets = [0.0] * len(energies)
-        for index in range(len(energies) - 1):
-            if energies[index + 1] - energies[index] < 150:
-                # Push bars apart slightly for visual separation
-                bar_offsets[index] -= 30
-                bar_offsets[index + 1] += 30
-        
-        # Plot levels
+        # Plot levels (bars drawn at true energy positions; no artificial vertical offsets)
         x_center = x_positions[dataset_code]
         x_start = x_center - line_width / 2
         x_end = x_center + line_width / 2
-        
+
         for index, item in enumerate(levels_data):
             energy = item['energy']
             y_text_position = text_y_positions[index]
-            bar_offset = bar_offsets[index]
+            bar_y_position = energy
+
+            # Thin bar: 0.5 pt linewidth separates closely spaced levels in dense regions
+            axis.hlines(y=bar_y_position, xmin=x_start, xmax=x_end, colors='black', linewidth=0.5)
             
-            # Draw level line with vertical offset for close-by levels
-            bar_y_position = energy + bar_offset
-            axis.hlines(y=bar_y_position, xmin=x_start, xmax=x_end, colors='black', linewidth=1.5)
-            
-            # Check if text is displaced significantly
-            is_displaced = abs(bar_y_position - y_text_position) > 50
-            
+            # Only draw connector line when label displacement is significant (reduces clutter)
+            is_displaced = abs(bar_y_position - y_text_position) > 200
+
             if is_displaced:
-                # Energy label with connector
-                axis.annotate(item['label_left'], 
+                # Energy label with thin connector
+                axis.annotate(item['label_left'],
                             xy=(x_start, bar_y_position), xycoords='data',
                             xytext=(x_start - 0.2, y_text_position), textcoords='data',
-                            arrowprops=dict(arrowstyle="-", color='gray', linewidth=2.5),
+                            arrowprops=dict(arrowstyle="-", color='gray', linewidth=0.4),
                             va='center', ha='right', fontsize=Font_Config['level_labels'], family='Times New Roman')
-                
-                # Spin/Parity label with connector
+
+                # Spin/Parity label with thin connector
                 if item['label_right']:
-                    axis.annotate(item['label_right'], 
+                    axis.annotate(item['label_right'],
                                 xy=(x_end, bar_y_position), xycoords='data',
                                 xytext=(x_end + 0.2, y_text_position), textcoords='data',
-                                arrowprops=dict(arrowstyle="-", color='gray', linewidth=2.5),
+                                arrowprops=dict(arrowstyle="-", color='gray', linewidth=0.4),
                                 va='center', ha='left', fontsize=Font_Config['level_labels'], family='Times New Roman')
             else:
                 # Standard text placement
@@ -256,9 +266,9 @@ def plot_level_schemes():
                 if initial_level_index < 0 or final_level_index < 0:
                     continue
                 
-                # Get energy positions WITH bar offsets applied
-                initial_energy = levels_data[initial_level_index]['energy'] + bar_offsets[initial_level_index]
-                final_energy = levels_data[final_level_index]['energy'] + bar_offsets[final_level_index]
+                # Get energy positions at true level energies
+                initial_energy = levels_data[initial_level_index]['energy']
+                final_energy = levels_data[final_level_index]['energy']
                 
                 # Get gamma properties
                 gamma_energy = gamma.get('energy', {}).get('value', 0)
@@ -278,42 +288,53 @@ def plot_level_schemes():
             # Arrows should be positioned NEAR the right side of the bar, but still within reasonable bounds
             # Level bar extends from (x_center - 0.4) to (x_center + 0.4)
             # Place arrows starting close to center, spreading rightward within/near the bar
+
+            # Limit to top 30 strongest gammas: 873 transitions in Dataset K would form a solid black
+            # wedge if all drawn; showing only the dominant transitions is standard practice
+            if len(all_gamma_data) > 30:
+                all_gamma_data.sort(key=lambda x: x['gamma_intensity'], reverse=True)
+                all_gamma_data = all_gamma_data[:30]
+
             num_total_gammas = len(all_gamma_data)
-            
+
+            # Constrain all gamma arrows to fit within bar width to prevent horizontal overflow
+            # Maximum arrow spread = 85% of bar width (line_width); arrow_spacing capped at 0.04 units
+            max_arrow_spread = line_width * 0.85
+            if num_total_gammas > 1:
+                arrow_spacing = min(0.04, max_arrow_spread / (num_total_gammas - 1))
+                total_arrow_width = (num_total_gammas - 1) * arrow_spacing
+                arrow_base_offset = -total_arrow_width / 2.0
+            else:
+                arrow_spacing = 0.0
+                arrow_base_offset = 0.0
+
             for index, gamma_data in enumerate(all_gamma_data):
-                # Dynamically center arrows within the bar
-                arrow_spacing = 0.20  # Increased spacing for better separation
-                if num_total_gammas > 1:
-                    total_width = (num_total_gammas - 1) * arrow_spacing
-                    base_offset = -total_width / 2.0
-                else:
-                    base_offset = 0.0
-                
-                arrow_x_position = x_center + base_offset + (index * arrow_spacing)
+                arrow_x_position = x_center + arrow_base_offset + (index * arrow_spacing)
                 
                 initial_energy = gamma_data['initial_energy']
                 final_energy = gamma_data['final_energy']
                 gamma_intensity = gamma_data['gamma_intensity']
                 
                 # Draw vertical arrow from initial to final level
-                axis.annotate('', 
-                            xy=(arrow_x_position, final_energy), 
+                axis.annotate('',
+                            xy=(arrow_x_position, final_energy),
                             xytext=(arrow_x_position, initial_energy),
-                            arrowprops=dict(arrowstyle='->', color='black', linewidth=1.0))
-                
-                # Place Branching_Ratio label at midpoint of arrow, centered with background to mask line
-                mid_energy = (initial_energy + final_energy) / 2.0
-                label_text = f"{int(gamma_intensity)}"
-                
-                axis.text(arrow_x_position, mid_energy, label_text, 
-                         va='center', ha='center', fontsize=Font_Config['gamma_labels'], 
-                         family='Times New Roman',
-                         bbox=dict(boxstyle='square,pad=0.1', facecolor='white', edgecolor='none', alpha=1.0))
+                            arrowprops=dict(arrowstyle='->', color='black', linewidth=0.5))
+
+                # Only label gammas with intensity >= 10% to reduce visual noise in dense regions
+                if gamma_intensity >= 10:
+                    mid_energy = (initial_energy + final_energy) / 2.0
+                    label_text = f"{int(gamma_intensity)}"
+                    axis.text(arrow_x_position, mid_energy, label_text,
+                             va='center', ha='center', fontsize=Font_Config['gamma_labels'],
+                             family='Times New Roman',
+                             bbox=dict(boxstyle='square,pad=0.1', facecolor='white', edgecolor='none', alpha=1.0))
 
     # Styling
-    axis.set_xlim(-1.5, 4.5)
-    axis.set_ylim(-200, maximum_energy * 1.15)
-    axis.set_xticks([0, 3.0])
+    axis.set_xlim(-2.5, 7.5)
+    # Extend ylim to the highest spread label position so no labels are clipped
+    axis.set_ylim(-200, max(maximum_energy * 1.05, maximum_label_position * 1.03))
+    axis.set_xticks([0, 5.0])
     axis.set_xticklabels(['Dataset K', 'Dataset L'], 
                          fontsize=Font_Config['axis_labels'], fontweight='bold', family='Times New Roman')
     
