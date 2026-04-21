@@ -197,8 +197,8 @@ Scoring_Config = {
         #   Rescue_Threshold=1.0:   only exact Match_Firm (1.0) rescues  ✓  (strictest)
         #
         # Rescue_Exponent transforms energy_similarity when rescue triggers (energy → energy^exponent):
-        #   Rescue_Exponent=0.5 (sqrt, aggressive): 0.1→32%, 0.2→45%, 0.4→63%, 0.6→77%, 0.8→89%
-        #   Rescue_Exponent=0.7 (gentler):          0.1→20%, 0.2→30%, 0.4→52%, 0.6→71%, 0.8→84%
+        #   Rescue_Exponent=0.5 (sqrt, aggressive): 0.1→0.32, 0.2→0.45, 0.4→0.63, 0.6→0.77, 0.8→0.89
+        #   Rescue_Exponent=0.7 (gentler):          0.1→0.20, 0.2→0.30, 0.4→0.52, 0.6→0.71, 0.8→0.84
         #   Rescue_Exponent=1.0 (disabled):         no change to energy_similarity
         'Enabled': True,
         'Rescue_Threshold': 0.86,  # Minimum score to trigger rescue: 0.86 → firm-match-only (1.0 ≥ 0.86; 0.8 < 0.86)
